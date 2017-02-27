@@ -6,6 +6,7 @@ import processing.sound.*;
 import controlP5.*;
 
 //Universal declarations
+float scaler;
 float speed;
 float direction;
 int knifeDamage;
@@ -16,6 +17,23 @@ Player player;
 HUD hud;
 int chapterKeys;
 int reqKeys;
+BufferedReader saveReader;
+PrintWriter saveWriter;
+String currentZone;
+float saveHealth;
+float saveStamina;
+float saveTemp;
+int saveAmmo;
+String last_cutscene;
+int dynamite;
+int detonator;
+int rope;
+int collar;
+int seal1;
+int seal2;
+int whale;
+int sap;
+
 
 /* Game State Tracker
  * 0 = Gameplay
@@ -82,9 +100,52 @@ void setup()
   //backgroundImage
   frameRate(60);
   cursor(ARROW);
+  noSmooth();
+  
+  scaler = height / 288.0;
   
   //Game state
   gameState = 2; //Start in Menu
+  
+  //Save file reader and writer
+  saveReader = createReader("save.txt");
+  saveWriter = createWriter("save.txt");
+  try
+  {
+    currentZone = saveReader.readLine().substring(5);
+    saveHealth = Integer.parseInt(saveReader.readLine().substring(7));
+    saveStamina = Integer.parseInt(saveReader.readLine().substring(8));
+    saveTemp = Integer.parseInt(saveReader.readLine().substring(5));
+    saveAmmo = Integer.parseInt(saveReader.readLine().substring(5));
+    last_cutscene = saveReader.readLine().substring(14);
+    dynamite = Integer.parseInt(saveReader.readLine().substring(9));
+    detonator = Integer.parseInt(saveReader.readLine().substring(10));
+    rope = Integer.parseInt(saveReader.readLine().substring(5));
+    collar = Integer.parseInt(saveReader.readLine().substring(7));
+    seal1 = Integer.parseInt(saveReader.readLine().substring(6));
+    seal2 = Integer.parseInt(saveReader.readLine().substring(6));
+    whale = Integer.parseInt(saveReader.readLine().substring(6));
+    sap = Integer.parseInt(saveReader.readLine().substring(4));
+  }
+  catch(IOException e)
+  {
+    currentZone = "zone_null";
+    saveHealth = 0;
+    saveStamina = 0;
+    saveTemp = 0;
+    saveAmmo = 0;
+    last_cutscene = "null";
+    dynamite = 0;
+    detonator = 0;
+    rope = 0;
+    collar = 0;
+    seal1 = 0;
+    seal2 = 0;
+    whale = 0;
+    sap = 0;
+    e.printStackTrace();
+  }
+  
   
   //Fonts
   textAlign(CENTER);
@@ -97,7 +158,10 @@ void setup()
   
   //Menu
   newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
-  continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+  if(currentZone.equals("null"))
+    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+  else
+    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
   menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
   pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
   quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
@@ -207,6 +271,7 @@ void mousePressed()
     {
       //Write/ rewrite save file
       
+      
       //Play next cutscene
       gameState = 1;
     }
@@ -214,6 +279,18 @@ void mousePressed()
     if(continueGame.getHighlight())
     {
       //Read save file
+      switch(currentZone)
+      {
+       case "Crash_1":
+         //Crash_1 Method
+         break;
+       //etc.
+       case "test":
+         testZone();
+         break;
+       default:
+         throw new IllegalArgumentException("Invalid zone name: " + currentZone);
+      }
       
       //Switch to gameplay at appropriate zone
       gameState = 0;

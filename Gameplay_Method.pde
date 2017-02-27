@@ -13,10 +13,11 @@ void gamePlay()
     //DRAW BACKGROUND ENVIRONMENT
     pushMatrix();
     translate(width/2,height/2);
-    rectMode(CENTER);
+    imageMode(CENTER);
     fill(255);
     noStroke();
-    rect(0,0,width,height);
+    image(zoneGround,0,0,width,height);
+    //rect(0,0,width,height);
     popMatrix();
     
     //Player position update

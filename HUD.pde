@@ -44,7 +44,7 @@ class HUD
     //temperature bar
     fill(100,100,100,100);
     rect(width/40-2, height/20 + 10*height/200 -2, 4*width/20+4, 2*height/200+4);
-    fill(255,0,0,255);
+    fill(190,38,51,255);
     rect(width/40, height/20 + 10*height/200, (temperature/100.0)*4*width/20, 2*height/200);
     
     //ammo counter

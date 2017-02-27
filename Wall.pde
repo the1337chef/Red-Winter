@@ -26,7 +26,7 @@ class Wall
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
     rectMode(CENTER);
-    fill(0);
+    noFill();
     noStroke();
     rect(0,0,this.sizeW,this.sizeH);
     popMatrix();
