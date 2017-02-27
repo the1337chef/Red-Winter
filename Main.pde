@@ -13,15 +13,27 @@ float knifeReach;
 int bowDamage;
 float arrowSpeed;
 Player player;
+HUD hud;
+int chapterKeys;
+int reqKeys;
+
+/* Game State Tracker
+ * 0 = Gameplay
+ * 1 = Cutscene
+ * 2 = Menu
+ */
+int gameState;
 
 //Fade trackers
 
 //Sound
 
 //Images
+PImage background;
+PImage zoneGround;
 
 //Fonts
-
+PFont menuFont;
 //Zones
 
 //Menu
@@ -30,13 +42,11 @@ boolean gameStart;
 boolean dead;
 float deadTimer;
 
-/*
-Button gameStart;    //Start/continue
-Button gameOptions;
-Button optionsBack;
+Button newGame;
+Button continueGame;
+Button menuBack;
 Button pauseContinue;
-Button pauseQuit;
-*/
+Button quitGame;
 
 //Weapons
 /*Weapon none;
@@ -60,8 +70,7 @@ Wall testWall;
 //ArrayList<RangedWeapon> projectileSpawners = new ArrayList<RangedWeapon>();
 
 //Pickups
-//StaminaPickup stamina20;
-//ArrayList<Pickup> pickups = new ArrayList<Pickup>();
+ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 
 //Enemies
 //ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -72,15 +81,26 @@ void setup()
   fullScreen();
   //backgroundImage
   frameRate(60);
-  cursor(CROSS);
+  cursor(ARROW);
+  
+  //Game state
+  gameState = 2; //Start in Menu
   
   //Fonts
+  textAlign(CENTER);
+  menuFont = loadFont("LucidaSans-TypewriterBold-24.vlw");
   
   //Images
+  background = loadImage("major_cutscene_test_32_low_res.png");
   
   //Intro?
   
   //Menu
+  newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
+  continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+  menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
+  pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
+  quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
   
   //Options
   
@@ -89,22 +109,27 @@ void setup()
   dead = false;
   deadTimer = 0;
   
-  //Fades
+  //Zone values
+  chapterKeys = 0;
+  reqKeys = 1;
   
-  //Load images
+  //Fades
   
   //Play sounds
   //Menu/ Game music
   
   
   //Player values
-  player = new Player(width/2, height/2, direction, 200, 32, 32, "player");
+  player = new Player(width/2, height/2, direction, 100, 32, 32, "player");
   speed = 5.0;
   direction = 0;
   knifeDamage = 50;
   knifeReach = 70;
   bowDamage = 100;
   arrowSpeed = 15.0;
+  
+  //Heads up display
+  hud = new HUD(100, 100, 100, 0);
   
   //bow = new RangedWeapon(bowDamage, arrowSpeed, true);
   //knife = new MeleeWeapon(knifeDamage, 0, 0, knifeReach, 400, true);
@@ -128,7 +153,6 @@ void setup()
   
   //ENEMY INITIALIZATION
   
-  //BUTTON INITIALIZATION
 }
 
 //Keyboard
@@ -175,10 +199,36 @@ void keyReleased()
 
 void mousePressed()
 {
-  //MENU SHIT
+  //Menu buttons
+  if(gameState == 2)
+  {
+    //New game button
+    if(newGame.getHighlight())
+    {
+      //Write/ rewrite save file
+      
+      //Play next cutscene
+      gameState = 1;
+    }
+    
+    if(continueGame.getHighlight())
+    {
+      //Read save file
+      
+      //Switch to gameplay at appropriate zone
+      gameState = 0;
+      cursor(CROSS);
+    }
+    
+    if(quitGame.getHighlight())
+    {
+      //Quit game
+      exit();
+    }
+  }
   
   //IN-GAME
-  if(gameStart == true)
+  if(gameState == 0)
   {/*
     if(mouseButton == LEFT)
     {
@@ -246,6 +296,13 @@ boolean yCollision(Hitbox hBox1, Hitbox hBox2, float yChange)
     return false;
 }
 
+void zoneKeyAdd()
+{
+  chapterKeys++;
+  if(chapterKeys >= reqKeys)
+  {}
+}
+
 //DEAD CHECK
 void deadCheck(Character testChar)
 {
@@ -257,91 +314,14 @@ void deadCheck(Character testChar)
   }
 }
 
-//DISPLAY HUD
-void displayHUD()
-{
-  //Health bar
-  //Stamina bar
-  //Amount of food
-  //Temperature
-}
-
 //CORE GAME LOOP
 //DRAW FUNCTION
 void draw()
 {
-  //MUSIC CONTROL
-  
-  //INTRO?
-  
-  //MENUS
-  
-  if(pause == false)
-  {
-    //DRAW BACKGROUND ENVIRONMENT
-    pushMatrix();
-    translate(width/2,height/2);
-    rectMode(CENTER);
-    fill(255);
-    noStroke();
-    rect(0,0,width,height);
-    popMatrix();
-    
-    //Player position update
-    if(keyPressed)
-    {
-      if(keyCode == UP || key == 'w' || key == 'W')
-        mUp = true;
-      if(keyCode == DOWN || key == 's' || key == 'S')
-        mDown = true;
-      if(keyCode == LEFT || key == 'a' || key == 'A')
-        mLeft = true;
-      if(keyCode == RIGHT || key == 'd' || key == 'D')
-        mRight = true;
-    }  
-    if(mUp == true)
-      player.movement(0, -1*speed);
-    if(mDown == true)
-      player.movement(0, speed);
-    if(mLeft == true)
-      player.movement(-1*speed, 0);
-    if(mRight == true)
-      player.movement(speed, 0);
-    
-    player.setDir(mouseAngle());
-    //Enemy behavior and movement update
-      
-    //Wall display
-    for(int i = 0; i < walls.size(); i++)
-      walls.get(i).displayWall();
-    
-    //Test turret
-    
-    //Pickup respawn?
-    
-    //Pickup Display
-    //for(int i = 0; i < pickups.size(); i++)
-      //pickups.get(i).display();
-      
-    //Player and Enemy display
-    player.display();
-    //for(int i = 0; i < enemies.size(); i++)
-      //enemies.get(i).display();
-    
-    //Projectile Display
-    //for(int i = 0; i < projectileSpawners.size(); i++)
-      //projectileSpawners.get(i).displayProjectiles();
-    
-    //HUD Display
-    displayHUD();
-    deadCheck(player);
-    
-  }
-  else if(dead == true)
-  {
-    //stop music
-    //play death noise and animation
-    
-    //"Continue","Main menu","Exit game"
-  }
+  if(gameState == 0)
+    gamePlay();
+  else if(gameState == 1)
+    cutscene();
+  else
+    mainMenu();
 }
