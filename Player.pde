@@ -7,6 +7,10 @@ class Player extends Character
   private float direction;
   private float maxHealth;
   private float currentHealth;
+  private float maxStamina;
+  private float currentStamina;
+  private float temperature;
+  private float ammo;
   private float sizeW;
   private float sizeH;
   private Hitbox hBox;
@@ -22,6 +26,10 @@ class Player extends Character
     this.direction = dir;
     this.maxHealth = h;
     this.currentHealth = h;
+    this.maxStamina = 100;
+    this.currentStamina = 100;
+    this.temperature = 100;
+    this.ammo = 0;
     this.sizeW = wi;
     this.sizeH = hi;
     this.hBox = new Hitbox(x, y, wi, hi, dir, type);
@@ -89,6 +97,14 @@ class Player extends Character
     return this.maxHealth;}
   float getCurrentHealth(){
     return this.currentHealth;}
+  float getMaxStamina(){
+    return this.maxStamina;}
+  float getCurrentStamina(){
+    return this.currentStamina;}
+  float getCurrentTemp(){
+    return this.temperature;}
+  float getCurrentAmmo(){
+    return this.ammo;}
   Hitbox getHitbox(){
     return this.hBox;}
     
