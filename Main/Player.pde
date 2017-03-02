@@ -10,7 +10,7 @@ class Player extends Character
   private float maxStamina;
   private float currentStamina;
   private float temperature;
-  private float ammo;
+  private int ammo;
   private float sizeW;
   private float sizeH;
   private Hitbox hBox;
@@ -137,7 +137,7 @@ class Player extends Character
     return this.currentStamina;}
   float getCurrentTemp(){
     return this.temperature;}
-  float getCurrentAmmo(){
+  int getCurrentAmmo(){
     return this.ammo;}
   Hitbox getHitbox(){
     return this.hBox;}

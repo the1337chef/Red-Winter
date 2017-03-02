@@ -5,9 +5,9 @@ class HUD
   private float health;
   private float stamina;
   private float temperature;
-  private float ammo;
+  private int ammo;
   
-  HUD(float h, float s, float t, float a)
+  HUD(float h, float s, float t, int a)
   {
     this.health = h;
     this.stamina = s;
@@ -15,7 +15,7 @@ class HUD
     this.ammo = a;
   }
   
-  void updateValues(float h, float s, float t, float a)
+  void updateValues(float h, float s, float t, int a)
   {
     this.health = h;
     this.stamina = s;
