@@ -3,7 +3,7 @@
 
 //For zone transition
 float transparency = 0; //Fade to white
-float transparencyIncrement = 1;
+float transparencyIncrement = 5;
 float transparency2 = 255; //Fade from white to pic
 boolean zoneTransition2 = false; //start the fade to white
 
@@ -273,7 +273,7 @@ void keyReleased()
       hitBoxMode = !hitBoxMode;
       
     if(key == 't' || key == 'T')
-      testZone();
+      zoneTransition = true;
   }
 }
 

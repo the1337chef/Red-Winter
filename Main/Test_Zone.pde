@@ -4,7 +4,6 @@ void testZone()
 {
   //Art
   zoneGround = loadImage("zone_test_3.png");
-  zoneTransition = true;
   //Entance position
   
   //Walls

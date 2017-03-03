@@ -18,33 +18,34 @@ void gamePlay()
     imageMode(CORNER);
     //fill(255);
     noStroke();
-    if(zoneTransition == false){
-      tint(255, 157);
-      image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
-      println("Main Zone");
-    }
+    image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
     popMatrix();
     
-    if(zoneTransition == true){ 
+    if(zoneTransition == true){ //For zone transitions
      
-     if(transparency < 255){
+     if(transparency < 255){ //Fade to white
         transparency += transparencyIncrement;
         fill(255, 255, 255, transparency);
         rect(0, 0, width, height);
         println("1st Zone");
      }
-     else if(transparency == 255){
+     else if(transparency == 255){ //Fade from white to new zone
+       if(zoneTransition == true){
+          
+          testZone();
+       }
         transparency2 -= transparencyIncrement;
-        fill(transparency);
+        fill(255, 255, 255, transparency2);
         rect(0, 0, width, height);
-        tint(255, 157);
-        image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
+        //tint(255, transparency2);
+        //image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
         println("2nd Zone");
-        if(transparency2 == 0){
+        if(transparency2 == 0){ // To force the next else statement after fade is done
           transparency = 256;
         }
      }
-     else{
+     else{ //reset variables
+       println("reset");
         zoneTransition = false;
         transparency = 0;
         transparency2 = 255;
