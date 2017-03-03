@@ -8,16 +8,48 @@ void gamePlay()
   
   //MENUS
   
+
+
+  
   if(pause == false)
   {
     //DRAW BACKGROUND ENVIRONMENT
     pushMatrix();
     imageMode(CORNER);
-    fill(255);
+    //fill(255);
     noStroke();
-    image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
-    //rect(0,0,width,height);
+    if(zoneTransition == false){
+      tint(255, 157);
+      image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
+      println("Main Zone");
+    }
     popMatrix();
+    
+    if(zoneTransition == true){ 
+     
+     if(transparency < 255){
+        transparency += transparencyIncrement;
+        fill(255, 255, 255, transparency);
+        rect(0, 0, width, height);
+        println("1st Zone");
+     }
+     else if(transparency == 255){
+        transparency2 -= transparencyIncrement;
+        fill(transparency);
+        rect(0, 0, width, height);
+        tint(255, 157);
+        image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
+        println("2nd Zone");
+        if(transparency2 == 0){
+          transparency = 256;
+        }
+     }
+     else{
+        zoneTransition = false;
+        transparency = 0;
+        transparency2 = 255;
+     }
+    }
     
     //Player position update
     if(keyPressed)

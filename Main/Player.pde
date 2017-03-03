@@ -77,11 +77,9 @@ class Player extends Character
     //Wall collision and correction
     for(int i = 0; i < walls.size(); i++)
     {
-      println(xCollision(walls.get(i).getHitbox(), this.hBox, xChange));
       if(xCollision(walls.get(i).getHitbox(), this.hBox, xChange)){
         xChange = 0;
       }
-      println(yCollision(walls.get(i).getHitbox(), this.hBox, yChange));
       if(yCollision(walls.get(i).getHitbox(), this.hBox, yChange)){
         yChange = 0;
       }

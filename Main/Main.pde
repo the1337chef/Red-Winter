@@ -1,6 +1,12 @@
 //RED WINTER MAIN
 //Main file/ class
 
+//For zone transition
+float transparency = 0; //Fade to white
+float transparencyIncrement = 1;
+float transparency2 = 255; //Fade from white to pic
+boolean zoneTransition2 = false; //start the fade to white
+
 //Imports
 //import processing.sound.*;
 
@@ -14,6 +20,7 @@ int bowDamage;                 //User arrow damage
 float arrowSpeed;              //Speed at which arrow projectiles will fly
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
+boolean zoneTransition;        //Triggers the fade between zone transitions
 
 /*
  * Camera X and Y determine the position the player's see of the larger map.
@@ -264,6 +271,9 @@ void keyReleased()
     }
     if(key == 'h' || key == 'H')
       hitBoxMode = !hitBoxMode;
+      
+    if(key == 't' || key == 'T')
+      testZone();
   }
 }
 
@@ -424,8 +434,9 @@ void deadCheck(Character testChar)
 //DRAW FUNCTION
 void draw()
 {
-  if(gameState == 0)
+  if(gameState == 0){
     gamePlay();
+  }
   else if(gameState == 1)
     cutscene();
   else
