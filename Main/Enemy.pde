@@ -2,7 +2,7 @@
 
 class Enemy extends Character
 {
-  private float viewAngle;
+  private float viewAngle; //make sure to put in radians
   private float viewDist;
   
   Enemy(){ //set default values

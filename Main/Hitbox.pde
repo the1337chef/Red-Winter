@@ -33,8 +33,9 @@ class Hitbox
   void displayBox()
   {
     pushMatrix();
-    //translate(this.xPos, this.yPos);
-    //rotate(this.direction);
+    if(!type.equals("player"))
+      translate((this.xPos - cameraX)*scaler, (this.yPos - cameraY)*scaler);
+    rotate(this.direction);
     rectMode(CENTER);
     noStroke();
     color c;
@@ -51,14 +52,14 @@ class Hitbox
     else if(type.equals("hostile_damage"))
       c = color(255,255,0);
     else if(type.equals("wall"))
-      c = color(200,200,200);
+      c = color(200,200,200); //silver
     else
       c = color(255,0,255);
     fill(c, 100);
     if(type.equals("player"))
       rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
     else
-      rect((this.xPos - cameraX)*scaler, (this.yPos - cameraY)*scaler, this.sizeW*scaler, this.sizeH*scaler);
+      rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
     popMatrix();
     
     pushMatrix();

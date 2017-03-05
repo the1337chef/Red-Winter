@@ -16,6 +16,7 @@ class Wall
     this.sizeW = w;
     this.sizeH = h;
     this.hBox = new Hitbox(x,y,w,h, dir, "wall");
+    this.direction = dir;
   }
   
   //Displays the wall
@@ -23,14 +24,15 @@ class Wall
   {
     pushMatrix();
     
-    //translate(,);
+    translate(this.xPos*scaler-cameraX*scaler,this.yPos*scaler-cameraY*scaler);
+    rotate(this.direction);
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
     rectMode(CENTER);
-    fill(0);
+    fill(0); //black
     noStroke();
     
-    rect(this.xPos*scaler-cameraX*scaler, this.yPos*scaler-cameraY*scaler,this.sizeW*scaler,this.sizeH*scaler);
+    rect(0, 0,this.sizeW*scaler,this.sizeH*scaler);
     
     popMatrix();
     if(hitBoxMode)
