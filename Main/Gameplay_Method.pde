@@ -8,9 +8,6 @@ void gamePlay()
   
   //MENUS
   
-
-
-  
   if(pause == false)
   {
     //DRAW BACKGROUND ENVIRONMENT
@@ -22,14 +19,14 @@ void gamePlay()
     popMatrix();
     
     if(zoneTransition == true){ //For zone transitions
-     
+
      if(transparency < 255){ //Fade to white
         transparency += transparencyIncrement;
-        fill(255, 255, 255, transparency);
+        fill(0, 0, 0, transparency);
         rect(0, 0, width, height);
      }
      else if(transparency == 255){ //Fade from white to new zone
-       if(zoneTransition == true){
+         
          //add switch statement of the variety of zones to transition to
          if( nextZone.equals("1")){
           testZone();
@@ -40,9 +37,8 @@ void gamePlay()
          else{
            println("ERROR: nextZone == NULL");
          }
-       }
         transparency2 -= transparencyIncrement;
-        fill(255, 255, 255, transparency2);
+        fill(0, 0, 0, transparency2);
         rect(0, 0, width, height);
         if(transparency2 == 0){ // To force the next else statement after fade is done
           transparency = 256;
@@ -50,6 +46,7 @@ void gamePlay()
      }
      else{ //reset variables
         zoneTransition = false;
+        zoneTransition2 = false;
         transparency = 0;
         transparency2 = 255;
      }
@@ -98,7 +95,9 @@ void gamePlay()
       //pickups.get(i).display();
       
     //Player and Enemy display
-    player.display();
+    if(zoneTransition == false){
+      player.display();
+    }
     //for(int i = 0; i < enemies.size(); i++)
       //enemies.get(i).display();
     

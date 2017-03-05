@@ -50,7 +50,6 @@ int seal2;
 int whale;
 int sap;
 
-
 /* Game State Tracker
  * 0 = Gameplay
  * 1 = Cutscene

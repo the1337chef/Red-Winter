@@ -65,7 +65,8 @@ class Player extends Character
     strokeWeight(2);
     fill(100);
     rectMode(CENTER);
-    rect(0, 0, this.sizeW, this.sizeH);
+    if(zoneTransition == false)
+      rect(0, 0, this.sizeW, this.sizeH);
     if(hitBoxMode)
       this.hBox.displayBox();
     popMatrix();
