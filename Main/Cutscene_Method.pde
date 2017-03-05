@@ -18,7 +18,7 @@ void cutscene()
              layer2 = loadImage("ch1-3-2.png");
              layer2Exists = true;
              break;
-    case 4:  cutScene = loadImage("Ch1-3-1.png");
+    case 4:  cutScene = loadImage("ch1-3-1.png");
              layer2 = loadImage("ch1-3-2.png");
              layer2Exists = true;
              layer3 = loadImage("ch1-3-3.png");
