@@ -6,8 +6,9 @@ void testZone2()
   zoneGround = loadImage("zone_test_2.png");
   
   //Player position
-  player.setX(560);
-  player.setY(500);
+  player.setX(16);
+  player.setY(307);
+  player.movement(0,0); //recalculate the camera position because of new player location
   
   //Camera position
   //cameraX = (560-256);    //player position - 1/2 screen width
