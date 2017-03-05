@@ -64,6 +64,7 @@ int gameState;
 //Images
 PImage background;
 PImage zoneGround;
+PImage cutScene;
 
 //Fonts
 PFont menuFont;
@@ -279,6 +280,12 @@ void keyReleased()
       
     if(key == 't' || key == 'T')
       zoneTransition = true;
+      
+    if(key == 'c' || key == 'C')
+      gameState = 1;
+     
+    if(key == ' ')
+      cutSceneNumber++;
   }
 }
 
@@ -352,6 +359,11 @@ void mousePressed()
     {
        //WEAPON AIM 
     }
+  }
+  
+  //CUTSCENE
+  if(gameState == 1){
+    cutSceneNumber++;
   }
 }
 
