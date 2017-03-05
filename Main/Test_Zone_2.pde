@@ -16,7 +16,7 @@ void testZone2()
   
   //Walls
   walls.clear();
-  Wall forestWall1 = new Wall(176, 64, 352, 128, 0);
+  Wall forestWall1 = new Wall(100, 100, 100, 100, 0);
   //println(176*scaler + " " + 64*scaler + " " + 352*scaler + " " + 128*scaler);
   //Wall forestWall2 = new Wall(432*scaler, 48*scaler, 160*scaler, 96*scaler, 0);
   walls.add(forestWall1);

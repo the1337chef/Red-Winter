@@ -19,7 +19,6 @@ void gamePlay()
     //fill(255);
     noStroke();
     image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
-    println("-CameraX*scaler = " + -cameraX*scaler + " -cameraY*scaler = " + -cameraY*scaler + " zoneGround.width*scaler = " + zoneGround.width*scaler + " zoneGround.height*scaler = " + zoneGround.height*scaler);
     popMatrix();
     
     if(zoneTransition == true){ //For zone transitions

@@ -51,7 +51,7 @@ class Hitbox
     else
       c = color(255,0,255);
     fill(c, 100);
-    rect(0, 0, this.sizeW, this.sizeH);
+    rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
     popMatrix();
     
     pushMatrix();

@@ -15,7 +15,7 @@ float scaler;                  //Used to scale the game up from 512x288 to the u
 float speed;                   //Player speed
 float direction;               //Initial player direction
 int knifeDamage;               //User knife damage value
-float knifeReach;              //Variable determining how far the knife can reach, used for knife hitbox
+float knifeReach;              //Variable determining how far the knife can reach, used for knife
 int bowDamage;                 //User arrow damage
 float arrowSpeed;              //Speed at which arrow projectiles will fly
 Player player;                 //The player character that the user directly controls
@@ -219,8 +219,8 @@ void setup()
   hitBoxMode = false;
   
   //Test wall
-  testWall = new Wall(width/4, height/2, 32, 128, 0);
-  walls.add(testWall);
+  //testWall = new Wall(width/4, height/2, 32, 128, 0);
+  //walls.add(testWall);
   
   //Adding bow to projectileSpawners
   //projectileSpawners.add(bow);

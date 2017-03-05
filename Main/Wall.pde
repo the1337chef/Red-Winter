@@ -19,16 +19,19 @@ class Wall
   }
   
   //Displays the wall
-  void displayWall()
+  void displayWall()//redundant cause they are shown when you press h
   {
     pushMatrix();
-    translate(this.xPos, this.yPos);
+    
+    //translate(,);
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
     rectMode(CENTER);
-    noFill();
+    fill(0);
     noStroke();
-    rect(0,0,this.sizeW,this.sizeH);
+    if(hitBoxMode)
+      rect(this.xPos*scaler-cameraX*scaler, this.yPos*scaler-cameraY*scaler,this.sizeW*scaler,this.sizeH*scaler);
+    
     popMatrix();
     if(hitBoxMode)
       this.hBox.displayBox();
