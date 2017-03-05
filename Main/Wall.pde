@@ -29,8 +29,8 @@ class Wall
     rectMode(CENTER);
     fill(0);
     noStroke();
-    if(hitBoxMode)
-      rect(this.xPos*scaler-cameraX*scaler, this.yPos*scaler-cameraY*scaler,this.sizeW*scaler,this.sizeH*scaler);
+    
+    rect(this.xPos*scaler-cameraX*scaler, this.yPos*scaler-cameraY*scaler,this.sizeW*scaler,this.sizeH*scaler);
     
     popMatrix();
     if(hitBoxMode)

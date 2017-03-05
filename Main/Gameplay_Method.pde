@@ -30,7 +30,16 @@ void gamePlay()
      }
      else if(transparency == 255){ //Fade from white to new zone
        if(zoneTransition == true){
+         //add switch statement of the variety of zones to transition to
+         if( nextZone.equals("1")){
           testZone();
+         }
+         else if( nextZone.equals("2")){
+           testZone2();
+         }
+         else{
+           println("ERROR: nextZone == NULL");
+         }
        }
         transparency2 -= transparencyIncrement;
         fill(255, 255, 255, transparency2);
@@ -69,10 +78,16 @@ void gamePlay()
       
     player.setDir(mouseAngle());
     //Enemy behavior and movement update
-      
-    //Wall display
-    for(int i = 0; i < walls.size(); i++)
-      walls.get(i).displayWall();
+    
+    if(hitBoxMode){
+      //Wall display
+      for(int i = 0; i < walls.size(); i++)
+        walls.get(i).displayWall();
+        
+      //Transition Zone display
+      for(int i = 0; i < transitions.size(); i++)
+        transitions.get(i).displayBox();
+    }
     
     //Test turret
     

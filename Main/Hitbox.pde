@@ -8,6 +8,7 @@ class Hitbox
   private float sizeH;
   private float direction;
   private String type;
+  private String zone;
   
   Hitbox(float x, float y, float w, float h, float d, String t)
   {
@@ -17,6 +18,7 @@ class Hitbox
     this.sizeH = h;
     this.direction = d;
     this.type = t;
+    this.zone = "null";
   }
   
   //Displays hitbox
@@ -44,6 +46,8 @@ class Hitbox
       c = color(0,0,255);
     else if(type.equals("friendly_damage"))
       c = color(0,255,255);
+    else if(type.equals("zone_transition"))
+      c = color(0,0,170);
     else if(type.equals("hostile_damage"))
       c = color(255,255,0);
     else if(type.equals("wall"))
@@ -51,7 +55,10 @@ class Hitbox
     else
       c = color(255,0,255);
     fill(c, 100);
-    rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
+    if(type.equals("player"))
+      rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
+    else
+      rect((this.xPos - cameraX)*scaler, (this.yPos - cameraY)*scaler, this.sizeW*scaler, this.sizeH*scaler);
     popMatrix();
     
     pushMatrix();
@@ -75,6 +82,8 @@ class Hitbox
     return this.sizeH;}
   String getType(){
     return this.type;}
+  String getZone(){
+    return this.zone;}
   
   void setXPos(float x){
     this.xPos = x;}
@@ -82,4 +91,8 @@ class Hitbox
     this.yPos = y;}
   void setDir(float dir){
     this.direction = dir;}
-}
+  void setZone(String z){
+    this.zone = z;}
+    
+    
+  }

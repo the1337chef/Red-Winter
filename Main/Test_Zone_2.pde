@@ -6,8 +6,8 @@ void testZone2()
   zoneGround = loadImage("zone_test_2.png");
   
   //Player position
-  player.setX(16);
-  player.setY(307);
+  player.setX(63);
+  player.setY(289);
   player.movement(0,0); //recalculate the camera position because of new player location
   
   //Camera position
@@ -21,6 +21,13 @@ void testZone2()
   //Wall forestWall2 = new Wall(432*scaler, 48*scaler, 160*scaler, 96*scaler, 0);
   walls.add(forestWall1);
   //walls.add(forestWall2);
+  
+
+  //Test Zone Transition Hitboxes
+  transitions.clear();
+  Hitbox testTransitionZone = new Hitbox(494, 526, 100, 50, 1, "Zone_Transition");
+  testTransitionZone.setZone("1");
+  transitions.add(testTransitionZone);
   
   //Enemies
   

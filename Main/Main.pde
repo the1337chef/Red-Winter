@@ -3,9 +3,10 @@
 
 //For zone transition
 float transparency = 0; //Fade to white
-float transparencyIncrement = 5;
+float transparencyIncrement = 15;
 float transparency2 = 255; //Fade from white to pic
 boolean zoneTransition2 = false; //start the fade to white
+String nextZone = "null"; //Zone to transition to
 
 //Imports
 //import processing.sound.*;
@@ -104,6 +105,9 @@ Wall testWall;
 
 //Pickups
 ArrayList<Pickup> pickups = new ArrayList<Pickup>();
+
+//Zone Transitions
+ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 
 //Enemies
 //ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -221,6 +225,8 @@ void setup()
   //Test wall
   //testWall = new Wall(width/4, height/2, 32, 128, 0);
   //walls.add(testWall);
+  
+
   
   //Adding bow to projectileSpawners
   //projectileSpawners.add(bow);

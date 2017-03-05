@@ -85,6 +85,19 @@ class Player extends Character
       }
     }
     
+    //Zone Transition Collision
+    for(int i = 0; i < transitions.size(); i++)
+    {
+      if(xCollision(transitions.get(i), this.hBox, xChange)){
+        zoneTransition = true;
+        nextZone = transitions.get(i).getZone();
+      }
+      if(yCollision(transitions.get(i), this.hBox, yChange)){
+        zoneTransition = true;
+        nextZone = transitions.get(i).getZone();
+      }
+    }
+    
     //Map boundary collision and correction
     if(this.xPos + xChange > 1120 || this.xPos + xChange < 0)
       xChange = 0;
