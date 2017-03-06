@@ -25,6 +25,9 @@ float arrowSpeed;              //Speed at which arrow projectiles will fly
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
 boolean zoneTransition;        //Triggers the fade between zone transitions
+boolean saveCompleted = false; //Prompts the screen to say that the user has completed the save
+                               //TODO: have the save complete dissolve away after a bit of time
+int currentTime;
 
 /*
  * Camera X and Y determine the position the player's see of the larger map.
@@ -84,6 +87,7 @@ Button continueGame;
 Button menuBack;
 Button pauseContinue;
 Button quitGame;
+Button saveGame;
 
 //Weapons
 /*Weapon none;
@@ -139,9 +143,9 @@ void setup()
   try
   {
     currentZone = saveReader.readLine().substring(5);
-    saveHealth = Integer.parseInt(saveReader.readLine().substring(7));
-    saveStamina = Integer.parseInt(saveReader.readLine().substring(8));
-    saveTemp = Integer.parseInt(saveReader.readLine().substring(5));
+    saveHealth = Float.parseFloat(saveReader.readLine().substring(7));
+    saveStamina = Float.parseFloat(saveReader.readLine().substring(8));
+    saveTemp = Float.parseFloat(saveReader.readLine().substring(5));
     saveAmmo = Integer.parseInt(saveReader.readLine().substring(5));
     last_cutscene = saveReader.readLine().substring(14);
     dynamite = Integer.parseInt(saveReader.readLine().substring(9));
@@ -188,9 +192,10 @@ void setup()
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
   else
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
-  menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
-  pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
+  //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
+  //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
   quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
+  saveGame = new Button(width/2, height/2 + height/5, 200, 50, "SAVE", true);
   
   //Options
   
@@ -206,7 +211,7 @@ void setup()
   
   
   //Player values
-  player = new Player(width/2, height/2, direction, 100, 32, 32, "player");
+  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, 32, 32, "player");
   speed = 5.0;
   direction = 0;
   knifeDamage = 50;
@@ -215,7 +220,7 @@ void setup()
   arrowSpeed = 15.0;
   
   //Heads up display
-  hud = new HUD(100, 100, 100, 0);
+  hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
   
   //bow = new RangedWeapon(bowDamage, arrowSpeed, true);
   //knife = new MeleeWeapon(knifeDamage, 0, 0, knifeReach, 400, true);
@@ -292,6 +297,11 @@ void keyReleased()
       
     if(key == 'q' || key == 'Q')
       save();
+      
+    if(key == 'p' || key == 'P'){//pause
+      pause = true;
+      gameState = 2;
+    }
   }
 }
 
@@ -311,7 +321,6 @@ void mousePressed()
       //Play next cutscene
       //gameState = 1;
     }
-    
     if(continueGame.getHighlight())
     {
       //Read save file
@@ -335,12 +344,18 @@ void mousePressed()
       gameState = 0;
       cursor(CROSS);
     }
-    
+
     if(quitGame.getHighlight())
     {
       //Quit game
       exit();
     }
+    
+    if(saveGame.getHighlight())
+    {
+      save();
+    }
+    
   }
   
   //IN-GAME

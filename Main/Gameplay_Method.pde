@@ -112,8 +112,7 @@ void gamePlay()
       //projectileSpawners.get(i).displayProjectiles();
     
     //HUD Display
-    hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), 
-      player.getCurrentTemp(), player.getCurrentAmmo());
+    hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), player.getCurrentTemp(), player.getCurrentAmmo());
     hud.display();
     deadCheck(player);
     
@@ -124,5 +123,6 @@ void gamePlay()
     //play death noise and animation
     
     //"Continue","Main menu","Exit game"
-  } 
+  }
+  printSave(saveCompleted); //Prints if recently saved
 }

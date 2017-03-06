@@ -18,18 +18,18 @@ class Player extends Character
   private float invTimer;
   private float invTime;
   
-  Player(float x, float y, float dir, int h, float wi, float hi, String type)
+  Player(float x, float y, float dir, float h, float s, float t, int a, float wi, float hi, String type)
   {
     //Default constructor
     this.xPos = x;
     this.yPos = y;
     this.direction = dir;
-    this.maxHealth = h;
+    this.maxHealth = 100;
     this.currentHealth = h;
     this.maxStamina = 100;
-    this.currentStamina = 100;
-    this.temperature = 100;
-    this.ammo = 0;
+    this.currentStamina = s;
+    this.temperature = t;
+    this.ammo = a;
     this.sizeW = wi;
     this.sizeH = hi;
     this.hBox = new Hitbox(x, y, wi, hi, dir, type);

@@ -2,6 +2,10 @@
 
 void testZone()
 {
+  //Update game state
+  gameState = 0;
+  saveCompleted = false;
+  
   //Art
   zoneGround = loadImage("zone_test_3.png");
   
@@ -10,9 +14,12 @@ void testZone()
   //Entance position
   
     //Player position
-  player.setX(550);
-  player.setY(500);
-  player.movement(0,0); //recalculate the camera position because of new player location
+  if( pause == false){
+    player.setX(550);
+    player.setY(500);
+    player.movement(0,0); //recalculate the camera position because of new player location
+  }
+  pause = false;
   
   //Walls
   walls.clear();

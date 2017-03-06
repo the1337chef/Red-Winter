@@ -2,17 +2,23 @@
 
 void testZone2()
 {
+  //Update game state
+  gameState = 0;
+  saveCompleted = false;
+  
   //Art
   zoneGround = loadImage("zone_test_2.png");
   
   //Update currentZone
   currentZone = "test_2";
   
+  if(pause == false){//only update at the start of a game
   //Player position
   player.setX(63);
   player.setY(289);
   player.movement(0,0); //recalculate the camera position because of new player location
-  
+  }
+  pause = false;
   //Camera position
   //cameraX = (560-256);    //player position - 1/2 screen width
   //cameraY = (266);
