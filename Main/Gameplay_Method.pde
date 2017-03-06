@@ -19,10 +19,16 @@ void gamePlay()
     popMatrix();
     
     if(zoneTransition == true){ //For zone transitions
+      if(flashBack == true){
+        fillColor = 255;
+      }
+      else{
+        fillColor = 0;
+      }
 
      if(transparency < 255){ //Fade to white
         transparency += transparencyIncrement;
-        fill(0, 0, 0, transparency);
+        fill(fillColor, fillColor, fillColor, transparency);
         rect(0, 0, width, height);
      }
      else if(transparency == 255){ //Fade from white to new zone
@@ -38,7 +44,7 @@ void gamePlay()
            println("ERROR: nextZone == NULL");
          }
         transparency2 -= transparencyIncrement;
-        fill(0, 0, 0, transparency2);
+        fill(fillColor, fillColor, fillColor, transparency2);
         rect(0, 0, width, height);
         if(transparency2 == 0){ // To force the next else statement after fade is done
           transparency = 256;

@@ -4,6 +4,9 @@ void testZone()
 {
   //Art
   zoneGround = loadImage("zone_test_3.png");
+  
+  //Update currentZone
+  currentZone = "test";
   //Entance position
   
     //Player position
@@ -20,7 +23,7 @@ void testZone()
   
   //Zone Transitions
   transitions.clear();
-  Hitbox zone = new Hitbox(7, 288, 50, 100, 1, "Zone_Transition");
+  Hitbox zone = new Hitbox(7, 288, 50, 100, 0, "Zone_Transition");
   zone.setZone("2");
   transitions.add(zone);
   

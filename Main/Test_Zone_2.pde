@@ -5,6 +5,9 @@ void testZone2()
   //Art
   zoneGround = loadImage("zone_test_2.png");
   
+  //Update currentZone
+  currentZone = "test_2";
+  
   //Player position
   player.setX(63);
   player.setY(289);
@@ -25,7 +28,7 @@ void testZone2()
 
   //Test Zone Transition Hitboxes
   transitions.clear();
-  Hitbox testTransitionZone = new Hitbox(494, 526, 100, 50, 1, "Zone_Transition");
+  Hitbox testTransitionZone = new Hitbox(494, 526, 100, 50, 0, "Zone_Transition");
   testTransitionZone.setZone("1");
   transitions.add(testTransitionZone);
   

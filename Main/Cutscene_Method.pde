@@ -6,13 +6,24 @@ boolean layer2Exists = false;
 PImage layer3;
 boolean layer3Exists = false;
 
+//Sound (Maybe put in seperate place)
+SoundFile file;
+boolean soundPlayed = false;
+
+
 void cutscene()
 {
   //Display Cutscene image
   switch (cutSceneNumber){
     case 1:  cutScene = loadImage("Ch1-1.png");
+             if(soundPlayed == false){
+               file = new SoundFile(this, "jetSound.mp3");
+               file.play();
+               soundPlayed = true;
+             }
              break;
-    case 2:  cutScene = loadImage("Ch1-2.png");
+    case 2:  file.stop();
+             cutScene = loadImage("Ch1-2.png");
              break;
     case 3:  cutScene = loadImage("ch1-3-1.png");
              layer2 = loadImage("ch1-3-2.png");
@@ -33,13 +44,13 @@ void cutscene()
              break;
   }
   
-  image(cutScene, 0, 0, cutScene.width*scaler, cutScene.height*scaler);
+  image(cutScene, 0, 0, width, height);
   if(layer2Exists){
-    image(layer2, 0, 0, layer2.width*scaler, layer2.height*scaler);
+    image(layer2, 0, 0, width, height);
     layer2Exists = false;
   }
   if(layer3Exists){
-    image(layer3, 0, 0, layer3.width*scaler, layer3.height*scaler);
+    image(layer3, 0, 0, width, height);
     layer3Exists = false;
   }
   

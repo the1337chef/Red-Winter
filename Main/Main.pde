@@ -7,9 +7,12 @@ float transparencyIncrement = 15;
 float transparency2 = 255; //Fade from white to pic
 boolean zoneTransition2 = false; //start the fade to white
 String nextZone = "null"; //Zone to transition to
+boolean flashBack = false; //Uses the same mechanic as zone transition but changes the fill color
+float fillColor = 0; //initially fade to black
 
 //Imports
-//import processing.sound.*;
+import processing.sound.*;
+
 
 //Universal declarations
 float scaler;                  //Used to scale the game up from 512x288 to the user's screen resolution
@@ -132,7 +135,7 @@ void setup()
   
   //Save file reader and writer
   saveReader = createReader("save.txt");
-  saveWriter = createWriter("save.txt");
+
   try
   {
     currentZone = saveReader.readLine().substring(5);
@@ -286,6 +289,9 @@ void keyReleased()
      
     if(key == ' ')
       cutSceneNumber++;
+      
+    if(key == 'q' || key == 'Q')
+      save();
   }
 }
 
