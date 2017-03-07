@@ -4,7 +4,6 @@
 
 public void save(){
 //TODO: Make sure all the values are updated before you save
-//TODO: have a save icon show up
 saveWriter = createWriter("data/save.txt");
 saveWriter.println("zone=" + currentZone);
 saveWriter.println("health=" + saveHealth);

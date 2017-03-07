@@ -13,7 +13,6 @@ float fillColor = 0; //initially fade to black
 //Imports
 import processing.sound.*;
 
-
 //Universal declarations
 float scaler;                  //Used to scale the game up from 512x288 to the user's screen resolution
 float speed;                   //Player speed
@@ -26,8 +25,7 @@ Player player;                 //The player character that the user directly con
 HUD hud;                       //Class which retrieves information and displays it for the user
 boolean zoneTransition;        //Triggers the fade between zone transitions
 boolean saveCompleted = false; //Prompts the screen to say that the user has completed the save
-                               //TODO: have the save complete dissolve away after a bit of time
-int currentTime;
+int currentTime;               //Measures time for the "Save Completed" to go away after 5 seconds
 
 /*
  * Camera X and Y determine the position the player's see of the larger map.
@@ -386,71 +384,6 @@ void mousePressed()
   if(gameState == 1){
     cutSceneNumber++;
   }
-}
-
-//Returns the angle in radians between the player and the current mouse position
-float mouseAngle()
-{
-  float yVar;
-  if(player.getYPos() < 144)
-    yVar = height/2 - (((144-player.getYPos())/144) * height/2);
-  else if(player.getYPos() > 410)
-    yVar = height/2 + (((player.getYPos()-410)/144) * height/2);
-  else
-    yVar = height/2;
-    
-  float xVar;
-  if(player.getXPos() < 256)
-    xVar = width/2 - ((width/2) * ((256-player.getXPos())/256));
-  else if(player.getXPos() > 864)
-    xVar = width/2 + ((width/2) * ((player.getXPos()-864)/256));
-  else
-    xVar = width/2;
-  return atan2(mouseY-yVar, mouseX-xVar);
-}
-
-//COLLISION DETECTION
-//X-AXIS
-boolean xCollision(Hitbox hBox1, Hitbox hBox2, float xChange)
-{
-  if(hBox2.getHeight() > hBox1.getHeight())        //Adjustment for size difference between hitboxes
-  {
-    Hitbox temp = hBox1;
-    hBox1 = hBox2; //did you switch so the one with the larger height is hBox1
-    hBox2 = temp;
-    //xChange = -xChange;
-  }
-  //the above will affect the xchange because it is assigned to the wrong box
-  if((hBox1.getYPos() + hBox1.getHeight()/2 >= hBox2.getYPos() - hBox2.getHeight()/2) && //top of first is bigger than the bottom of second
-    (hBox1.getYPos() - hBox1.getHeight()/2 <= hBox2.getYPos() + hBox2.getHeight()/2) && //bottom of first is smaller than the top of the second
-    (hBox1.getXPos() + hBox1.getWidth()/2 >= hBox2.getXPos() - hBox2.getWidth()/2 + xChange) && //right of first is larger than left of second with change
-    (hBox1.getXPos() - hBox1.getWidth()/2 <= hBox2.getXPos() + hBox2.getWidth()/2 + xChange)) //left of first will be smaller than right of second with change 
-    {
-      return true;
-    }
-  else
-    return false;
-}
-
-//Y-AXIS
-boolean yCollision(Hitbox hBox1, Hitbox hBox2, float yChange)
-{
-  if(hBox2.getWidth() > hBox1.getWidth())        //Adjustment for size difference between hitboxes
-  {
-    Hitbox temp = hBox1;
-    hBox1 = hBox2;
-    hBox2 = temp;
-    //yChange = -yChange;
-  }
-  if((hBox1.getXPos() + hBox1.getWidth()/2 >= hBox2.getXPos() - hBox2.getWidth()/2 &&
-    hBox1.getXPos() - hBox1.getWidth()/2 <= hBox2.getXPos() + hBox2.getWidth()/2) &&
-    (hBox1.getYPos() + hBox1.getHeight()/2 >= hBox2.getYPos() - hBox2.getHeight()/2 + yChange &&
-    hBox1.getYPos() - hBox1.getHeight()/2 <= hBox2.getYPos() + hBox2.getHeight()/2 + yChange))
-    {
-      return true;
-    }
-  else
-    return false;
 }
 
 void zoneKeyAdd()

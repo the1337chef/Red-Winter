@@ -19,6 +19,13 @@ void gamePlay()
     popMatrix();
     
     if(zoneTransition == true){ //For zone transitions
+      if(soundPlayed == false){
+                 file = new SoundFile(this, "ZoneTransition2.wav");
+                 file.play();
+                 soundPlayed = true;
+               }
+    
+    
       if(flashBack == true){
         fillColor = 255;
       }
@@ -55,6 +62,7 @@ void gamePlay()
         zoneTransition2 = false;
         transparency = 0;
         transparency2 = 255;
+        soundPlayed = false;
      }
     }
     

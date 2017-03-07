@@ -23,6 +23,7 @@ void cutscene()
              }
              break;
     case 2:  file.stop();
+             soundPlayed = false;
              cutScene = loadImage("Ch1-2.png");
              break;
     case 3:  cutScene = loadImage("ch1-3-1.png");
