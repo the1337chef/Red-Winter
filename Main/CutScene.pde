@@ -17,32 +17,30 @@ class CutScene
     this.nextZone = nextZone;
   }
 
-  //Destructor
-
   //Getters
   String getId(){
     return this.id;}
-  ArrayList <int> getLayers(){
+  ArrayList <Integer> getLayers(){
     return this.layers;}
   int getSubScenes(){
     return this.subScenes;}
   ArrayList <String> getSounds(){
     return this.sounds;}
-  ArrayList <float> getDurations(){
+  ArrayList <Float> getDurations(){
     return this.durations;}
   String getNextZone(){
-    return this.nextZone();}
+    return this.nextZone;}
 
   //Setters
   void setId(String id){
     this.id = id;}
-  void setLayers(ArrayList <int> layers){
+  void setLayers(ArrayList <Integer> layers){
     this.layers = layers;}
   void setSubScenes(int subScenes){
     this.subScenes = subScenes;}
   void setSounds(ArrayList <String> sounds){
     this.sounds = sounds;}
-  void setDurations(ArrayList <float> durations){
+  void setDurations(ArrayList <Float> durations){
     this.durations = durations;}
   void setNextZone(String nextZone){
     this.nextZone = nextZone;}
