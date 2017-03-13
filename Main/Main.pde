@@ -244,6 +244,9 @@ void setup()
   
   //ENEMY INITIALIZATION
   
+  //Initiallize Chapter Information
+    configureChapter(chapter1);
+  
 }
 
 //Keyboard
@@ -291,10 +294,11 @@ void keyReleased()
       gameState = 1;
      
     if(key == ' ')
-      cutSceneNumber++;
+      nextSubScene();
       
     if(key == 'q' || key == 'Q')
-      save();
+      configureChapter(chapter1);
+
       
     if(key == 'p' || key == 'P'){//pause
       pause = true;
@@ -382,7 +386,7 @@ void mousePressed()
   
   //CUTSCENE
   if(gameState == 1){
-    cutSceneNumber++;
+    nextSubScene();
   }
 }
 
@@ -409,7 +413,8 @@ void draw()
     gamePlay();
   }
   else if(gameState == 1)
-    cutscene();
+    playCutScene(1, chapter1.cutScenes.get(0));
   else
     mainMenu();
 }
+  

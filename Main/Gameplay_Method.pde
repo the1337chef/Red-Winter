@@ -20,8 +20,8 @@ void gamePlay()
     
     if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
-                 file = new SoundFile(this, "ZoneTransition2.wav");
-                 file.play();
+                 soundFile = new SoundFile(this, "ZoneTransition2.wav");
+                 soundFile.play();
                  soundPlayed = true;
                }
     
