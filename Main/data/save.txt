@@ -1,8 +1,8 @@
-zone=test_2
-health=50.0
+zone=1
+health=100.0
 stamina=17.0
-temp=40.0
-ammo=5
+temp=100.0
+ammo=0
 last_cutscene=null
 dynamite=0
 detonator=0

@@ -7,5 +7,4 @@ public void loadCutScene(){
   
   //load Ch1configure
 
-  
 }

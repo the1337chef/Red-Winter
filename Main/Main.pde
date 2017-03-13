@@ -294,7 +294,9 @@ void keyReleased()
       gameState = 1;
      
     if(key == ' ')
-      nextSubScene();
+      if(gameState == 1){
+        nextSubScene();
+      }
       
     if(key == 'q' || key == 'Q')
       configureChapter(chapter1);
@@ -318,10 +320,11 @@ void mousePressed()
     if(newGame.getHighlight())
     {
       //Write/ rewrite save file
-      
+      newSave();
       
       //Play next cutscene
-      //gameState = 1;
+      //Play cut
+      gameState = 1;
     }
     if(continueGame.getHighlight())
     {

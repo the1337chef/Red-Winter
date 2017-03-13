@@ -41,15 +41,7 @@ void gamePlay()
      else if(transparency == 255){ //Fade from white to new zone
          
          //add switch statement of the variety of zones to transition to
-         if( nextZone.equals("1")){
-          testZone();
-         }
-         else if( nextZone.equals("2")){
-           testZone2();
-         }
-         else{
-           println("ERROR: nextZone == NULL");
-         }
+        loadZone();
         transparency2 -= transparencyIncrement;
         fill(fillColor, fillColor, fillColor, transparency2);
         rect(0, 0, width, height);

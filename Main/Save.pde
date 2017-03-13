@@ -34,9 +34,49 @@ void printSave(boolean saved){
   
   
   if(saved == true){
-    println("Printing Save!");
+    //println("Printing Save!");
     textSize(20);
     //textAlign(CENTER,CENTER);
     text("Saved Successfully", 6*width/7, height/5);
   }
+}
+
+public void newSave(){
+//Reset values
+currentZone = "1";
+saveHealth = 100;
+saveTemp = 100;
+saveAmmo = 0;
+last_cutscene = "null";
+dynamite = 0;
+detonator = 0;
+rope = 0;
+collar = 0;
+seal1 = 0;
+seal2 = 0;
+whale = 0;
+sap = 0;
+
+nextZone = "1";
+
+saveWriter = createWriter("data/save.txt");
+saveWriter.println("zone=" + currentZone);
+saveWriter.println("health=" + saveHealth);
+saveWriter.println("stamina=" + saveStamina);
+saveWriter.println("temp=" + saveTemp);
+saveWriter.println("ammo=" + saveAmmo);
+saveWriter.println("last_cutscene=" + last_cutscene);
+saveWriter.println("dynamite=" + dynamite);
+saveWriter.println("detonator=" + detonator);
+saveWriter.println("rope=" + rope);
+saveWriter.println("collar=" + collar);
+saveWriter.println("seal1=" + seal1);
+saveWriter.println("seal2=" + seal2);
+saveWriter.println("whale=" + whale);
+saveWriter.println("sap=" + sap);
+saveWriter.flush();
+saveWriter.close();
+println("Save completed");
+saveCompleted = true;
+currentTime = millis();
 }
