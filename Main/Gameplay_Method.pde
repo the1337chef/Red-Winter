@@ -63,6 +63,7 @@ void gamePlay()
         transparency = 0;
         transparency2 = 255;
         soundPlayed = false;
+        save();
      }
     }
     

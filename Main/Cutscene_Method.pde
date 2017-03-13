@@ -125,6 +125,7 @@ void playCutScene(int ch, CutScene cutscene){
     subSceneIndex = 0;
     timeUpdated = false;
     soundPlayed = false;
+    save();
   }
   
   cursor(CROSS);
