@@ -11,12 +11,14 @@ void gamePlay()
   if(pause == false)
   {
     //DRAW BACKGROUND ENVIRONMENT
-    pushMatrix();
-    imageMode(CORNER);
-    //fill(255);
-    noStroke();
-    image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
-    popMatrix();
+    if(cutSceneHalfWay){
+      pushMatrix();
+      imageMode(CORNER);
+      //fill(255);
+      noStroke();
+      image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
+      popMatrix();
+    }
     
     if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
@@ -39,7 +41,7 @@ void gamePlay()
         rect(0, 0, width, height);
      }
      else if(transparency == 255){ //Fade from white to new zone
-         
+         cutSceneHalfWay = true;
          //add switch statement of the variety of zones to transition to
         loadZone();
         transparency2 -= transparencyIncrement;

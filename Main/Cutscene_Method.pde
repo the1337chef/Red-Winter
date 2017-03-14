@@ -76,10 +76,11 @@ void playCutScene(int ch, CutScene cutscene){
       timeUpdated = false;
       soundPlayed = false;
       cutSceneTransitionPlayed = false;
-      cutSceneHalfWay = false;
       save();
       soundFile.stop();
       loadZone();
+      zoneTransition = true;
+      resetValues();
     }
     
     cursor(CROSS);
@@ -92,5 +93,6 @@ void nextSubScene(){
       timeUpdated = false;
       soundPlayed = false;
       soundFile.stop();
+      println("Next SubScene");
       
 }

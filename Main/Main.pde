@@ -292,6 +292,7 @@ void keyReleased()
       
     if(key == 'c' || key == 'C')
       gameState = 1;
+      resetValues();
      
     if(key == ' ')
       if(gameState == 1){
@@ -305,6 +306,7 @@ void keyReleased()
     if(key == 'p' || key == 'P'){//pause
       pause = true;
       gameState = 2;
+      resetValues();
     }
   }
 }
@@ -321,10 +323,11 @@ void mousePressed()
     {
       //Write/ rewrite save file
       newSave();
-      
+      println("SubSceneIndex: " + subSceneIndex);
       //Play next cutscene
       //Play cut
       gameState = 1;
+      resetValues();
     }
     if(continueGame.getHighlight())
     {
@@ -347,6 +350,7 @@ void mousePressed()
       
       //Switch to gameplay at appropriate zone
       gameState = 0;
+      resetValues();
       cursor(CROSS);
     }
 
@@ -362,9 +366,8 @@ void mousePressed()
     }
     
   }
-  
   //IN-GAME
-  if(gameState == 0)
+  else if(gameState == 0)
   {
     
     
@@ -386,9 +389,8 @@ void mousePressed()
        //WEAPON AIM 
     }
   }
-  
   //CUTSCENE
-  if(gameState == 1){
+  else{
     nextSubScene();
   }
 }
@@ -415,8 +417,11 @@ void draw()
   if(gameState == 0){
     gamePlay();
   }
-  else if(gameState == 1)
+  else if(gameState == 1){
+    println("SubSceneIndex: " + subSceneIndex);
     playCutScene(1, chapter1.cutScenes.get(0));
+    
+  }
   else
     mainMenu();
 }
