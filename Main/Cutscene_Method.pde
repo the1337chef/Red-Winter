@@ -81,6 +81,7 @@ void playCutScene(int ch, CutScene cutscene){
       loadZone();
       zoneTransition = true;
       resetValues();
+      println("reset in playCutScene last else");
     }
     
     cursor(CROSS);

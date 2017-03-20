@@ -34,11 +34,14 @@ void gamePlay()
       else{
         fillColor = 0;
       }
-
+     
      if(transparency < 255){ //Fade to white
         transparency += transparencyIncrement;
         fill(fillColor, fillColor, fillColor, transparency);
+        pushMatrix();
+        rectMode(CORNER);
         rect(0, 0, width, height);
+        popMatrix();
      }
      else if(transparency == 255){ //Fade from white to new zone
          cutSceneHalfWay = true;
@@ -46,7 +49,10 @@ void gamePlay()
         loadZone();
         transparency2 -= transparencyIncrement;
         fill(fillColor, fillColor, fillColor, transparency2);
+        pushMatrix();
+        rectMode(CORNER);
         rect(0, 0, width, height);
+        popMatrix();
         if(transparency2 == 0){ // To force the next else statement after fade is done
           transparency = 256;
         }
@@ -59,6 +65,8 @@ void gamePlay()
         soundPlayed = false;
         save();
      }
+     
+     
     }
     
     //Player position update
@@ -116,7 +124,9 @@ void gamePlay()
     
     //HUD Display
     hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), player.getCurrentTemp(), player.getCurrentAmmo());
-    hud.display();
+    if(cutSceneHalfWay && !zoneTransition){
+      hud.display();
+    }
     deadCheck(player);
     
   }

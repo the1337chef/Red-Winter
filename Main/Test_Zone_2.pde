@@ -4,7 +4,6 @@ void testZone2()
 {
   //Update game state
   gameState = 0;
-  resetValues();
   saveCompleted = false;
   
   //Art

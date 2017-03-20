@@ -188,8 +188,10 @@ void setup()
   newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
   if(currentZone.equals("null"))
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
-  else
+  else{
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
+    zoneTransition = true;
+  }
   //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
   //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
   quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
@@ -290,9 +292,12 @@ void keyReleased()
     if(key == 't' || key == 'T')
       zoneTransition = true;
       
-    if(key == 'c' || key == 'C')
+    if(key == 'c' || key == 'C'){
       gameState = 1;
+      println("reset in C");
       resetValues();
+    }
+      
      
     if(key == ' ')
       if(gameState == 1){
@@ -306,7 +311,7 @@ void keyReleased()
     if(key == 'p' || key == 'P'){//pause
       pause = true;
       gameState = 2;
-      resetValues();
+     // resetValues();
     }
   }
 }
@@ -323,10 +328,11 @@ void mousePressed()
     {
       //Write/ rewrite save file
       newSave();
-      println("SubSceneIndex: " + subSceneIndex);
+      //println("SubSceneIndex: " + subSceneIndex);
       //Play next cutscene
       //Play cut
       gameState = 1;
+      println("reset in mousePRessed");
       resetValues();
     }
     if(continueGame.getHighlight())
@@ -351,6 +357,7 @@ void mousePressed()
       //Switch to gameplay at appropriate zone
       gameState = 0;
       resetValues();
+      println("reset in continue game");
       cursor(CROSS);
     }
 
@@ -418,7 +425,7 @@ void draw()
     gamePlay();
   }
   else if(gameState == 1){
-    println("SubSceneIndex: " + subSceneIndex);
+    //println("SubSceneIndex: " + subSceneIndex);
     playCutScene(1, chapter1.cutScenes.get(0));
     
   }
