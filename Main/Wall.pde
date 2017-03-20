@@ -22,7 +22,7 @@ class Wall
   void displayWall()
   {
     pushMatrix();
-    translate(this.xPos*scaler, this.yPos*scaler);
+    translate(this.xPos, this.yPos);
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
     rectMode(CENTER);

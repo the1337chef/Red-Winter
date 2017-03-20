@@ -60,9 +60,49 @@ void gamePlay()
     //for(int i = 0; i < enemies.size(); i++)
       //enemies.get(i).display();
     
-    //Projectile Display
-    //for(int i = 0; i < projectileSpawners.size(); i++)
-      //projectileSpawners.get(i).displayProjectiles();
+    //Projectile Collision detection and display
+    if(projectiles.size() > 0)
+    {
+      for(int i = 0; i < projectiles.size(); i++)
+      {
+        boolean removed = false;
+        
+        //WALL COLLISION
+        for(int j = 0; j < walls.size(); j++)
+        {
+          if(xCollision(walls.get(j).getHitbox(), projectiles.get(i).getHitbox(), projectiles.get(i).getXVector()))
+          {
+            projectiles.remove(i);
+            removed = true;
+            break;
+          }
+          if(yCollision(walls.get(j).getHitbox(), projectiles.get(i).getHitbox(), projectiles.get(i).getYVector()))
+          {
+            projectiles.remove(i);
+            removed = true;
+            break;
+          }
+        }
+        
+        //Enemy Collision Check
+        
+        //Out of bounds Check
+        if(removed == false)
+        {
+          if(projectiles.get(i).getXPos() < -50 || projectiles.get(i).getXPos() > 1170 ||
+            projectiles.get(i).getYPos() < -50 || projectiles.get(i).getYPos() > 604)
+            {
+              projectiles.remove(0);
+              removed = true;
+            }
+        }
+        
+        if(removed)
+          i--;
+        else
+          projectiles.get(i).display();
+      }
+    }
     
     //HUD Display
     hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), 

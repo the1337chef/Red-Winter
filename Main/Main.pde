@@ -2,7 +2,7 @@
 //Main file/ class
 
 //Imports
-//import processing.sound.*;
+import processing.sound.*;
 
 //Universal declarations
 float scaler;                  //Used to scale the game up from 512x288 to the user's screen resolution
@@ -75,11 +75,11 @@ Button pauseContinue;
 Button quitGame;
 
 //Weapons
-/*Weapon none;
+Weapon none;
 RangedWeapon bow;
-MeleeWeapon knife;
+//MeleeWeapon knife;
 
-Weapon activeWeapon, previousWeapon, temp;*/
+Weapon activeWeapon, previousWeapon, temp;
 
 //Player movement
 boolean mUp, mDown, mLeft, mRight;
@@ -94,6 +94,9 @@ Wall testWall;
 
 //Projectile Spawners
 //ArrayList<RangedWeapon> projectileSpawners = new ArrayList<RangedWeapon>();
+
+//List of projectiles
+ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 //Pickups
 ArrayList<Pickup> pickups = new ArrayList<Pickup>();
@@ -198,15 +201,15 @@ void setup()
   knifeDamage = 50;
   knifeReach = 70;
   bowDamage = 100;
-  arrowSpeed = 15.0;
+  arrowSpeed = 5.0;
   
   //Heads up display
   hud = new HUD(100, 100, 100, 0);
   
-  //bow = new RangedWeapon(bowDamage, arrowSpeed, true);
+  bow = new RangedWeapon(bowDamage, arrowSpeed, "friendly_damage", 20, 20);
   //knife = new MeleeWeapon(knifeDamage, 0, 0, knifeReach, 400, true);
-  //activeWeapon = none;
-  //beviousWeapon = bow;
+  activeWeapon = none;
+  previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
   hitBoxMode = false;
@@ -258,9 +261,9 @@ void keyReleased()
     //Weapon switch
     if(key == 'f' || key == 'F')
     {
-      //temp = activeWeapon;
-      //activeWeapon = previousWeapon;
-      //previousWeapon = temp;
+      temp = activeWeapon;
+      activeWeapon = previousWeapon;
+      previousWeapon = temp;
     }
     if(key == 'h' || key == 'H')
       hitBoxMode = !hitBoxMode;
@@ -318,9 +321,6 @@ void mousePressed()
   //IN-GAME
   if(gameState == 0)
   {
-    
-    
-    /*
     if(mouseButton == LEFT)
     {
       if(activeWeapon instanceof RangedWeapon)
@@ -328,9 +328,9 @@ void mousePressed()
         float angle = mouseAngle();
         float xVector = cos(angle);
         float yVector = sin(angle);
-        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector, 60, 10);
+        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
       }
-    }*/
+    }
     //MORE PAUSE;
     
     if(mouseButton == RIGHT)
@@ -368,15 +368,13 @@ boolean xCollision(Hitbox hBox1, Hitbox hBox2, float xChange)
   if(hBox2.getHeight() > hBox1.getHeight())        //Adjustment for size difference between hitboxes
   {
     Hitbox temp = hBox1;
-    hBox1 = hBox2; //did you switch so the one with the larger height is hBox1
+    hBox1 = hBox2;
     hBox2 = temp;
-    //xChange = -xChange;
   }
-  //the above will affect the xchange because it is assigned to the wrong box
-  if((hBox1.getYPos() + hBox1.getHeight()/2 >= hBox2.getYPos() - hBox2.getHeight()/2) && //top of first is bigger than the bottom of second
-    (hBox1.getYPos() - hBox1.getHeight()/2 <= hBox2.getYPos() + hBox2.getHeight()/2) && //bottom of first is smaller than the top of the second
-    (hBox1.getXPos() + hBox1.getWidth()/2 >= hBox2.getXPos() - hBox2.getWidth()/2 + xChange) && //right of first is larger than left of second with change
-    (hBox1.getXPos() - hBox1.getWidth()/2 <= hBox2.getXPos() + hBox2.getWidth()/2 + xChange)) //left of first will be smaller than right of second with change 
+  if((hBox1.getYPos() + hBox1.getHeight()/2 >= hBox2.getYPos() - hBox2.getHeight()/2 &&
+    hBox1.getYPos() - hBox1.getHeight()/2 <= hBox2.getYPos() + hBox2.getHeight()/2) &&
+    (hBox1.getXPos() + hBox1.getWidth()/2 >= hBox2.getXPos() - hBox2.getWidth()/2 + xChange &&
+    hBox1.getXPos() - hBox1.getWidth()/2 <= hBox2.getXPos() + hBox2.getWidth()/2 + xChange))
     {
       return true;
     }
@@ -392,7 +390,6 @@ boolean yCollision(Hitbox hBox1, Hitbox hBox2, float yChange)
     Hitbox temp = hBox1;
     hBox1 = hBox2;
     hBox2 = temp;
-    //yChange = -yChange;
   }
   if((hBox1.getXPos() + hBox1.getWidth()/2 >= hBox2.getXPos() - hBox2.getWidth()/2 &&
     hBox1.getXPos() - hBox1.getWidth()/2 <= hBox2.getXPos() + hBox2.getWidth()/2) &&
