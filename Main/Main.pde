@@ -21,6 +21,7 @@ int knifeDamage;               //User knife damage value
 float knifeReach;              //Variable determining how far the knife can reach, used for knife
 int bowDamage;                 //User arrow damage
 float arrowSpeed;              //Speed at which arrow projectiles will fly
+boolean aiming;
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
 boolean zoneTransition;        //Triggers the fade between zone transitions
@@ -88,11 +89,11 @@ Button quitGame;
 Button saveGame;
 
 //Weapons
-/*Weapon none;
+Weapon none;
 RangedWeapon bow;
-MeleeWeapon knife;
+//MeleeWeapon knife;
 
-Weapon activeWeapon, previousWeapon, temp;*/
+Weapon activeWeapon, previousWeapon, temp;
 
 //Player movement
 boolean mUp, mDown, mLeft, mRight;
@@ -106,7 +107,7 @@ ArrayList<Wall> walls = new ArrayList<Wall>();
 Wall testWall;
 
 //Projectile Spawners
-//ArrayList<RangedWeapon> projectileSpawners = new ArrayList<RangedWeapon>();
+ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 //Pickups
 ArrayList<Pickup> pickups = new ArrayList<Pickup>();
@@ -212,20 +213,21 @@ void setup()
   
   //Player values
   player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, 32, 32, "player");
-  speed = 5.0;
+  speed = 3.0;
   direction = 0;
   knifeDamage = 50;
   knifeReach = 70;
   bowDamage = 100;
   arrowSpeed = 15.0;
+  aiming = false;
   
   //Heads up display
   hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
   
-  //bow = new RangedWeapon(bowDamage, arrowSpeed, true);
+  bow = new RangedWeapon(bowDamage, arrowSpeed, "friendly_damage", 20, 20);
   //knife = new MeleeWeapon(knifeDamage, 0, 0, knifeReach, 400, true);
-  //activeWeapon = none;
-  //beviousWeapon = bow;
+  activeWeapon = none;
+  previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
   hitBoxMode = false;
@@ -282,9 +284,9 @@ void keyReleased()
     //Weapon switch
     if(key == 'f' || key == 'F')
     {
-      //temp = activeWeapon;
-      //activeWeapon = previousWeapon;
-      //previousWeapon = temp;
+      temp = activeWeapon;
+      activeWeapon = previousWeapon;
+      previousWeapon = temp;
     }
     if(key == 'h' || key == 'H')
       hitBoxMode = !hitBoxMode;
@@ -376,29 +378,37 @@ void mousePressed()
   //IN-GAME
   else if(gameState == 0)
   {
-    
-    
-    /*
     if(mouseButton == LEFT)
     {
-      if(activeWeapon instanceof RangedWeapon)
+      if(activeWeapon instanceof RangedWeapon && aiming)
       {
         float angle = mouseAngle();
         float xVector = cos(angle);
         float yVector = sin(angle);
-        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector, 60, 10);
+        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
       }
-    }*/
+    }
     //MORE PAUSE;
     
-    if(mouseButton == RIGHT)
+    if(activeWeapon instanceof RangedWeapon && mouseButton == RIGHT)
     {
-       //WEAPON AIM 
+       aiming = true;
     }
   }
   //CUTSCENE
   else{
     nextSubScene();
+  }
+}
+
+void mouseReleased()
+{
+  if(gameState == 0 && activeWeapon instanceof RangedWeapon)
+  {
+    if(mouseButton == RIGHT)
+    {
+      aiming = false;
+    }
   }
 }
 

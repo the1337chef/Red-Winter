@@ -19,12 +19,12 @@ class Wall
     this.direction = dir;
   }
   
-  //Displays the wall
-  void displayWall()//redundant cause they are shown when you press h
+  //Displays the wall hitbox
+  void displayWall()
   {
     pushMatrix();
     
-    translate(this.xPos*scaler-cameraX*scaler,this.yPos*scaler-cameraY*scaler);
+    translate((this.xPos-cameraX)*scaler,(this.yPos-cameraY)*scaler);
     rotate(this.direction);
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
@@ -48,6 +48,8 @@ class Wall
     return this.sizeW;}
   float getHeight(){
     return this.sizeH;}
+  float getDirection(){
+    return this.direction;}
   Hitbox getHitbox(){
     return this.hBox;}
   

@@ -81,14 +81,18 @@ void gamePlay()
       if(keyCode == RIGHT || key == 'd' || key == 'D')
         mRight = true;
     }  
-    if(mUp == true)
+    if(mUp == true){
       player.movement(0, -1*speed);
-    if(mDown == true)
+      player.setMDir(1);}
+    if(mDown == true){
       player.movement(0, speed);
-    if(mLeft == true)
+      player.setMDir(3);}
+    if(mLeft == true){
       player.movement(-1*speed, 0);
-    if(mRight == true)
+      player.setMDir(2);}
+    if(mRight == true){
       player.movement(speed, 0);
+      player.setMDir(0);}
       
     player.setDir(mouseAngle());
     //Enemy behavior and movement update
@@ -119,8 +123,43 @@ void gamePlay()
       //enemies.get(i).display();
     
     //Projectile Display
-    //for(int i = 0; i < projectileSpawners.size(); i++)
-      //projectileSpawners.get(i).displayProjectiles();
+    if(projectiles.size() > 0)
+    {
+      for(int i = 0; i < projectiles.size(); i++)
+      {
+        boolean removed = false;
+        PVector change = new PVector(projectiles.get(i).getXVector(),projectiles.get(i).getYVector(),0);
+        //WALL COLLISION
+        for(int j = 0; j < walls.size(); j++)
+        {
+          change = collision(walls.get(j).getHitbox(), projectiles.get(i).getHitbox(), change.x, change.y, change.z, walls.get(j).getDirection());
+          if(change.z == 1)
+          {
+            projectiles.remove(i);
+            removed = true;
+            break;
+          }
+        }
+        
+        //Enemy Collision Check
+        
+        //Out of bounds Check
+        if(removed == false)
+        {
+          if(projectiles.get(i).getXPos() < -50 || projectiles.get(i).getXPos() > 1170 ||
+            projectiles.get(i).getYPos() < -50 || projectiles.get(i).getYPos() > 604)
+            {
+              projectiles.remove(0);
+              removed = true;
+            }
+        }
+        
+        if(removed)
+          i--;
+        else
+          projectiles.get(i).display();
+      }
+    }
     
     //HUD Display
     hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), player.getCurrentTemp(), player.getCurrentAmmo());

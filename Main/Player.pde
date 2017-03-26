@@ -4,7 +4,8 @@ class Player extends Character
 {
   private float xPos;
   private float yPos;
-  private float direction;
+  private float direction;        //Aiming direction
+  private int mDirection;         //Movement direction
   private float maxHealth;
   private float currentHealth;
   private float maxStamina;
@@ -23,7 +24,8 @@ class Player extends Character
     //Default constructor
     this.xPos = x;
     this.yPos = y;
-    this.direction = dir;
+    this.direction = dir;        //Radians: 0-2PI
+    this.mDirection = 0;       //Int: 0:E, 1:N, 2:W, 3:S
     this.maxHealth = 100;
     this.currentHealth = h;
     this.maxStamina = 100;
@@ -60,13 +62,20 @@ class Player extends Character
     else
       translate(0, height/2);
     
-    rotate(this.direction);
+    
     stroke(0);
     strokeWeight(2);
     fill(100);
     rectMode(CENTER);
+    rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
+    
+    pushMatrix();
+    translate(0, -16);
+    if(aiming)
+      rotate(this.direction);
     if(zoneTransition == false)
-      rect(0, 0, this.sizeW, this.sizeH);
+      rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
+    popMatrix();
     if(hitBoxMode)
       this.hBox.displayBox();
     popMatrix();
@@ -75,25 +84,21 @@ class Player extends Character
   //Player movement
   void movement(float xChange, float yChange)
   {
+    PVector change = new PVector(xChange,yChange,0);
+    
     //Wall collision and correction
     for(int i = 0; i < walls.size(); i++)
     {
-      if(xCollision(walls.get(i).getHitbox(), this.hBox, xChange)){
-        xChange = 0;
-      }
-      if(yCollision(walls.get(i).getHitbox(), this.hBox, yChange)){
-        yChange = 0;
-      }
+      change = collision(walls.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, walls.get(i).getDirection());
+      xChange = change.x;
+      yChange = change.y;
     }
-    
+    change.z = 0;
     //Zone Transition Collision
     for(int i = 0; i < transitions.size(); i++)
     {
-      if(xCollision(transitions.get(i), this.hBox, xChange)){
-        zoneTransition = true;
-        nextZone = transitions.get(i).getZone();
-      }
-      if(yCollision(transitions.get(i), this.hBox, yChange)){
+      change = collision(transitions.get(i), this.hBox, change.x, change.y, change.z, 0);
+      if(change.z == 1){
         zoneTransition = true;
         nextZone = transitions.get(i).getZone();
       }
@@ -160,6 +165,7 @@ class Player extends Character
     this.yPos = y;}
     
   void setDir(float dir){
-    this.hBox.setDir(dir);
     this.direction = dir;}
+  void setMDir(int dir){
+    this.mDirection = dir;}
 }

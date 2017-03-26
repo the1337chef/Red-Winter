@@ -35,7 +35,7 @@ class Hitbox
     pushMatrix();
     if(!type.equals("player"))
       translate((this.xPos - cameraX)*scaler, (this.yPos - cameraY)*scaler);
-    rotate(this.direction);
+    //rotate(this.direction);
     rectMode(CENTER);
     noStroke();
     color c;
