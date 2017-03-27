@@ -7,7 +7,12 @@ void testZone()
   saveCompleted = false;
   
   //Art
+  horizonView = loadImage("Ch1/Zones/horizon.png");
   zoneGround = loadImage("zone_test_3.png");
+  background = loadImage("Ch1/Zones/zone1A_Background.png");
+  foreground = loadImage("Ch1/Zones/zone1A_Foreground.png");
+  
+  
   
   //Update currentZone
   currentZone = "test";
@@ -15,8 +20,8 @@ void testZone()
   
     //Player position
   if( pause == false){
-    player.setX(550);
-    player.setY(500);
+    player.setX(96);
+    player.setY(480);
     player.movement(0,0); //recalculate the camera position because of new player location
   }
   pause = false;

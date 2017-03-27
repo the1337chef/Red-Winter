@@ -69,6 +69,8 @@ int gameState;
 //Images
 PImage background;
 PImage zoneGround;
+PImage foreground;
+PImage horizonView;
 PImage cutScene;
 
 //Fonts

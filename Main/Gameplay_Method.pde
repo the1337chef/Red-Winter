@@ -12,12 +12,17 @@ void gamePlay()
   {
     //DRAW BACKGROUND ENVIRONMENT
     if(cutSceneHalfWay){
+      
       pushMatrix();
       imageMode(CORNER);
       //fill(255);
       noStroke();
-      image(zoneGround,-cameraX*scaler,-cameraY*scaler,zoneGround.width*scaler,zoneGround.height*scaler);
+      //Draw horizon view
+      image(horizonView, 0,0,width,height);
+      //Draw background
+      image(background,-cameraX*scaler,-cameraY*scaler,background.width*scaler,background.height*scaler);
       popMatrix();
+      
     }
     
     if(zoneTransition == true){ //For zone transitions
@@ -118,6 +123,12 @@ void gamePlay()
     //Player and Enemy display
     if(zoneTransition == false){
       player.display();
+      //TODO: Foreground
+    }
+    
+    if(cutSceneHalfWay){
+      //Draw foreground
+      image(foreground, -cameraX*scaler,-cameraY*scaler,foreground.width*scaler,foreground.height*scaler);
     }
     //for(int i = 0; i < enemies.size(); i++)
       //enemies.get(i).display();
