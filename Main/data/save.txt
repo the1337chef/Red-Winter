@@ -1,4 +1,4 @@
-zone=test
+zone=test_2
 health=100.0
 stamina=17.0
 temp=100.0
