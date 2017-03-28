@@ -56,6 +56,7 @@ class Hitbox
     else
       c = color(255,0,255);
     fill(c, 100);
+    rotate(this.direction);
     if(type.equals("player"))
       rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
     else

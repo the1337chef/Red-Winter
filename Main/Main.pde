@@ -3,7 +3,7 @@
 
 //For zone transition
 float transparency = 0; //Fade to white
-float transparencyIncrement = 15;
+float transparencyIncrement = 17;
 float transparency2 = 255; //Fade from white to pic
 boolean zoneTransition2 = false; //start the fade to white
 String nextZone = "null"; //Zone to transition to

@@ -18,7 +18,7 @@ class Projectile
     this.xPos = 0;
     this.yPos = 0;
     this.damage = 0;
-    this.speed = 1;
+    this.speed = 3.5;
     this.xVector = 1;
     this.yVector = 0;
     this.sizeW = 10;

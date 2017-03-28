@@ -28,14 +28,28 @@ void testZone()
   
   //Walls
   walls.clear();
-  Wall forestWall1 = new Wall(176, 64, 352, 128, 0);
-  //Wall forestWall2 = new Wall(432*scaler, 48*scaler, 160*scaler, 96*scaler, 0);
+  Wall forestWall1 = new Wall(563, 403, 610, 70, 0);
+  Wall forestWall2 = new Wall(995, 441, 200, 60, 0);
+  Wall forestWall3 = new Wall(897, 426, 60, 60, PI/4.0);
+  Wall forestWall4 = new Wall(258, 389, 70, 70, PI/4.0);
+  Wall forestWall5 = new Wall(127, 385, 70, 20, 0);
+  Wall forestWall6 = new Wall(193, 379, 70, 70, PI/4.0);
+  Wall forestWall7 = new Wall(43, 395, 73, 73, PI/4.0);
+  Wall forestWall8 = new Wall(43, 550, 140, 140, PI/4.0);
+  Wall forestWall9 = new Wall(1100, 472, 50, 50, PI/4.0);
   walls.add(forestWall1);
-  //walls.add(forestWall2);
+  walls.add(forestWall2);
+  walls.add(forestWall3);
+  walls.add(forestWall4);
+  walls.add(forestWall5);
+  walls.add(forestWall6);
+  walls.add(forestWall7);
+  walls.add(forestWall8);
+  walls.add(forestWall9);
   
   //Zone Transitions
   transitions.clear();
-  Hitbox zone = new Hitbox(7, 288, 50, 100, 0, "Zone_Transition");
+  Hitbox zone = new Hitbox(1034, 534, 180, 50, 0, "Zone_Transition");
   zone.setZone("2");
   transitions.add(zone);
   

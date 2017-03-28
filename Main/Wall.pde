@@ -29,7 +29,7 @@ class Wall
     this.hBox.setXPos(this.xPos);
     this.hBox.setYPos(this.yPos);
     rectMode(CENTER);
-    fill(0); //black
+    //fill(0); //black
     noStroke();
     
     rect(0, 0,this.sizeW*scaler,this.sizeH*scaler);

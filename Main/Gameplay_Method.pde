@@ -18,61 +18,14 @@ void gamePlay()
       //fill(255);
       noStroke();
       //Draw horizon view
-      image(horizonView, 0,0,width,height);
+      image(horizonView, 0,-30,width,height);
       //Draw background
       image(background,-cameraX*scaler,-cameraY*scaler,background.width*scaler,background.height*scaler);
       popMatrix();
       
     }
     
-    if(zoneTransition == true){ //For zone transitions
-      if(soundPlayed == false){
-                 soundFile = new SoundFile(this, "ZoneTransition2.wav");
-                 soundFile.play();
-                 soundPlayed = true;
-               }
-    
-    
-      if(flashBack == true){
-        fillColor = 255;
-      }
-      else{
-        fillColor = 0;
-      }
-     
-     if(transparency < 255){ //Fade to white
-        transparency += transparencyIncrement;
-        fill(fillColor, fillColor, fillColor, transparency);
-        pushMatrix();
-        rectMode(CORNER);
-        rect(0, 0, width, height);
-        popMatrix();
-     }
-     else if(transparency == 255){ //Fade from white to new zone
-         cutSceneHalfWay = true;
-         //add switch statement of the variety of zones to transition to
-        loadZone();
-        transparency2 -= transparencyIncrement;
-        fill(fillColor, fillColor, fillColor, transparency2);
-        pushMatrix();
-        rectMode(CORNER);
-        rect(0, 0, width, height);
-        popMatrix();
-        if(transparency2 == 0){ // To force the next else statement after fade is done
-          transparency = 256;
-        }
-     }
-     else{ //reset variables
-        zoneTransition = false;
-        zoneTransition2 = false;
-        transparency = 0;
-        transparency2 = 255;
-        soundPlayed = false;
-        save();
-     }
-     
-     
-    }
+
     
     //Player position update
     if(keyPressed)
@@ -102,15 +55,7 @@ void gamePlay()
     player.setDir(mouseAngle());
     //Enemy behavior and movement update
     
-    if(hitBoxMode){
-      //Wall display
-      for(int i = 0; i < walls.size(); i++)
-        walls.get(i).displayWall();
-        
-      //Transition Zone display
-      for(int i = 0; i < transitions.size(); i++)
-        transitions.get(i).displayBox();
-    }
+
     
     //Test turret
     
@@ -172,12 +117,71 @@ void gamePlay()
       }
     }
     
+    if(hitBoxMode){
+      //Wall display
+      for(int i = 0; i < walls.size(); i++)
+        walls.get(i).displayWall();
+        
+      //Transition Zone display
+      for(int i = 0; i < transitions.size(); i++)
+        transitions.get(i).displayBox();
+    }
+    
     //HUD Display
     hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), player.getCurrentTemp(), player.getCurrentAmmo());
     if(cutSceneHalfWay && !zoneTransition){
       hud.display();
     }
     deadCheck(player);
+    
+        if(zoneTransition == true){ //For zone transitions
+      if(soundPlayed == false){
+                 soundFile = new SoundFile(this, "ZoneTransition2.wav");
+                 soundFile.play();
+                 soundPlayed = true;
+               }
+    
+    
+      if(flashBack == true){
+        fillColor = 255;
+      }
+      else{
+        fillColor = 0;
+      }
+     
+     if(transparency < 255){ //Fade to white
+        transparency += transparencyIncrement;
+        fill(fillColor, fillColor, fillColor, transparency);
+        pushMatrix();
+        rectMode(CORNER);
+        rect(0, 0, width, height);
+        popMatrix();
+     }
+     else if(transparency == 255){ //Fade from white to new zone
+         cutSceneHalfWay = true;
+         //add switch statement of the variety of zones to transition to
+        loadZone();
+        transparency2 -= transparencyIncrement;
+        fill(fillColor, fillColor, fillColor, transparency2);
+        pushMatrix();
+        rectMode(CORNER);
+        rect(0, 0, width, height);
+        popMatrix();
+        if(transparency2 == 0){ // To force the next else statement after fade is done
+          transparency = 256;
+        }
+     }
+     else{ //reset variables
+        zoneTransition = false;
+        zoneTransition2 = false;
+        transparency = 0;
+        transparency2 = 255;
+        soundPlayed = false;
+        save();
+     }
+     
+     
+    }
     
   }
   else if(dead == true)

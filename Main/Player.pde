@@ -107,7 +107,7 @@ class Player extends Character
     //Map boundary collision and correction
     if(this.xPos + xChange > 1120 || this.xPos + xChange < 0)
       xChange = 0;
-    if(this.yPos + yChange > 554 || this.yPos + yChange < 0)
+    if(this.yPos + yChange > 544 || this.yPos + yChange < 0)
       yChange = 0;
     this.xPos += xChange;
     this.yPos += yChange;
@@ -121,8 +121,8 @@ class Player extends Character
     
     if(this.yPos < 144)
       cameraY = 0;
-    else if(this.yPos > 410)
-      cameraY = 266;
+    else if(this.yPos > 400)
+      cameraY = 256;
     else
       cameraY = this.yPos-144;
     
