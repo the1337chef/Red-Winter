@@ -13,7 +13,7 @@ void configureChapter(Chapter chapter) {
     int numOfCutScenes = Integer.parseInt(line1);
 
     int zones = Integer.parseInt(reader.readLine().substring(9));
-    chapter.setZones(zones);
+    chapter.setNumOfZones(zones);
 
     //skip comment
     reader.readLine();

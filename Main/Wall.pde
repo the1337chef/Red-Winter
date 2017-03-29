@@ -57,4 +57,13 @@ class Wall
     this.xPos = x;}
   void setYPos(float y){
     this.yPos = y;}
+    
+  void print(){
+    println("Wall:");
+    println("x = " + this.xPos);
+    println("y = " + this.yPos);
+    println("width = " + this.sizeW);
+    println("height = " + this.sizeH);
+    println("direction = " + this.direction);
+  }
 }

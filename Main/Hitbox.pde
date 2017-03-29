@@ -9,6 +9,8 @@ class Hitbox
   private float direction;
   private String type;
   private String zone;
+  private float nextXPos; // Player's x position after a transition
+  private float nextYPos; // Player's y position after a transition
   
   Hitbox(float x, float y, float w, float h, float d, String t)
   {
@@ -19,6 +21,8 @@ class Hitbox
     this.direction = d;
     this.type = t;
     this.zone = "null";
+    this.nextXPos = 0;
+    this.nextYPos = 0;
   }
   
   //Displays hitbox
@@ -86,6 +90,10 @@ class Hitbox
     return this.type;}
   String getZone(){
     return this.zone;}
+  float getNextXPos(){
+    return this.nextXPos;}
+  float getNextYPos(){
+    return this.nextYPos;}
   
   void setXPos(float x){
     this.xPos = x;}
@@ -95,6 +103,18 @@ class Hitbox
     this.direction = dir;}
   void setZone(String z){
     this.zone = z;}
+  void setNextXPos(float nextXPos){
+    this.nextXPos = nextXPos;}
+  void setNextYPos(float nextYPos){
+    this.nextYPos = nextYPos;} 
     
-    
+    void print(){
+      println("Hitbox:");
+      println("X = " + this.xPos);
+      println("Y = " + this.yPos);
+      println("direction = " + this.direction);
+      println("Zone to transition to : " + this.zone);
+      println("Next Player X position : " + this.nextXPos);
+      println("Next Player Y position : " + this.nextYPos);
+    }
   }
