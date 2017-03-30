@@ -144,6 +144,7 @@ void setup()
   try
   {
     currentZone = saveReader.readLine().substring(5);
+    nextZone = currentZone;
     saveHealth = Float.parseFloat(saveReader.readLine().substring(7));
     saveStamina = Float.parseFloat(saveReader.readLine().substring(8));
     saveTemp = Float.parseFloat(saveReader.readLine().substring(5));
@@ -160,7 +161,7 @@ void setup()
   }
   catch(IOException e)
   {
-    currentZone = "zone_null";
+    currentZone = "null";
     saveHealth = 0;
     saveStamina = 0;
     saveTemp = 0;
@@ -336,7 +337,7 @@ void mousePressed()
       //Play next cutscene
       //Play cut
       gameState = 1;
-      println("reset in mousePRessed");
+      //println("reset in mousePRessed");
       resetValues();
     }
     if(continueGame.getHighlight())
@@ -348,10 +349,10 @@ void mousePressed()
          //Crash_1 Method
          break;
        //etc.
-       case "test":
+       case "1":
          testZone();
          break;
-       case "test_2":
+       case "2":
          testZone2();
          break;
        default:
@@ -361,7 +362,7 @@ void mousePressed()
       //Switch to gameplay at appropriate zone
       gameState = 0;
       resetValues();
-      println("reset in continue game");
+      //println("reset in continue game");
       cursor(CROSS);
     }
 

@@ -21,7 +21,7 @@ saveWriter.println("whale=" + whale);
 saveWriter.println("sap=" + sap);
 saveWriter.flush();
 saveWriter.close();
-println("Save completed");
+//println("Save completed");
 saveCompleted = true;
 currentTime = millis();
 }

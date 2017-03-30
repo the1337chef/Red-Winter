@@ -16,7 +16,7 @@ void testZone2()
   
   
   //Update currentZone
-  currentZone = "test_2";
+  currentZone = "2";
   
   if(pause == false){//only update at the start of a game
   //Player position

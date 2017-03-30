@@ -7,7 +7,7 @@ PImage layer3;
 boolean layer3Exists = false;
 
 //Sound (Maybe put in seperate place)
-SoundFile soundFile = new SoundFile(this, "Ch1/1-1/1-1-1.mp3");
+SoundFile soundFile;
 boolean soundPlayed = false;
 
 float pastTime;
@@ -74,14 +74,16 @@ void playCutScene(int ch, CutScene cutscene){
       gameState = 0;
       subSceneIndex = 0;
       timeUpdated = false;
+      if(soundPlayed){
+        soundFile.stop();
+      }
       soundPlayed = false;
       cutSceneTransitionPlayed = false;
       save();
-      soundFile.stop();
       loadZone();
       zoneTransition = true;
       resetValues();
-      println("reset in playCutScene last else");
+      //println("reset in playCutScene last else");
     }
     
     cursor(CROSS);
@@ -92,8 +94,11 @@ void playCutScene(int ch, CutScene cutscene){
 void nextSubScene(){
       subSceneIndex++;
       timeUpdated = false;
+      if(soundPlayed){
+        soundFile.stop();
+      }
       soundPlayed = false;
-      soundFile.stop();
-      println("Next SubScene");
+      
+      //println("Next SubScene");
       
 }

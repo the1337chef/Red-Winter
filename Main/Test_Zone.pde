@@ -15,7 +15,7 @@ void testZone()
   
   
   //Update currentZone
-  currentZone = "test";
+  currentZone = "1";
   //Entance position
   
     //Player position
