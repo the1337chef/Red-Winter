@@ -72,6 +72,8 @@ PImage zoneGround;
 PImage foreground;
 PImage horizonView;
 PImage cutScene;
+PImage playerBottom;
+PImage playerTop;
 
 //Fonts
 PFont menuFont;
@@ -185,6 +187,8 @@ void setup()
   
   //Images
   background = loadImage("major_cutscene_test_32_low_res.png");
+  playerBottom = loadImage("Amaruq_Sprite_Sheet_Bottom.png");
+  playerTop = loadImage("Amaruq_Sprite_Sheet_Top.png");
   
   //Intro?
   
@@ -215,8 +219,8 @@ void setup()
   
   
   //Player values
-  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, 32, 32, "player");
-  speed = 3.0;
+  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, 20, 20, "player");
+  speed = 4.0;
   direction = 0;
   knifeDamage = 50;
   knifeReach = 70;

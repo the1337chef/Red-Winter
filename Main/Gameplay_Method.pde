@@ -28,7 +28,7 @@ void gamePlay()
 
     
     //Player position update
-    if(keyPressed)
+    if(keyPressed && !zoneTransition)
     {
       if(keyCode == UP || key == 'w' || key == 'W')
         mUp = true;
@@ -66,15 +66,8 @@ void gamePlay()
       //pickups.get(i).display();
       
     //Player and Enemy display
-    if(zoneTransition == false){
-      player.display();
-      //TODO: Foreground
-    }
+    player.displayBottom();
     
-    if(cutSceneHalfWay){
-      //Draw foreground
-      image(foreground, -cameraX*scaler,-cameraY*scaler,foreground.width*scaler,foreground.height*scaler);
-    }
     //for(int i = 0; i < enemies.size(); i++)
       //enemies.get(i).display();
     
@@ -115,6 +108,19 @@ void gamePlay()
         else
           projectiles.get(i).display();
       }
+    }
+    
+    player.displayTop();
+    
+    if(cutSceneHalfWay){
+      //Draw foreground
+      pushMatrix();
+      imageMode(CORNER);
+      //fill(255);
+      noStroke();
+      //Draw foreground
+      image(foreground, -cameraX*scaler,-cameraY*scaler,foreground.width*scaler,foreground.height*scaler);
+      popMatrix();
     }
     
     if(hitBoxMode){
