@@ -15,6 +15,8 @@ class Player extends Character
   private float sizeW;
   private float sizeH;
   private Hitbox hBox;
+  private int runTime;
+  private int runTimeTracker;
   private boolean invincible;
   private float invTimer;
   private float invTime;
@@ -35,13 +37,15 @@ class Player extends Character
     this.sizeW = wi;
     this.sizeH = hi;
     this.hBox = new Hitbox(x, y, wi, hi, dir, type);
+    this.runTime = 0;
+    this.runTimeTracker = 0;
     this.invincible = false;
     this.invTimer = 0;
     this.invTime = 1000;
   }
   
-  //Player display
-  void display()
+  //Player display bottom half
+  void displayBottom()
   {
     //Sprites instead of squares
     pushMatrix();
@@ -62,22 +66,165 @@ class Player extends Character
     else
       translate(0, height/2);
     
-    
-    stroke(0);
-    strokeWeight(2);
-    fill(100);
-    rectMode(CENTER);
-    rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
-    
-    pushMatrix();
-    translate(0, -16);
-    if(aiming)
-      rotate(this.direction);
-    if(zoneTransition == false)
-      rect(0, 0, this.sizeW*scaler, this.sizeH*scaler);
-    popMatrix();
+    imageMode(CENTER);
+    if(mDirection == 0) //RIGHT
+    {
+      if(mRight)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerBottom.get(64*temp2,0,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerBottom.get(0,0,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 1) //UP
+    {
+      if(mUp)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerBottom.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerBottom.get(0,64,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 2) //LEFT
+    {
+      if(mLeft)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerBottom.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerBottom.get(0,128,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 3) // DOWN
+    {
+      if(mDown)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerBottom.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerBottom.get(0,192,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
     if(hitBoxMode)
       this.hBox.displayBox();
+    popMatrix();
+  }
+   //Player display top half
+  void displayTop()
+  {
+    //Sprites instead of squares
+    pushMatrix();
+    
+    //X-Translation
+    if(this.xPos < 256)                                              //Camera against left wall
+      translate(width/2 - ((width/2) * ((256-this.xPos)/256)), 0);
+    else if(this.xPos > 864)                                         //Camera against right wall
+      translate(width/2 + ((width/2) * ((this.xPos-864)/256)),0);
+    else
+      translate(width/2, 0);
+      
+    //Y-Translation
+    if(this.yPos < 144)
+      translate(0, height/2 - ((height/2) * ((144-this.yPos)/144))); //Camera against top wall
+    else if(this.yPos > 410)
+      translate(0, height/2 + ((height/2) * ((this.yPos-410)/144))); //Camera against bottom wall
+    else
+      translate(0, height/2);
+    
+    imageMode(CENTER);
+    if(mDirection == 0) //RIGHT
+    {
+      if(mRight)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerTop.get(64*temp2,0,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerTop.get(0,0,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 1) //UP
+    {
+      if(mUp)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerTop.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerTop.get(0,64,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 2) //LEFT
+    {
+      if(mLeft)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerTop.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerTop.get(0,128,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    else if(mDirection == 3) // DOWN
+    {
+      if(mDown)
+      {
+        int temp = runTime;
+        runTime = millis();
+        runTimeTracker += runTime - temp;
+        if(runTimeTracker >= 600)
+          runTimeTracker = 0;
+        int temp2 = (runTimeTracker / 100)+1;
+        println(temp2);
+        image(playerTop.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
+      }
+      else
+        image(playerTop.get(0,192,64,64), 0, -32, 48*scaler, 48*scaler);
+    }
+    
+    if(aiming)
+      rotate(this.direction);
     popMatrix();
   }
   
@@ -109,6 +256,11 @@ class Player extends Character
       xChange = 0;
     if(this.yPos + yChange > 544 || this.yPos + yChange < 0)
       yChange = 0;
+    if(abs(xChange) + abs(yChange) >= 1.4*speed)
+    {
+      xChange = xChange * 0.7;
+      yChange = yChange * 0.7;
+    }
     this.xPos += xChange;
     this.yPos += yChange;
     
