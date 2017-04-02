@@ -4,15 +4,13 @@ class Chapter
 {
   private String id = "null";
   ArrayList<CutScene> cutScenes = new ArrayList<CutScene>();
-  private int numOfZones = 0;
-  ArrayList<String> zones = new ArrayList<String>();
+  ArrayList<Zone> zones = new ArrayList<Zone>();
   
   
   //Constructor
-  Chapter(String id, int numOfZones)
+  Chapter(String id)
   {
   	this.id = id;
-  	this.numOfZones = numOfZones;
   }
 
   //Getters
@@ -20,9 +18,7 @@ class Chapter
   	return this.id;}
   ArrayList<CutScene> getCutScenes(){
   	return this.cutScenes;}
-  int getNumOfZones(){
-  	return this.numOfZones;}
-  ArrayList<String> getZones(){
+  ArrayList<Zone> getZones(){
     return this.zones;}
 
   //Setters
@@ -32,15 +28,14 @@ class Chapter
   	this.cutScenes = cutScenes;}
   void addCutScene(CutScene cutscene){
   	this.cutScenes.add(cutscene);}
-  void setNumOfZones(int numOfZones){
-  	this.numOfZones = numOfZones;}
-  void setZones(ArrayList<String> zones){
+  void setZones(ArrayList<Zone> zones){
     this.zones = zones;}
+  void addZone(Zone newZone){
+    this.zones.add(newZone);}
 
   //Print
-  void printChapter(boolean printCutScenes){
+  void print(boolean printCutScenes){
   	println("Chapter: " + this.id);
-  	println("Zones: " + this.zones);
   	if(printCutScenes == true)
   	{
   		println("CutScenes:");

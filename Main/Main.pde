@@ -27,6 +27,8 @@ HUD hud;                       //Class which retrieves information and displays 
 boolean zoneTransition;        //Triggers the fade between zone transitions
 boolean saveCompleted = false; //Prompts the screen to say that the user has completed the save
 int currentTime;               //Measures time for the "Save Completed" to go away after 5 seconds
+float nextPlayerX;             //Player's X position upon a transition to a different zone
+float nextPlayerY;             //Player's Y position upon a transition to a different zone
 
 /*
  * Camera X and Y determine the position the player's see of the larger map.
@@ -40,6 +42,7 @@ float cameraY;
 //Save and checkpoint relevant declarations
 BufferedReader saveReader;
 PrintWriter saveWriter;
+String currentChapter;
 String currentZone;
 float saveHealth;
 float saveStamina;
@@ -108,7 +111,7 @@ boolean hitBoxMode;
 //Walls
 //Changes from zone to zone
 ArrayList<Wall> walls = new ArrayList<Wall>();
-Wall testWall;
+
 
 //Projectile Spawners
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -145,7 +148,10 @@ void setup()
 
   try
   {
+    currentChapter = saveReader.readLine().substring(8);
     currentZone = saveReader.readLine().substring(5);
+    nextPlayerX = Float.parseFloat(saveReader.readLine().substring(5));
+    nextPlayerY = Float.parseFloat(saveReader.readLine().substring(5));
     nextZone = currentZone;
     saveHealth = Float.parseFloat(saveReader.readLine().substring(7));
     saveStamina = Float.parseFloat(saveReader.readLine().substring(8));
@@ -163,7 +169,10 @@ void setup()
   }
   catch(IOException e)
   {
+    currentChapter = "1";
     currentZone = "null";
+    nextPlayerX = 0;
+    nextPlayerY = 0;
     saveHealth = 0;
     saveStamina = 0;
     saveTemp = 0;
@@ -213,7 +222,7 @@ void setup()
   deadTimer = 0;
   
   //Fades
-  
+ 
   //Play sounds
   //Menu/ Game music
   
@@ -239,9 +248,6 @@ void setup()
   meleeTwo = false;
   hitBoxMode = false;
   
-  //Test wall
-  //testWall = new Wall(width/4, height/2, 32, 128, 0);
-  //walls.add(testWall);
   
 
   
@@ -256,8 +262,8 @@ void setup()
   //ENEMY INITIALIZATION
   
   //Initiallize Chapter Information
-    configureChapter(chapter1);
-  
+  configureChapter(chapter1);
+    
 }
 
 //Keyboard
@@ -303,10 +309,19 @@ void keyReleased()
       
     if(key == 'c' || key == 'C'){
       gameState = 1;
-      println("reset in C");
+      //println("reset in C");
       resetValues();
     }
-      
+    if(key == 'u'){
+      println("walls:");
+      for(int i = 0; i < walls.size(); i++){
+        walls.get(i).print();
+      }
+      println("transitions:");
+      for(int i = 0; i < transitions.size(); i++){
+        transitions.get(i).print();
+      }    
+    }
      
     if(key == ' ')
       if(gameState == 1){
@@ -347,21 +362,7 @@ void mousePressed()
     if(continueGame.getHighlight())
     {
       //Read save file
-      switch(currentZone)
-      {
-       case "Crash_1":
-         //Crash_1 Method
-         break;
-       //etc.
-       case "1":
-         testZone();
-         break;
-       case "2":
-         testZone2();
-         break;
-       default:
-         throw new IllegalArgumentException("Invalid zone name: " + currentZone);
-      }
+      loadZone();
       
       //Switch to gameplay at appropriate zone
       gameState = 0;

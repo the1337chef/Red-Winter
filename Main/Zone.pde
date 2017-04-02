@@ -5,7 +5,8 @@ class Zone
   ArrayList<Wall> walls = new ArrayList<Wall>();
   ArrayList<Hitbox> transitionZones = new ArrayList<Hitbox>();
   private String name;
-  Zone(){
+  Zone(String name){
+    this.name = name;
   }
   
   //Getters
@@ -19,8 +20,12 @@ class Zone
   //Setters
   void setWalls(ArrayList<Wall> walls){
     this.walls = walls;}
+  void addWall(Wall newWall){
+    this.walls.add(newWall);}
   void setTransitionZones(ArrayList<Hitbox> transitionZones){
     this.transitionZones = transitionZones;}
+  void addTransitionZone(Hitbox newTransition){
+    this.transitionZones.add(newTransition);}
   void setZoneName(String name){
     this.name = name;}
     

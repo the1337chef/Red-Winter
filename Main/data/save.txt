@@ -1,4 +1,7 @@
-zone=2
+chapter=1
+zone=1
+xpos=96
+ypos=480
 health=100.0
 stamina=17.0
 temp=100.0

@@ -8,7 +8,7 @@ class Hitbox
   private float sizeH;
   private float direction;
   private String type;
-  private String zone;
+  private String zone; // Next zone for zone transition boxes
   private float nextXPos; // Player's x position after a transition
   private float nextYPos; // Player's y position after a transition
   

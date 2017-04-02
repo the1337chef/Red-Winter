@@ -143,7 +143,6 @@ void gamePlay()
         if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
                  soundFile = new SoundFile(this, "ZoneTransition2.wav");
-                 //println("Zone transition soundfile");
                  soundFile.play();
                  soundPlayed = true;
                }

@@ -5,7 +5,10 @@
 public void save(){
 //TODO: Make sure all the values are updated before you save
 saveWriter = createWriter("data/save.txt");
+saveWriter.println("chapter=" + currentChapter);
 saveWriter.println("zone=" + currentZone);
+saveWriter.println("xpos=" + nextPlayerX);
+saveWriter.println("ypos=" + nextPlayerY);
 saveWriter.println("health=" + saveHealth);
 saveWriter.println("stamina=" + saveStamina);
 saveWriter.println("temp=" + saveTemp);
@@ -43,7 +46,10 @@ void printSave(boolean saved){
 
 public void newSave(){
 //Reset values
+currentChapter = "1";
 currentZone = "1";
+nextPlayerX = 96;
+nextPlayerY = 480;
 saveHealth = 100;
 saveTemp = 100;
 saveAmmo = 0;
@@ -60,7 +66,10 @@ sap = 0;
 nextZone = "1";
 
 saveWriter = createWriter("data/save.txt");
+saveWriter.println("chapter=" + currentChapter);
 saveWriter.println("zone=" + currentZone);
+saveWriter.println("xpos=" + nextPlayerX);
+saveWriter.println("ypos=" + nextPlayerY);
 saveWriter.println("health=" + saveHealth);
 saveWriter.println("stamina=" + saveStamina);
 saveWriter.println("temp=" + saveTemp);

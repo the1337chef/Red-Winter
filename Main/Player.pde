@@ -93,6 +93,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerBottom.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -108,6 +109,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerBottom.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -123,6 +125,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerBottom.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -165,6 +168,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerTop.get(64*temp2,0,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -180,6 +184,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerTop.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -195,6 +200,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerTop.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -210,6 +216,7 @@ class Player extends Character
         if(runTimeTracker >= 600)
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
+        //println(temp2);
         image(playerTop.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
       }
       else
@@ -241,6 +248,8 @@ class Player extends Character
       if(change.z == 1){
         zoneTransition = true;
         nextZone = transitions.get(i).getZone();
+        nextPlayerX = transitions.get(i).getNextXPos();
+        nextPlayerY = transitions.get(i).getNextYPos();
       }
     }
     
