@@ -8,30 +8,48 @@ class Key extends Pickup
   private float sizeH;
   private Hitbox hBox;
   private String identifier;
+  private PImage image;
   
   Key(float x, float y, float w, float h, String id)
   {
-    super(x,y,w,h);
+    this.xPos = x;
+    this.yPos = y;
+    this.sizeW = w;
+    this.sizeH = h;
+    this.hBox = new Hitbox(x, y, w, h, 0, "pickup");
     this.identifier = id;
+    this.image = loadImage(this.identifier + ".png");
   }
   
   void display()
   {
     pushMatrix();
-    translate(this.xPos,this.yPos);
-    stroke(0);
-    strokeWeight(1);
-    fill(255);
+    translate((width*(this.xPos-cameraX)/512), height*(this.yPos-cameraY)/288);
+    imageMode(CENTER);
+    image(this.image,0,0, this.sizeW, this.sizeH);
     rectMode(CENTER);
-    //image(this.identifier + ".png", this.sizeW, this.sizeH);
-    rect(0,0, this.sizeW, this.sizeH);
     if(hitBoxMode)
       this.hBox.displayBox();
     popMatrix();
   }
   
+  String getID(){
+    return this.identifier;}
+  
   void activate()
   {
-    zoneKeyAdd();
+    switch(this.identifier){
+      case "dynamite": dynamite = 1;
+                       break;
+      case "rope": dynamite = 1;
+                       break;
+      default: println("INVALID KEY TYPE, DUMMY");
+                       break;
+    }
   }
+  
+  Hitbox getHitbox(){
+    return this.hBox;}
+  float getDirection(){
+    return 0;}
 }

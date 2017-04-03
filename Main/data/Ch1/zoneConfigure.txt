@@ -271,7 +271,7 @@ y=266
 w=200
 h=100
 r=0
-nextzone=-1
+nextzone=3
 nextPlayerX=43
 nextPlayerY=250
 //walls

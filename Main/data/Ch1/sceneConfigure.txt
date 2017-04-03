@@ -1,11 +1,11 @@
 #ofcutscenes=2
 //cutscene 1
-nextZone=1
+nextZone=2
 #ofsubscenes=6
 	//layers
 1
 1
-1
+3
 1
 1
 1
