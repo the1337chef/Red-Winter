@@ -137,6 +137,26 @@ void configureChapter(Chapter chapter) {
         Wall newWall = new Wall( x, y, w, h, r);
         newZone.addWall(newWall);
       }
+      
+      //Pickups
+      
+      //skip comment pickups
+      reader.readLine();
+      
+      int numOfPickups = Integer.parseInt(reader.readLine().substring(11));
+      
+      for(int j = 0; j < numOfPickups; j++){
+        //skip comment pickup
+        reader.readLine();
+        int x =  Integer.parseInt(reader.readLine().substring(2));
+        int y =  Integer.parseInt(reader.readLine().substring(2));
+        int w =  Integer.parseInt(reader.readLine().substring(2));
+        int h =  Integer.parseInt(reader.readLine().substring(2));
+        String line = reader.readLine().substring(3);
+        
+        Key newKey = new Key(x, y, w, h, line);
+        newZone.addPickup(newKey);
+      }
       chapter.addZone(newZone);
     }
     
