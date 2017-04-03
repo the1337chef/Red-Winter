@@ -29,11 +29,19 @@ void loadZone(){
     int nextZ = Integer.parseInt(nextZone);
     Chapter thisChapter = chapters.get(currentCh-1);
     Zone thisZone = thisChapter.getZones().get(nextZ - 1);
-    walls = thisZone.getWalls();
+    ArrayList <Wall> thisWall =  thisZone.getWalls();
+    
+    for(int i = 0; i < thisWall.size(); i++){
+      walls.add(thisWall.get(i));
+    }
 
     //transitions
     transitions.clear();
-    transitions = thisZone.getTransitionZones();
+    ArrayList <Hitbox> thisTransition = thisZone.getTransitionZones(); 
+    
+    for(int i = 0; i < thisTransition.size(); i++){
+      transitions.add(thisTransition.get(i));
+    }
 
     //Enemies
   
