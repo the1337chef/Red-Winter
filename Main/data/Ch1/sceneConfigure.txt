@@ -1,4 +1,4 @@
-#ofcutscenes=1
+#ofcutscenes=2
 //cutscene 1
 nextZone=2
 #ofsubscenes=6
@@ -23,4 +23,24 @@ nextZone=2
 5000
 5000
 4000
-5000
+//cutscene2
+nextZone=3
+#ofsubscenes=5
+//layers
+1
+1
+1
+1
+1
+//sounds
+0
+0
+0
+0
+0
+//durations
+4000
+4000
+4000
+4000
+4000
