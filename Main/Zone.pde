@@ -4,6 +4,7 @@ class Zone
 {
   ArrayList<Wall> walls = new ArrayList<Wall>();
   ArrayList<Hitbox> transitionZones = new ArrayList<Hitbox>();
+  ArrayList<Pickup> pickups = new ArrayList<Pickup>();
   private String name;
   Zone(String name){
     this.name = name;
@@ -14,6 +15,8 @@ class Zone
     return this.walls;}
   ArrayList<Hitbox> getTransitionZones(){
     return this.transitionZones;}
+  ArrayList<Pickup> getPickups(){
+    return this.pickups;}
   String getZoneName(){
     return this.name;} //I couldn't use getName because it is a processiing library method already
     
@@ -26,6 +29,10 @@ class Zone
     this.transitionZones = transitionZones;}
   void addTransitionZone(Hitbox newTransition){
     this.transitionZones.add(newTransition);}
+  void setPickups(ArrayList<Pickup> pickups){
+    this.pickups = pickups;}
+  void addPickup(Pickup newPickup){
+    this.pickups.add(newPickup);}
   void setZoneName(String name){
     this.name = name;}
     
@@ -39,6 +46,10 @@ class Zone
     //TransitionZones
     for(int i = 0; i < this.transitionZones.size(); i++){
       this.transitionZones.get(i).print();
+    }
+    //Pickups
+    for(int i = 0; i < this.pickups.size(); i++){
+      println(this.pickups.get(i).getID());
     }
   }
 }
