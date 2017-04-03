@@ -250,6 +250,12 @@ class Player extends Character
         nextZone = transitions.get(i).getZone();
         nextPlayerX = transitions.get(i).getNextXPos();
         nextPlayerY = transitions.get(i).getNextYPos();
+        if(nextZone.equals("-1")){
+          gameState = 1;//cutscene mode
+        }
+        else{
+          //TODO: if -2, increment the chapter
+        }
       }
     }
     

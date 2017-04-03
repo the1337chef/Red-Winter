@@ -137,7 +137,7 @@ void setup()
   scaler = height / 288.0;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -246,7 +246,7 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = true;
+  hitBoxMode = false;
   
   
 
@@ -311,6 +311,11 @@ void keyReleased()
       gameState = 1;
       //println("reset in C");
       resetValues();
+    }
+    if(key == 'm' || key == 'M'){
+      //testing if the configure loaded properly
+      chapters.get(0).getCutScenes().get(0).printCutScene();
+      chapters.get(0).getCutScenes().get(1).printCutScene();
     }
     if(key == 'u'){
       println("walls:");
@@ -444,7 +449,7 @@ void draw()
   }
   else if(gameState == 1){
     //println("SubSceneIndex: " + subSceneIndex);
-    playCutScene(1, chapter1.cutScenes.get(0));
+    loadCutScene();
     
   }
   else

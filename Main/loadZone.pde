@@ -4,7 +4,7 @@ void loadZone(){
     println("ERROR: nextZone == NULL");
   }
   else{
-    println("next zone is " + nextZone);
+    //println("next zone is " + nextZone);
     //Update game state
     gameState = 0;
     saveCompleted = false;

@@ -140,7 +140,7 @@ void gamePlay()
     }
     deadCheck(player);
     
-        if(zoneTransition == true){ //For zone transitions
+     if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
                  soundFile = new SoundFile(this, "ZoneTransition2.wav");
                  soundFile.play();

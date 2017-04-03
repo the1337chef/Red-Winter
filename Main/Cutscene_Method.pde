@@ -16,8 +16,6 @@ boolean cutSceneTransitionPlayed = false;
 boolean cutSceneHalfWay = false; //half the fade occured
 
 void playCutScene(int ch, CutScene cutscene){
-  //TODO:establish layers booleans
-
 
   if(cutSceneHalfWay){
     if(subSceneIndex < cutscene.getSubScenes()){
@@ -74,6 +72,8 @@ void playCutScene(int ch, CutScene cutscene){
       gameState = 0;
       subSceneIndex = 0;
       timeUpdated = false;
+      println("update last cutscene");
+      //last_cutscene = cutscene.getId();
       if(soundPlayed){
         soundFile.stop();
       }
@@ -83,12 +83,21 @@ void playCutScene(int ch, CutScene cutscene){
       loadZone();
       zoneTransition = true;
       resetValues();
+      println("update nextZone");
+      nextZone = cutscene.getNextZone();
+      if(nextZone.equals("-2")){//NextChapter
+        //currentChapter++
+        //nextZone set to 1
+      }
+      
+
       //println("reset in playCutScene last else");
     }
     
     cursor(CROSS);
   }
     cutSceneTransition();
+    
 }
 
 void nextSubScene(){
