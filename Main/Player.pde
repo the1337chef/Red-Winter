@@ -250,12 +250,6 @@ class Player extends Character
         nextZone = transitions.get(i).getZone();
         nextPlayerX = transitions.get(i).getNextXPos();
         nextPlayerY = transitions.get(i).getNextYPos();
-        if(nextZone.equals("-1")){
-          gameState = 1;//cutscene mode
-        }
-        else{
-          //TODO: if -2, increment the chapter
-        }
       }
     }
     
@@ -271,8 +265,27 @@ class Player extends Character
     }
     this.xPos += xChange;
     this.yPos += yChange;
+        
+    //Pickups
+    for(int i = 0; i < pickups.size(); i++)
+    {
+      change = collision(pickups.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, pickups.get(i).getDirection());
+      if(change.z == 1)
+      {
+        pickups.get(i).activate();
+        pickups.remove(i);
+        i--;
+      }
+    }
     
-    if(this.xPos < 256)
+    //Hitbox placement
+    this.hBox.setXPos(this.xPos);
+    this.hBox.setYPos(this.yPos);
+  }
+  
+  void cameraMove()
+  {
+   if(this.xPos < 256)
       cameraX = 0;
     else if(this.xPos > 864)
       cameraX = 608;
@@ -284,13 +297,7 @@ class Player extends Character
     else if(this.yPos > 400)
       cameraY = 256;
     else
-      cameraY = this.yPos-144;
-    
-    //Pickups
-    
-    //Hitbox placement
-    this.hBox.setXPos(this.xPos);
-    this.hBox.setYPos(this.yPos);
+      cameraY = this.yPos-144; 
   }
   
   //GETTERS AND SETTERS
