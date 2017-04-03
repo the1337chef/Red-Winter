@@ -62,8 +62,8 @@ void gamePlay()
     //Pickup respawn?
     
     //Pickup Display
-    //for(int i = 0; i < pickups.size(); i++)
-      //pickups.get(i).display();
+    for(int i = 0; i < pickups.size(); i++)
+      pickups.get(i).display();
       
     //Player and Enemy display
     player.displayBottom();
@@ -132,6 +132,8 @@ void gamePlay()
       for(int i = 0; i < transitions.size(); i++)
         transitions.get(i).displayBox();
     }
+    
+    player.cameraMove();
     
     //HUD Display
     hud.updateValues(player.getCurrentHealth(), player.getCurrentStamina(), player.getCurrentTemp(), player.getCurrentAmmo());
