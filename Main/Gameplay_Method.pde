@@ -22,7 +22,8 @@ void gamePlay()
       //Draw background
       image(background,-cameraX*scaler,-cameraY*scaler,background.width*scaler,background.height*scaler);
       popMatrix();
-      
+      //Player and Enemy display
+      player.displayBottom();
     }
     
 
@@ -66,8 +67,7 @@ void gamePlay()
     for(int i = 0; i < pickups.size(); i++)
       pickups.get(i).display();
       
-    //Player and Enemy display
-    player.displayBottom();
+    
     
     //for(int i = 0; i < enemies.size(); i++)
       //enemies.get(i).display();
@@ -111,9 +111,10 @@ void gamePlay()
       }
     }
     
-    player.displayTop();
+    
     
     if(cutSceneHalfWay){
+      player.displayTop();
       //Draw foreground
       pushMatrix();
       imageMode(CORNER);
@@ -143,7 +144,7 @@ void gamePlay()
     }
     deadCheck(player);
     
-        if(zoneTransition == true){ //For zone transitions
+     if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
                  soundFile = new SoundFile(this, "ZoneTransition2.wav");
                  soundFile.play();
@@ -170,6 +171,25 @@ void gamePlay()
          cutSceneHalfWay = true;
          //add switch statement of the variety of zones to transition to
         loadZone();
+        player.setX(nextPlayerX);
+        player.setY(nextPlayerY);
+        player.cameraMove();
+        pushMatrix();
+        imageMode(CORNER);
+        //fill(255);
+        noStroke();
+        //Draw horizon view
+        image(horizonView, 0,-30,width,height);
+        //Draw background
+        image(background,-cameraX*scaler,-cameraY*scaler,background.width*scaler,background.height*scaler);
+        popMatrix();
+        pushMatrix();
+        imageMode(CORNER);
+        //fill(255);
+        noStroke();
+        //Draw foreground
+        image(foreground, -cameraX*scaler,-cameraY*scaler,foreground.width*scaler,foreground.height*scaler);
+        popMatrix();
         transparency2 -= transparencyIncrement;
         fill(fillColor, fillColor, fillColor, transparency2);
         pushMatrix();

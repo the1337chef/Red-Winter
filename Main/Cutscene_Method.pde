@@ -81,6 +81,9 @@ void playCutScene(int ch, CutScene cutscene){
       loadZone();
       zoneTransition = true;
       resetValues();
+      int nextScene = Integer.parseInt(last_cutscene);
+      nextScene++;
+      last_cutscene = Integer.toString(nextScene);
       //println("reset in playCutScene last else");
     }
     

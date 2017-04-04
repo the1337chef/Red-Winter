@@ -137,7 +137,7 @@ void setup()
   scaler = height / 288.0;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -177,7 +177,7 @@ void setup()
     saveStamina = 0;
     saveTemp = 0;
     saveAmmo = 0;
-    last_cutscene = "null";
+    last_cutscene = "0";
     dynamite = 0;
     detonator = 0;
     rope = 0;
@@ -246,7 +246,7 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = true;
+  hitBoxMode = false;
   
   
 

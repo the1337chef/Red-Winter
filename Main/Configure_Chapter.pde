@@ -21,8 +21,12 @@ void configureChapter(Chapter chapter) {
       reader.readLine();
       String sceneNum = Integer.toString(i+1);
       String nextZone = reader.readLine().substring(9);
+      float nextXPos = Float.parseFloat(reader.readLine().substring(12));
+      float nextYPos = Float.parseFloat(reader.readLine().substring(12));
       int subScenes = Integer.parseInt(reader.readLine().substring(13));
       CutScene cutscene = new CutScene( sceneNum, subScenes, nextZone);
+      cutscene.setNextXPos(nextXPos);
+      cutscene.setNextYPos(nextYPos);
       chapter.addCutScene(cutscene);
 
       //skip comment

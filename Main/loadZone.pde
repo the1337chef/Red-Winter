@@ -8,7 +8,13 @@ void loadZone(){
 
   }
   else if(nextZone == "-2"){//zone to next chapter
-
+    //playerNextX = xpos
+    //ypos
+    last_cutscene = "0";
+    currentChapter = Integer.toString(Integer.parseInt(currentChapter) + 1);
+    nextZone = "1";
+    gameState = 1;
+    
   }
   else{
     //println("next zone is " + nextZone);
