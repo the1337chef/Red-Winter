@@ -62,6 +62,7 @@ void gamePlay()
     //Pickup respawn?
     
     //Pickup Display
+    println("Pickups size: " + pickups.size());
     for(int i = 0; i < pickups.size(); i++)
       pickups.get(i).display();
       

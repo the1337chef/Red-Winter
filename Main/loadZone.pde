@@ -46,6 +46,11 @@ void loadZone(){
     //Enemies
   
     //Pickups
+    pickups.clear();
+    ArrayList <Key> thisPickup = thisZone.getPickups();
+    for(int i = 0; i < thisPickup.size(); i++){
+      pickups.add(thisPickup.get(i));
+    }
     
     //chapterKeys = 0;
     //reqKeys = 1;
