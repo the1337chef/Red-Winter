@@ -24,6 +24,7 @@ void gamePlay()
       popMatrix();
       //Player and Enemy display
       player.displayBottom();
+      player.displayTop();
     }
     
 
@@ -114,7 +115,7 @@ void gamePlay()
     
     
     if(cutSceneHalfWay){
-      player.displayTop();
+      
       //Draw foreground
       pushMatrix();
       imageMode(CORNER);
