@@ -3,6 +3,13 @@ void loadZone(){
   if(nextZone == "null"){
     println("ERROR: nextZone == NULL");
   }
+  else if(nextZone == "-1"){//Zone to Cutscene
+    gameState = 1;
+
+  }
+  else if(nextZone == "-2"){//zone to next chapter
+
+  }
   else{
     //println("next zone is " + nextZone);
     //Update game state
@@ -47,7 +54,7 @@ void loadZone(){
   
     //Pickups
     pickups.clear();
-    ArrayList <Key> thisPickup = thisZone.getPickups();
+    ArrayList <Pickup> thisPickup = thisZone.getPickups();
     for(int i = 0; i < thisPickup.size(); i++){
       pickups.add(thisPickup.get(i));
     }

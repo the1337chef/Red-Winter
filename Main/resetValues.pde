@@ -1,6 +1,0 @@
-
-
-
-void resetValues(){
-  cutSceneHalfWay = false;
-}

@@ -435,6 +435,11 @@ void deadCheck(Character testChar)
   }
 }
 
+
+void resetValues(){
+  cutSceneHalfWay = false;
+}
+
 //CORE GAME LOOP
 //DRAW FUNCTION
 void draw()
@@ -444,10 +449,9 @@ void draw()
   }
   else if(gameState == 1){
     //println("SubSceneIndex: " + subSceneIndex);
-    playCutScene(1, chapter1.cutScenes.get(0));
+    loadCutScene();
     
   }
   else
     mainMenu();
 }
-  

@@ -24,7 +24,7 @@ nextZone=2
 5000
 4000
 //cutscene2
-nextZone=3
+nextZone=-2
 #ofsubscenes=5
 //layers
 1
