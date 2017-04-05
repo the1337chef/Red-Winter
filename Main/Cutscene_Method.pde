@@ -84,6 +84,8 @@ void playCutScene(int ch, CutScene cutscene){
       int nextScene = Integer.parseInt(last_cutscene);
       nextScene++;
       last_cutscene = Integer.toString(nextScene);
+      println("last_cutscene increased by 1");
+      
       //println("reset in playCutScene last else");
     }
     

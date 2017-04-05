@@ -1,5 +1,7 @@
 //Player subclass
 
+boolean nextZoneChanged = false;
+
 class Player extends Character
 {
   private float xPos;
@@ -247,7 +249,12 @@ class Player extends Character
       change = collision(transitions.get(i), this.hBox, change.x, change.y, change.z, 0);
       if(change.z == 1){
         zoneTransition = true;
-        nextZone = transitions.get(i).getZone();
+        if(!nextZoneChanged){
+          nextZone = transitions.get(i).getZone();
+          nextZoneChanged = true;
+          println("nextZone is " + nextZone + " from the transition");
+        }
+        
         nextPlayerX = transitions.get(i).getNextXPos();
         nextPlayerY = transitions.get(i).getNextYPos();
       }

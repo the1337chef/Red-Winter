@@ -263,6 +263,7 @@ void setup()
   
   //Initiallize Chapter Information
   configureChapter(chapter1);
+  configureChapter(chapter2);
     
 }
 

@@ -1,7 +1,7 @@
 //Configure Chapter
 ArrayList<Chapter> chapters = new ArrayList<Chapter>();
 Chapter chapter1 = new Chapter("1");
-
+Chapter chapter2 = new Chapter("2");
 
 void configureChapter(Chapter chapter) {
 

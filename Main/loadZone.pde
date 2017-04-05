@@ -1,46 +1,49 @@
   
 void loadZone(){
-  if(nextZone == "null"){
+  if(nextZone.equals("null")){
     println("ERROR: nextZone == NULL");
   }
-  else if(nextZone == "-1"){//Zone to Cutscene
+  else if(nextZone.equals("-1")){//Zone to Cutscene
     gameState = 1;
+    nextZoneChanged = false;
 
   }
-  else if(nextZone == "-2"){//zone to next chapter
+  else if(nextZone.equals("-2")){//zone to next chapter's zone
     //playerNextX = xpos
     //ypos
-    last_cutscene = "0";
+    println("nextzone is -2");
+    last_cutscene = "-1";
     currentChapter = Integer.toString(Integer.parseInt(currentChapter) + 1);
+    println("currentChapter is " + currentChapter);
     nextZone = "1";
-    gameState = 1;
+    println("Next zone is 1 from loadzone->else if");
+    gameState = 0;
+    nextZoneChanged = false;
+    loadZone();
     
   }
   else{
     //println("next zone is " + nextZone);
     //Update game state
     gameState = 0;
+    nextZoneChanged = false;
     saveCompleted = false;
+    
     //Landscape
     horizonView = loadImage("Ch" + currentChapter + "/Zones/" + nextZone + "_Horizon.png");
     background = loadImage("Ch" + currentChapter + "/Zones/" + nextZone + "_Background.png");
     foreground = loadImage("Ch" + currentChapter + "/Zones/" + nextZone + "_Foreground.png");
     
     currentZone = nextZone;
-    
-    //Player position
-    if( pause == false){
-      player.setX(nextPlayerX);
-      player.setY(nextPlayerY);
-      player.movement(0,0); //recalculate the camera position because of new player location
-    }
-    pause = false;
+   
     
     //Walls
     walls.clear();
     int currentCh = Integer.parseInt(currentChapter);
     int nextZ = Integer.parseInt(nextZone);
     Chapter thisChapter = chapters.get(currentCh-1);
+    
+    
     Zone thisZone = thisChapter.getZones().get(nextZ - 1);
     ArrayList <Wall> thisWall =  thisZone.getWalls();
     
@@ -50,12 +53,11 @@ void loadZone(){
 
     //transitions
     transitions.clear();
-    ArrayList <Hitbox> thisTransition = thisZone.getTransitionZones(); 
-    
-    for(int i = 0; i < thisTransition.size(); i++){
-      transitions.add(thisTransition.get(i));
+    ArrayList <Hitbox> thisTransitions = thisZone.getTransitionZones();
+    for(int i = 0; i < thisTransitions.size(); i++){
+      transitions.add(thisTransitions.get(i));
     }
-
+    
     //Enemies
   
     //Pickups
@@ -67,6 +69,14 @@ void loadZone(){
     
     //chapterKeys = 0;
     //reqKeys = 1;
+    
+        //Player position
+    if( pause == false){
+      player.setX(nextPlayerX);
+      player.setY(nextPlayerY);
+      player.movement(0,0); //recalculate the camera position because of new player location
+    }
+    pause = false;
 
   }
 

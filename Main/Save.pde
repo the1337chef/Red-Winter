@@ -64,6 +64,7 @@ whale = 0;
 sap = 0;
 
 nextZone = "1";
+println("nextZone is 1 form newsave");
 
 saveWriter = createWriter("data/save.txt");
 saveWriter.println("chapter=" + currentChapter);

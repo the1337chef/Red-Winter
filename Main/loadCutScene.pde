@@ -10,7 +10,8 @@ public void loadCutScene(){
   cc--;
   println("cc=" + cc);
   CutScene currentCutScene = chapters.get(cc).getCutScenes().get(cid);
-
+  nextZone = currentCutScene.getNextZone();
+  println("nextZone turned to " + nextZone + "in the loadCutscene");
   cc++;
   playCutScene(cc, currentCutScene);
 

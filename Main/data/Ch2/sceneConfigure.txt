@@ -1,4 +1,4 @@
-#ofcutscenes=2
+#ofcutscenes=0
 //cutscene 1
 nextZone=2
 #ofsubscenes=6
