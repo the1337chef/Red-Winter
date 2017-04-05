@@ -3,8 +3,12 @@
 nextZone=1
 nextPlayerX=176
 nextPlayerY=496
-#ofsubscenes=6
+#ofsubscenes=10
 	//layers
+1
+1
+1
+1
 1
 1
 1
@@ -18,8 +22,16 @@ nextPlayerY=496
 0
 0
 0
+0
+0
+0
+0
 	//durations in milliseconds
 4000
+4000
+5000
+5000
+5000
 4000
 5000
 5000
