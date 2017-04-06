@@ -172,21 +172,7 @@ void gamePlay()
     deadCheck(player);
     
      if(zoneTransition == true){ //For zone transitions
-      if(soundPlayed == false){
-                 soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
-                 soundFile.amp(0.6);
-                 soundFile.play();
-                 theme = new SoundFile(this, "SFX/Theme.wav");
-                 theme.amp(0.8);
-                 
-                 siberia = new SoundFile(this, "SFX/siberia-background.wav");
-                 siberia.amp(0.2);
-                 if(!nextZone.equals("-1")){
-                   theme.loop();
-                   siberia.play();
-                 }
-                 soundPlayed = true;
-               }
+
     
     
       if(flashBack == true){
@@ -203,6 +189,22 @@ void gamePlay()
         rectMode(CORNER);
         rect(0, 0, width, height);
         popMatrix();
+              if(soundPlayed == false){
+                 soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
+                 soundFile.amp(0.6);
+                 soundFile.play();
+                 theme = new SoundFile(this, "SFX/Theme.wav");
+                 theme.amp(0.8);
+                 
+                 siberia = new SoundFile(this, "SFX/siberia-background.wav");
+                 siberia.amp(0.2);
+                 if(!nextZone.equals("-1")){
+                   theme.loop();
+                   siberia.play();
+                 }
+                 //println("Turning to true1");
+                 soundPlayed = true;
+               }
      }
      else if(transparency == 255){ //Fade from white to new zone
          cutSceneHalfWay = true;
@@ -239,12 +241,14 @@ void gamePlay()
      }
      else{ //reset variables
         zoneTransition = false;
+        //println("f1");
         zoneTransition2 = false;
         transparency = 0;
         transparency2 = 255;
+        //println("Turning to false2");
         soundPlayed = false;
         save();
-        nextZoneChanged = false;
+
      }
      
      

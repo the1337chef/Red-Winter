@@ -130,6 +130,7 @@ ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 //Sounds
 SoundFile pickupSound;
 SoundFile step;
+boolean soundPlayed = false;
 
 void setup()
 {
@@ -214,6 +215,7 @@ void setup()
   else{
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
     zoneTransition = true;
+    //println("t3");
   }
   //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
   //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);

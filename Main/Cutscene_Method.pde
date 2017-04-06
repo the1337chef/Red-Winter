@@ -8,8 +8,9 @@ boolean layer3Exists = false;
 
 //Sound (Maybe put in seperate place)
 SoundFile soundFile;
-boolean soundPlayed = false;
-
+SoundFile soundFile2;
+boolean soundPlayed1 = false;
+boolean soundPlayed2 = false;
 
 float pastTime;
 boolean timeUpdated = false;
@@ -43,16 +44,27 @@ void playCutScene(int ch, CutScene cutscene){
         //println("Sound num:" + soundNum);
         int subSceneIndexNum = subSceneIndex + 1;
         String source = "Ch" + ch + "/" + ch + "-" + cutscene.getId() + "/" + ch + "-" + cutscene.getId() + "-" + subSceneIndexNum;
-        if( cutscene.getLayers().get(subSceneIndex) > 1){
+        if( cutscene.getSounds().get(subSceneIndex) > 1){
           source = source + "-" + soundNum;
         }
         source = source + ".wav";
+        //println("soundPlayed is " + soundPlayed);
         //println(source);
-        if(soundPlayed == false){
-          //println("Playing Sound");
+        
+        if(soundPlayed1 == false){
+          println("subscene " + subSceneIndex);
+          println("Playing Sound1");
           soundFile = new SoundFile(this, source);
           soundFile.play();
-          soundPlayed = true;
+          //println("Turning to true3");
+          soundPlayed1 = true;
+        }
+        if(soundPlayed2 == false && i == 1){
+          println("subscene " + subSceneIndex);
+          println("Playing Sound2");
+          soundFile2 = new SoundFile(this, source);
+          soundFile2.play();
+          soundPlayed2 = true;
         }
       }
       //TODO: sound might not be able to be overwritten
@@ -76,16 +88,19 @@ void playCutScene(int ch, CutScene cutscene){
       if(soundPlayed){
         //soundFile.stop();
       }
+      //println("Turning to false4");
       soundPlayed = false;
+      soundPlayed2 = false;
       cutSceneTransitionPlayed = false;
       save();
       loadZone();
       zoneTransition = true;
+      //println("t4");
       resetValues();
       int nextScene = Integer.parseInt(last_cutscene);
       nextScene++;
       last_cutscene = Integer.toString(nextScene);
-      println("last_cutscene increased by 1");
+      //println("last_cutscene increased by 1");
       
       //println("reset in playCutScene last else");
     }
@@ -99,9 +114,10 @@ void nextSubScene(){
       subSceneIndex++;
       timeUpdated = false;
       if(soundPlayed){
-        soundFile.stop();
+        //soundFile.stop();
       }
-      soundPlayed = false;
+      soundPlayed1 = false;
+      soundPlayed2 = false;
       
       //println("Next SubScene");
       
@@ -130,6 +146,7 @@ void cutSceneTransition(){
        }
        else{ //reset variables
           zoneTransition = false;
+          //println("f5");
           zoneTransition2 = false;
           transparency = 0;
           transparency2 = 255;

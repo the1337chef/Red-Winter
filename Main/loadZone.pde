@@ -5,7 +5,7 @@ void loadZone(){
   }
   else if(nextZone.equals("-1")){//Zone to Cutscene
     gameState = 1;
-    nextZoneChanged = false;
+
 
   }
   else if(nextZone.equals("-2")){//zone to next chapter's zone
@@ -19,6 +19,7 @@ void loadZone(){
     //println("Next zone is 1 from loadzone->else if");
     gameState = 0;
     nextZoneChanged = false;
+    //println("nzf4");
     loadZone();
 
   }
@@ -75,6 +76,7 @@ void loadZone(){
       player.setX(nextPlayerX);
       player.setY(nextPlayerY);
       player.movement(0,0); //recalculate the camera position because of new player location
+      
     }
     pause = false;
 

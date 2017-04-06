@@ -248,13 +248,17 @@ class Player extends Character
     {
       change = collision(transitions.get(i), this.hBox, change.x, change.y, change.z, 0);
       if(change.z == 1){
-        zoneTransition = true;
-        if(!nextZoneChanged){
+        
+        if(nextZone != transitions.get(i).getZone() && gameState == 0){
+          zoneTransition = true;
+          
           nextZone = transitions.get(i).getZone();
           nextZoneChanged = true;
+          //println("nzt1");
           //println("nextZone is " + nextZone + " from the transition");
           nextPlayerX = transitions.get(i).getNextXPos();
           nextPlayerY = transitions.get(i).getNextYPos();
+          transitions.clear();
           siberia.stop();
           theme.stop();
         }
