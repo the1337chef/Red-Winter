@@ -2,6 +2,7 @@
 SoundFile theme;
 SoundFile siberia;
 
+float savedTime = millis();
 void gamePlay()
 {
  //MUSIC CONTROL
@@ -33,14 +34,38 @@ void gamePlay()
     //Player position update
     if(keyPressed && !zoneTransition)
     {
-      if(keyCode == UP || key == 'w' || key == 'W')
+      if(keyCode == UP || key == 'w' || key == 'W'){
         mUp = true;
-      if(keyCode == DOWN || key == 's' || key == 'S')
+
+        if(millis() - savedTime > 300){
+          step.play();
+          savedTime = millis();
+        }
+      }
+      if(keyCode == DOWN || key == 's' || key == 'S'){
         mDown = true;
-      if(keyCode == LEFT || key == 'a' || key == 'A')
+        
+        if(millis() - savedTime > 300){
+          step.play();
+          savedTime = millis();
+        }
+      }
+      if(keyCode == LEFT || key == 'a' || key == 'A'){
         mLeft = true;
-      if(keyCode == RIGHT || key == 'd' || key == 'D')
+
+        if(millis() - savedTime > 300){
+          step.play();
+          savedTime = millis();
+        }
+      }
+      if(keyCode == RIGHT || key == 'd' || key == 'D'){
         mRight = true;
+
+        if(millis() - savedTime > 300){
+          step.play();
+          savedTime = millis();
+        }
+      }
     }  
     if(mUp == true){
       player.movement(0, -1*speed);

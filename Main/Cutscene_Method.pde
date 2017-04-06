@@ -74,7 +74,7 @@ void playCutScene(int ch, CutScene cutscene){
       subSceneIndex = 0;
       timeUpdated = false;
       if(soundPlayed){
-        soundFile.stop();
+        //soundFile.stop();
       }
       soundPlayed = false;
       cutSceneTransitionPlayed = false;

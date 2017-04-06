@@ -129,6 +129,7 @@ ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 
 //Sounds
 SoundFile pickupSound;
+SoundFile step;
 
 void setup()
 {
@@ -257,6 +258,8 @@ void setup()
   //Sounds
   pickupSound = new SoundFile(this, "SFX/pickup.wav");
   pickupSound.amp(1.0);
+  step = new SoundFile(this, "SFX/one-snow-step.wav");
+  step.amp(0.3);
 
   
   //Adding bow to projectileSpawners
