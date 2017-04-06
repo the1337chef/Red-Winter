@@ -10,6 +10,7 @@ boolean layer3Exists = false;
 SoundFile soundFile;
 boolean soundPlayed = false;
 
+
 float pastTime;
 boolean timeUpdated = false;
 boolean cutSceneTransitionPlayed = false;
@@ -45,7 +46,7 @@ void playCutScene(int ch, CutScene cutscene){
         if( cutscene.getLayers().get(subSceneIndex) > 1){
           source = source + "-" + soundNum;
         }
-        source = source + ".mp3";
+        source = source + ".wav";
         //println(source);
         if(soundPlayed == false){
           //println("Playing Sound");
@@ -115,6 +116,7 @@ void cutSceneTransition(){
           rectMode(CORNER);
           fill(fillColor, fillColor, fillColor, transparency);
           rect(0, 0, width, height);
+          
        }
        else if(transparency == 255){ //Fade from white to new zone
            cutSceneHalfWay = true;

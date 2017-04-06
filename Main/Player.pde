@@ -1,4 +1,5 @@
 //Player subclass
+SoundFile pickupSound;
 
 boolean nextZoneChanged = false;
 
@@ -252,11 +253,14 @@ class Player extends Character
         if(!nextZoneChanged){
           nextZone = transitions.get(i).getZone();
           nextZoneChanged = true;
-          println("nextZone is " + nextZone + " from the transition");
+          //println("nextZone is " + nextZone + " from the transition");
+          nextPlayerX = transitions.get(i).getNextXPos();
+          nextPlayerY = transitions.get(i).getNextYPos();
+          siberia.stop();
+          theme.stop();
         }
         
-        nextPlayerX = transitions.get(i).getNextXPos();
-        nextPlayerY = transitions.get(i).getNextYPos();
+        
       }
     }
     

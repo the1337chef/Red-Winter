@@ -26,7 +26,8 @@ class Pickup
     this.sizeH = h;
     this.hBox = new Hitbox(x, y, w, h, 0, "pickup");
   }
-  void activate(){}
+  void activate(){
+  }
   
   void display(){
     pushMatrix();

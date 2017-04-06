@@ -192,12 +192,12 @@ void setup()
   
   //Fonts
   textAlign(CENTER);
-  menuFont = loadFont("LucidaSans-TypewriterBold-24.vlw");
+  menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
   
   //Images
-  background = loadImage("major_cutscene_test_32_low_res.png");
-  playerBottom = loadImage("Amaruq_Sprite_Sheet_Bottom.png");
-  playerTop = loadImage("Amaruq_Sprite_Sheet_Top.png");
+  background = loadImage("ETC/major_cutscene_test_32_low_res.png");
+  playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
+  playerTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
   
   //Intro?
   
@@ -329,8 +329,10 @@ void keyReleased()
         nextSubScene();
       }
       
-    if(key == 'q' || key == 'Q')
-      configureChapter(chapter1);
+    if(key == 'q' || key == 'Q'){
+      println("x = " + nextPlayerX);
+      println("y = " + nextPlayerY);
+    }
 
       
     if(key == 'p' || key == 'P'){//pause

@@ -392,6 +392,6 @@ r=pi4
 //pickup1
 x=900
 y=390
-w=32
-h=32
+w=45
+h=45
 id=dynamite

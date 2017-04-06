@@ -11,12 +11,12 @@ void loadZone(){
   else if(nextZone.equals("-2")){//zone to next chapter's zone
     //playerNextX = xpos
     //ypos
-    println("nextzone is -2");
+    //println("nextzone is -2");
     last_cutscene = "-1";
     currentChapter = Integer.toString(Integer.parseInt(currentChapter) + 1);
-    println("currentChapter is " + currentChapter);
+    //println("currentChapter is " + currentChapter);
     nextZone = "1";
-    println("Next zone is 1 from loadzone->else if");
+    //println("Next zone is 1 from loadzone->else if");
     gameState = 0;
     nextZoneChanged = false;
     loadZone();
@@ -26,7 +26,7 @@ void loadZone(){
     //println("next zone is " + nextZone);
     //Update game state
     gameState = 0;
-    nextZoneChanged = false;
+    
     saveCompleted = false;
     
     //Landscape

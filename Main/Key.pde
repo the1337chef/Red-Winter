@@ -18,7 +18,7 @@ class Key extends Pickup
     this.sizeH = h;
     this.hBox = new Hitbox(x, y, w, h, 0, "pickup");
     this.identifier = id;
-    this.image = loadImage(this.identifier + ".png");
+    this.image = loadImage("Pickups/" + this.identifier + ".png");
   }
   
   void display()

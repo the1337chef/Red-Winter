@@ -1,9 +1,11 @@
 //Gameplay Method
+SoundFile theme;
+SoundFile siberia;
 
 void gamePlay()
 {
  //MUSIC CONTROL
-  
+
   //INTRO?
   
   //MENUS
@@ -12,7 +14,6 @@ void gamePlay()
   {
     //DRAW BACKGROUND ENVIRONMENT
     if(cutSceneHalfWay){
-      
       pushMatrix();
       imageMode(CORNER);
       //fill(255);
@@ -147,8 +148,15 @@ void gamePlay()
     
      if(zoneTransition == true){ //For zone transitions
       if(soundPlayed == false){
-                 soundFile = new SoundFile(this, "ZoneTransition2.wav");
+                 soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
+                 soundFile.amp(0.6);
                  soundFile.play();
+                 theme = new SoundFile(this, "SFX/Theme.wav");
+                 theme.amp(0.8);
+                 theme.loop();
+                 siberia = new SoundFile(this, "SFX/siberia-background.wav");
+                 siberia.amp(0.2);
+                 siberia.play();
                  soundPlayed = true;
                }
     
@@ -171,7 +179,7 @@ void gamePlay()
      else if(transparency == 255){ //Fade from white to new zone
          cutSceneHalfWay = true;
          //add switch statement of the variety of zones to transition to
-        loadZone();
+        loadZone();       
         player.setX(nextPlayerX);
         player.setY(nextPlayerY);
         player.cameraMove();
@@ -208,6 +216,7 @@ void gamePlay()
         transparency2 = 255;
         soundPlayed = false;
         save();
+        nextZoneChanged = false;
      }
      
      
