@@ -30,6 +30,8 @@ int currentTime;               //Measures time for the "Save Completed" to go aw
 float nextPlayerX;             //Player's X position upon a transition to a different zone
 float nextPlayerY;             //Player's Y position upon a transition to a different zone
 
+
+
 /*
  * Camera X and Y determine the position the player's see of the larger map.
  * Based off of the top-left corner of the screen and image.
@@ -125,6 +127,9 @@ ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 //Enemies
 //ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
+//Sounds
+SoundFile pickupSound;
+
 void setup()
 {
   //Screen Resolution
@@ -137,7 +142,7 @@ void setup()
   scaler = height / 288.0;
   
   //Game state
-  gameState = 2; //Start in Menu
+  gameState = 0; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -246,9 +251,12 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = false;
+  hitBoxMode = true;
   
   
+  //Sounds
+  pickupSound = new SoundFile(this, "SFX/pickup.wav");
+  pickupSound.amp(1.0);
 
   
   //Adding bow to projectileSpawners

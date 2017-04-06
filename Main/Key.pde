@@ -45,6 +45,7 @@ class Key extends Pickup
                        temp.setNextXPos(43);
                        temp.setNextYPos(250);
                        transitions.add(temp);
+                       
                        break;
       case "rope": dynamite = 1;
                        break;

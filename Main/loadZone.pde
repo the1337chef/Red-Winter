@@ -20,13 +20,13 @@ void loadZone(){
     gameState = 0;
     nextZoneChanged = false;
     loadZone();
-    
+
   }
   else{
     //println("next zone is " + nextZone);
     //Update game state
     gameState = 0;
-    
+
     saveCompleted = false;
     
     //Landscape

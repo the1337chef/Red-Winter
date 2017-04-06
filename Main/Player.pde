@@ -1,5 +1,4 @@
 //Player subclass
-SoundFile pickupSound;
 
 boolean nextZoneChanged = false;
 
@@ -284,6 +283,7 @@ class Player extends Character
       if(change.z == 1)
       {
         pickups.get(i).activate();
+        pickupSound.play();
         pickups.remove(i);
         i--;
       }

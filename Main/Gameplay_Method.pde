@@ -153,10 +153,13 @@ void gamePlay()
                  soundFile.play();
                  theme = new SoundFile(this, "SFX/Theme.wav");
                  theme.amp(0.8);
-                 theme.loop();
+                 
                  siberia = new SoundFile(this, "SFX/siberia-background.wav");
                  siberia.amp(0.2);
-                 siberia.play();
+                 if(!nextZone.equals("-1")){
+                   theme.loop();
+                   siberia.play();
+                 }
                  soundPlayed = true;
                }
     

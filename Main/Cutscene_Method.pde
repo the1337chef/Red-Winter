@@ -119,7 +119,7 @@ void cutSceneTransition(){
           
        }
        else if(transparency == 255){ //Fade from white to new zone
-           cutSceneHalfWay = true;
+          cutSceneHalfWay = true;
 
           transparency2 -= transparencyIncrement;
           fill(fillColor, fillColor, fillColor, transparency2);
