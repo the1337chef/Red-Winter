@@ -7,7 +7,7 @@ PImage layer3;
 boolean layer3Exists = false;
 
 //Sound (Maybe put in seperate place)
-SoundFile soundFile;
+SoundFile soundFile1;
 SoundFile soundFile2;
 boolean soundPlayed1 = false;
 boolean soundPlayed2 = false;
@@ -54,8 +54,8 @@ void playCutScene(int ch, CutScene cutscene){
         if(soundPlayed1 == false){
           println("subscene " + subSceneIndex);
           println("Playing Sound1");
-          soundFile = new SoundFile(this, source);
-          soundFile.play();
+          soundFile1 = new SoundFile(this, source);
+          soundFile1.play();
           //println("Turning to true3");
           soundPlayed1 = true;
         }

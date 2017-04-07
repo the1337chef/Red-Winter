@@ -137,6 +137,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 //Sounds
 SoundFile pickupSound;
 SoundFile step;
+SoundFile soundFile;
 boolean soundPlayed = false;
 
 void setup()
@@ -152,7 +153,7 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 2; //Start in Menu
+  gameState = 0; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -271,7 +272,7 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = false;
+  hitBoxMode = true;
   
   
   //Sounds

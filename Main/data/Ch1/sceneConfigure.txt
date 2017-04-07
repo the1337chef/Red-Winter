@@ -39,8 +39,8 @@ nextPlayerY=496
 4000
 //cutscene2
 nextZone=-2
-nextPlayerX=43
-nextPlayerY=250
+nextPlayerX=372
+nextPlayerY=306
 #ofsubscenes=9
 //layers
 1
