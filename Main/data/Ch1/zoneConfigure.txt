@@ -68,6 +68,8 @@ h=50
 r=pi4
 //pickups
 #ofpickups=0
+//enemies
+#ofenemies=0
 //zone2
 #oftransitions=1
 //transition1
@@ -251,6 +253,8 @@ h=40
 r=0
 //pickups
 #ofpickups=0
+//enemies
+#ofenemies=0
 //zone3
 #oftransitions=0
 //walls
@@ -461,3 +465,13 @@ y=390
 w=45
 h=45
 id=dynamite
+//enemies
+#ofenemies=2
+//enemy1
+x=450
+y=380
+p=20
+//enemy2
+x=340
+y=160
+p=0

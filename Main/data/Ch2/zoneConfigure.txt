@@ -20,6 +20,8 @@ h=70
 r=0
 //pickups
 #ofpickups=0
+//enemies
+#ofenemies=0
 //zone2
 #oftransitions=1
 //transition1
@@ -41,3 +43,5 @@ h=150
 r=pi4
 //pickups
 #ofpickups=0
+//enemies
+#ofenemies=0

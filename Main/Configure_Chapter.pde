@@ -161,6 +161,23 @@ void configureChapter(Chapter chapter) {
         Key newKey = new Key(x, y, w, h, line);
         newZone.addPickup(newKey);
       }
+      
+      //Enemies
+      
+      //skip comment enemies
+      reader.readLine();
+      
+      int numOfEnemies = Integer.parseInt(reader.readLine().substring(11));
+      for(int j = 0; j < numOfEnemies; j++){
+        //skip comment enemy
+        reader.readLine();
+        int x =  Integer.parseInt(reader.readLine().substring(2));
+        int y =  Integer.parseInt(reader.readLine().substring(2));
+        int p =  Integer.parseInt(reader.readLine().substring(2));
+        
+        Enemy newEnemy = new Enemy(x, y, 0, 100, peopleSize/2, peopleSize/2, PI/2, 100, p);
+        newZone.addEnemy(newEnemy);
+      }
       chapter.addZone(newZone);
     }
     
