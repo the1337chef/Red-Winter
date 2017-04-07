@@ -44,8 +44,8 @@ class Key extends Pickup
       case "dynamite": dynamite = 1;
                        Hitbox temp = new Hitbox(745,266,200,100,0,"zone_transition");
                        temp.setZone("-1");
-                       temp.setNextXPos(43);
-                       temp.setNextYPos(250);
+                       temp.setNextXPos(355);
+                       temp.setNextYPos(324);
                        transitions.add(temp);
                        
                        break;

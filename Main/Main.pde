@@ -153,7 +153,7 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -272,7 +272,7 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = true;
+  hitBoxMode = false;
   
   
   //Sounds

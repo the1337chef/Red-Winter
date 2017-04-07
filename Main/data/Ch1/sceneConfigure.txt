@@ -39,10 +39,11 @@ nextPlayerY=496
 4000
 //cutscene2
 nextZone=-2
-nextPlayerX=372
-nextPlayerY=306
-#ofsubscenes=9
+nextPlayerX=355
+nextPlayerY=324
+#ofsubscenes=10
 //layers
+1
 1
 1
 1
@@ -61,6 +62,7 @@ nextPlayerY=306
 1
 1
 1
+0
 2
 //durations
 2000
@@ -70,5 +72,6 @@ nextPlayerY=306
 2000
 2000
 3000
-3000
+2000
+1000
 4000
