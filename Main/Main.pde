@@ -15,7 +15,9 @@ import processing.sound.*;
 
 //Universal declarations
 float scaler;                  //Used to scale the game up from 512x288 to the user's screen resolution
+float peopleSize;
 float speed;                   //Player speed
+float enemySpeed;              //Russian soldier speed
 float direction;               //Initial player direction
 int knifeDamage;               //User knife damage value
 float knifeReach;              //Variable determining how far the knife can reach, used for knife
@@ -70,6 +72,8 @@ int gameState;
 //Fade trackers
 
 //Sound
+SoundFile theme;
+SoundFile siberia;
 
 //Images
 PImage background;
@@ -79,6 +83,8 @@ PImage horizonView;
 PImage cutScene;
 PImage playerBottom;
 PImage playerTop;
+PImage russianBottom;
+PImage russianTop;
 
 //Fonts
 PFont menuFont;
@@ -125,7 +131,8 @@ ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 
 //Enemies
-//ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
 
 //Sounds
 SoundFile pickupSound;
@@ -142,6 +149,7 @@ void setup()
   noSmooth();
   
   scaler = height / 288.0;
+  peopleSize = 48;
   
   //Game state
   gameState = 2; //Start in Menu
@@ -205,7 +213,9 @@ void setup()
   background = loadImage("ETC/major_cutscene_test_32_low_res.png");
   playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
   playerTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
-  
+  russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
+  russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
+
   //Intro?
   
   //Menu
@@ -233,11 +243,18 @@ void setup()
  
   //Play sounds
   //Menu/ Game music
+  soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
+  soundFile.amp(0.6);
+  theme = new SoundFile(this, "SFX/Theme.wav");
+  theme.amp(0.8);
+  siberia = new SoundFile(this, "SFX/siberia-background.wav");
+  siberia.amp(0.2);
   
   
   //Player values
-  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, 20, 20, "player");
+  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, peopleSize/2, peopleSize/2, "player");
   speed = 4.0;
+  enemySpeed = 2.0;
   direction = 0;
   knifeDamage = 50;
   knifeReach = 70;

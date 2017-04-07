@@ -38,7 +38,7 @@ class Player extends Character
     this.ammo = a;
     this.sizeW = wi;
     this.sizeH = hi;
-    this.hBox = new Hitbox(x, y, wi, hi, dir, type);
+    this.hBox = new Hitbox(x, y, wi, hi, 0, type);
     this.runTime = 0;
     this.runTimeTracker = 0;
     this.invincible = false;
@@ -80,10 +80,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,0,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,0,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 1) //UP
     {
@@ -96,10 +96,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,64,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 2) //LEFT
     {
@@ -112,10 +112,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,128,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 3) // DOWN
     {
@@ -128,10 +128,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,192,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerBottom.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     if(hitBoxMode)
       this.hBox.displayBox();
@@ -171,10 +171,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerTop.get(64*temp2,0,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerTop.get(0,0,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 1) //UP
     {
@@ -187,10 +187,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerTop.get(64*temp2,64,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerTop.get(0,64,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 2) //LEFT
     {
@@ -203,10 +203,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerTop.get(64*temp2,128,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerTop.get(0,128,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 3) // DOWN
     {
@@ -219,10 +219,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerTop.get(64*temp2,192,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerTop.get(0,192,64,64), 0, -32, 48*scaler, 48*scaler);
+        image(playerTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     
     if(aiming)

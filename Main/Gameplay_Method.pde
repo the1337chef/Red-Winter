@@ -1,6 +1,4 @@
 //Gameplay Method
-SoundFile theme;
-SoundFile siberia;
 
 float savedTime = millis();
 void gamePlay()
@@ -15,6 +13,7 @@ void gamePlay()
   {
     //DRAW BACKGROUND ENVIRONMENT
     if(cutSceneHalfWay){
+      
       pushMatrix();
       imageMode(CORNER);
       //fill(255);
@@ -24,9 +23,6 @@ void gamePlay()
       //Draw background
       image(background,-cameraX*scaler,-cameraY*scaler,background.width*scaler,background.height*scaler);
       popMatrix();
-      //Player and Enemy display
-      player.displayBottom();
-      player.displayTop();
     }
     
 
@@ -81,23 +77,20 @@ void gamePlay()
       player.setMDir(0);}
       
     player.setDir(mouseAngle());
-    //Enemy behavior and movement update
+    for(int i = 0; i < enemies.size(); i++)
+      enemies.get(i).behaviorCheck();
     
-
-    
-    //Test turret
-    
-    //Pickup respawn?
+    if(cutSceneHalfWay){
+      //Player and Enemy display
+      player.displayBottom();
+      for(int i = 0; i < enemies.size(); i++)
+        enemies.get(i).displayBottom();
+    }
     
     //Pickup Display
     //println("Pickups size: " + pickups.size());
     for(int i = 0; i < pickups.size(); i++)
       pickups.get(i).display();
-      
-    
-    
-    //for(int i = 0; i < enemies.size(); i++)
-      //enemies.get(i).display();
     
     //Projectile Display
     if(projectiles.size() > 0)
@@ -141,7 +134,9 @@ void gamePlay()
     
     
     if(cutSceneHalfWay){
-      
+      player.displayTop();
+      for(int i = 0; i < enemies.size(); i++)
+        enemies.get(i).displayTop();
       //Draw foreground
       pushMatrix();
       imageMode(CORNER);
@@ -190,14 +185,8 @@ void gamePlay()
         rect(0, 0, width, height);
         popMatrix();
               if(soundPlayed == false){
-                 soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
-                 soundFile.amp(0.6);
                  soundFile.play();
-                 theme = new SoundFile(this, "SFX/Theme.wav");
-                 theme.amp(0.8);
                  
-                 siberia = new SoundFile(this, "SFX/siberia-background.wav");
-                 siberia.amp(0.2);
                  if(!nextZone.equals("-1")){
                    theme.loop();
                    siberia.play();

@@ -28,8 +28,10 @@ class Key extends Pickup
     imageMode(CENTER);
     image(this.image,0,0, this.sizeW, this.sizeH);
     rectMode(CENTER);
+    pushMatrix();
     if(hitBoxMode)
       this.hBox.displayBox();
+    popMatrix();
     popMatrix();
   }
   

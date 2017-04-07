@@ -58,9 +58,7 @@ void loadZone(){
     for(int i = 0; i < thisTransitions.size(); i++){
       transitions.add(thisTransitions.get(i));
     }
-    
-    //Enemies
-  
+
     //Pickups
     pickups.clear();
     ArrayList <Pickup> thisPickup = thisZone.getPickups();
@@ -68,6 +66,12 @@ void loadZone(){
       pickups.add(thisPickup.get(i));
     }
     
+    //Enemies
+    enemies.clear();
+    ArrayList <Enemy> thisEnemy = thisZone.getEnemies();
+    for(int i = 0; i < thisEnemy.size(); i++){
+      enemies.add(thisEnemy.get(i));
+    }
     //chapterKeys = 0;
     //reqKeys = 1;
     
