@@ -1,8 +1,17 @@
 #ofzones=2
 //zone1
-#oftransitions=0
+#oftransitions=1
+//transition 1
+x=484
+y=44
+w=80
+h=80
+r=0
+nextzone=2
+nextPlayerX=63
+nextPlayerY=118
 //walls
-#ofwalls=24
+#ofwalls=28
 //wall1
 x=39
 y=238
@@ -150,9 +159,27 @@ r=pi4
 //wall25
 x=510
 y=527
-w=450
+w=600
 h=10
 r=0
+//wall26
+x=895
+y=541
+w=170
+h=170
+r=pi4
+//wall27
+x=953
+y=438
+w=100
+h=40
+r=0
+//wall28
+x=1074
+y=411
+w=120
+h=120
+r=pi4
 //pickups
 #ofpickups=0
 //enemies
@@ -162,7 +189,7 @@ r=0
 //transition 1
 x=850
 y=157
-w=70
+w=100
 h=50
 r=0
 nextzone=2
