@@ -26,9 +26,6 @@ int bulletDamage;
 float bulletSpeed;
 float bulletSize;
 boolean aiming;
-boolean shooting;
-int timer;
-int shootTimer;
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
 boolean zoneTransition;        //Triggers the fade between zone transitions
@@ -90,14 +87,8 @@ PImage playerBottom;
 PImage playerTop;
 PImage fistTop;
 PImage bowTop;
-PImage arrow;
 PImage russianBottom;
 PImage russianTop;
-
-PImage hudHealth;
-PImage hudEnergy;
-PImage hudAmmo;
-PImage crosshairs;
 
 //Fonts
 PFont menuFont;
@@ -108,6 +99,7 @@ boolean pause;
 boolean gameStart;
 boolean dead;
 float deadTimer;
+float timeDead;
 
 Button newGame;
 Button continueGame;
@@ -115,10 +107,12 @@ Button menuBack;
 Button pauseContinue;
 Button quitGame;
 Button saveGame;
+Button deathContinue;
 
 //Weapons
 Weapon none;
 RangedWeapon bow;
+//MeleeWeapon knife;
 
 Weapon activeWeapon, previousWeapon, temp;
 
@@ -165,18 +159,113 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
   cameraY = 0;
-  
   //Save file reader and writer
-  saveReader = createReader("save.txt");
+  reload();
+  
+  
+  //Fonts
+  textAlign(CENTER);
+  menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
+  
+  //Images
+  background = loadImage("ETC/major_cutscene_test_32_low_res.png");
+  playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
+  fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
+  bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
+  playerTop = fistTop;
+  russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
+  russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
+  //Intro?
+  
+  //Menu
+  newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
+  if(currentZone.equals("null")){
+    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+    println("current zone is null");
+  }
+    
+  else{
+    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
+    zoneTransition = true;
+    println("current zone is NOT null");
+  }
+  //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
+  //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
+  quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
+  saveGame = new Button(width/2, height/2 + height/5, 200, 50, "SAVE", true);
+  
+  //Options
+  
+  pause = false;
+  gameStart = true; //SWITCH TO FALSE WHEN MENU IS ADDED
+  dead = false;
+  deadTimer = 0;
+  timeDead = 0;
+  
+  //Fades
+ 
+  //Play sounds
+  //Menu/ Game music
+  soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
+  soundFile.amp(0.6);
+  theme = new SoundFile(this, "SFX/Theme.wav");
+  theme.amp(0.8);
+  siberia = new SoundFile(this, "SFX/siberia-background.wav");
+  siberia.amp(0.2);
+  
+  
+  //Player values
+  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, peopleSize/2, peopleSize/2, "player");
+  speed = 4.0;
+  enemySpeed = 2.0;
+  direction = 0;
+  arrowDamage = 100;
+  arrowSpeed = 30.0;
+  arrowSize = 5;
+  bulletDamage = 20;
+  bulletSpeed = 10.0;
+  bulletSize = 4;
+  aiming = false;
+  
+  //Heads up display
+  hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
+  
+  bow = new RangedWeapon(arrowDamage, arrowSpeed, "friendly_damage", arrowSize, arrowSize);
+  activeWeapon = none;
+  previousWeapon = bow;
+  meleeOne = false;
+  meleeTwo = false;
+  hitBoxMode = false;
+  
+  
+  //Sounds
+  pickupSound = new SoundFile(this, "SFX/pickup.wav");
+  pickupSound.amp(1.0);
+  step = new SoundFile(this, "SFX/one-snow-step.wav");
+  step.amp(0.3);
+  
+  //player.display();
+  
+  
+  //Initiallize Chapter Information
+  configureChapter(chapter1);
+  configureChapter(chapter2);
+    
+}
+
+void reload()
+{
+  saveReader = createReader("save.txt");
   try
   {
     currentChapter = saveReader.readLine().substring(8);
+ 
     currentZone = saveReader.readLine().substring(5);
     nextPlayerX = Float.parseFloat(saveReader.readLine().substring(5));
     nextPlayerY = Float.parseFloat(saveReader.readLine().substring(5));
@@ -194,6 +283,7 @@ void setup()
     seal2 = Integer.parseInt(saveReader.readLine().substring(6));
     whale = Integer.parseInt(saveReader.readLine().substring(6));
     sap = Integer.parseInt(saveReader.readLine().substring(4));
+    deadTimer = millis();
   }
   catch(IOException e)
   {
@@ -215,102 +305,7 @@ void setup()
     whale = 0;
     sap = 0;
     e.printStackTrace();
-  }
-  
-  
-  //Fonts
-  textAlign(CENTER);
-  menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
-  
-  //Images
-  background = loadImage("ETC/major_cutscene_test_32_low_res.png");
-  playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
-  fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
-  bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
-  playerTop = fistTop;
-  arrow = loadImage("Sprites/arrow_projectile.png");
-  russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
-  russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
-
-  hudHealth = loadImage("Sprites/Heart.png");
-  hudEnergy = loadImage("Sprites/Energy.png");
-  hudAmmo = loadImage("Sprites/Arrow.png");
-  crosshairs = loadImage("Sprites/crosshairs.png");
-  //Intro?
-  
-  //Menu
-  newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
-  if(currentZone.equals("null"))
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
-  else{
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
-    zoneTransition = true;
-    //println("t3");
-  }
-  //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
-  //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
-  quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
-  saveGame = new Button(width/2, height/2 + height/5, 200, 50, "SAVE", true);
-  
-  //Options
-  
-  pause = false;
-  gameStart = true; //SWITCH TO FALSE WHEN MENU IS ADDED
-  dead = false;
-  deadTimer = 0;
-  
-  //Fades
- 
-  //Play sounds
-  //Menu/ Game music
-  soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
-  soundFile.amp(0.6);
-  theme = new SoundFile(this, "SFX/Theme.wav");
-  theme.amp(0.8);
-  siberia = new SoundFile(this, "SFX/siberia-background.wav");
-  siberia.amp(0.2);
-  
-  
-  //Player values
-  player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, peopleSize/2, peopleSize/2, "player");
-  speed = 4.0;
-  enemySpeed = 2.0;
-  direction = 0;
-  arrowDamage = 100;
-  arrowSpeed = 15.0;
-  arrowSize = 5;
-  bulletDamage = 20;
-  bulletSpeed = 10.0;
-  bulletSize = 4;
-  aiming = false;
-  shooting = false;
-  timer = 0;
-  shootTimer = 0;
-  
-  //Heads up display
-  hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
-  
-  bow = new RangedWeapon(arrowDamage, arrowSpeed, "friendly_damage", arrowSize, arrowSize);
-  activeWeapon = none;
-  previousWeapon = bow;
-  hitBoxMode = false;
-  
-  
-  //Sounds
-  pickupSound = new SoundFile(this, "SFX/pickup.wav");
-  pickupSound.amp(1.0);
-  step = new SoundFile(this, "SFX/one-snow-step.wav");
-  step.amp(0.3);
-  
-  //player.display();
-  
-  
-  
-  Chapter chapter3 = new Chapter("3");
-  //Initiallize Chapter Information
-  configureChapter(chapter1);
-  configureChapter(chapter2);
-  configureChapter(chapter3);
+  }    
 }
 
 //Keyboard
@@ -414,13 +409,12 @@ void mousePressed()
     if(continueGame.getHighlight())
     {
       //Read save file
-      loadZone();
-      
+      loadZone(); 
       //Switch to gameplay at appropriate zone
       gameState = 0;
       resetValues();
       //println("reset in continue game");
-      noCursor();
+      cursor(CROSS);
     }
 
     if(quitGame.getHighlight())
@@ -440,19 +434,17 @@ void mousePressed()
   {
     if(mouseButton == LEFT)
     {
-      if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
+      if(activeWeapon instanceof RangedWeapon && aiming)
       {
         float angle = mouseAngle();
         float xVector = cos(angle);
         float yVector = sin(angle);
         bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
-        shooting = true;
-        player.setCurrentAmmo(player.getCurrentAmmo() - 1);
       }
     }
     //MORE PAUSE;
     
-    if(activeWeapon instanceof RangedWeapon && player.getCurrentAmmo() > 0 && mouseButton == RIGHT)
+    if(activeWeapon instanceof RangedWeapon && mouseButton == RIGHT)
     {
        aiming = true;
     }
@@ -474,20 +466,24 @@ void mouseReleased()
   }
 }
 
-void zoneKeyAdd()
-{
-}
+
 
 //DEAD CHECK
-void deadCheck(Character testChar)
+boolean checkDead(Character testChar)
 {
+  
   if(testChar.getCurrentHealth() <= 0)
   {
-    //Death sound
-    //Reset/ Load to checkpoint
-    dead = true;
+  
+  if(testChar instanceof  Player)
+  {
+    dead = true;  
+    enemies.clear(); 
   }
 }
+     return dead;
+}
+ 
 
 
 void resetValues(){
@@ -498,8 +494,30 @@ void resetValues(){
 //DRAW FUNCTION
 void draw()
 {
-  if(gameState == 0){
-    gamePlay();
+
+  if(gameState == 0)
+  {
+     gamePlay(); 
+     if(dead == true)
+     {
+       float temptime = deadTimer;
+       deadTimer = millis();
+       timeDead += (deadTimer - temptime);  
+       speed = 0;
+       
+       if(timeDead >= 10000)
+       {         
+            //Switch to gameplay at appropriate zone
+            reload();
+            println(currentZone);
+            println(nextZone);
+            timeDead = 0;
+            deadTimer = 0;
+            gameState = 2;
+       }
+     
+     }
+  
   }
   else if(gameState == 1){
     //println("SubSceneIndex: " + subSceneIndex);
