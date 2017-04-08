@@ -135,7 +135,7 @@ ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 
 //Enemies
-ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
 
 //Sounds
@@ -157,7 +157,7 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 2; //Start in Menu
+  gameState = 0; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -279,7 +279,7 @@ void setup()
   previousWeapon = bow;
   meleeOne = false;
   meleeTwo = false;
-  hitBoxMode = false;
+  hitBoxMode = true;
   
   
   //Sounds
@@ -291,10 +291,12 @@ void setup()
   //player.display();
   
   
+  
+  Chapter chapter3 = new Chapter("3");
   //Initiallize Chapter Information
   configureChapter(chapter1);
   configureChapter(chapter2);
-    
+  configureChapter(chapter3);
 }
 
 //Keyboard
