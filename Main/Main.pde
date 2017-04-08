@@ -19,10 +19,12 @@ float peopleSize;
 float speed;                   //Player speed
 float enemySpeed;              //Russian soldier speed
 float direction;               //Initial player direction
-int knifeDamage;               //User knife damage value
-float knifeReach;              //Variable determining how far the knife can reach, used for knife
-int bowDamage;                 //User arrow damage
+int arrowDamage;                //User arrow damage
 float arrowSpeed;              //Speed at which arrow projectiles will fly
+float arrowSize;
+int bulletDamage;
+float bulletSpeed;
+float bulletSize;
 boolean aiming;
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
@@ -83,6 +85,8 @@ PImage horizonView;
 PImage cutScene;
 PImage playerBottom;
 PImage playerTop;
+PImage fistTop;
+PImage bowTop;
 PImage russianBottom;
 PImage russianTop;
 
@@ -213,7 +217,9 @@ void setup()
   //Images
   background = loadImage("ETC/major_cutscene_test_32_low_res.png");
   playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
-  playerTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
+  fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
+  bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
+  playerTop = fistTop;
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
@@ -257,17 +263,18 @@ void setup()
   speed = 4.0;
   enemySpeed = 2.0;
   direction = 0;
-  knifeDamage = 50;
-  knifeReach = 70;
-  bowDamage = 100;
-  arrowSpeed = 15.0;
+  arrowDamage = 100;
+  arrowSpeed = 30.0;
+  arrowSize = 5;
+  bulletDamage = 20;
+  bulletSpeed = 10.0;
+  bulletSize = 4;
   aiming = false;
   
   //Heads up display
   hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
   
-  bow = new RangedWeapon(bowDamage, arrowSpeed, "friendly_damage", 20, 20);
-  //knife = new MeleeWeapon(knifeDamage, 0, 0, knifeReach, 400, true);
+  bow = new RangedWeapon(arrowDamage, arrowSpeed, "friendly_damage", arrowSize, arrowSize);
   activeWeapon = none;
   previousWeapon = bow;
   meleeOne = false;
@@ -280,17 +287,9 @@ void setup()
   pickupSound.amp(1.0);
   step = new SoundFile(this, "SFX/one-snow-step.wav");
   step.amp(0.3);
-
   
-  //Adding bow to projectileSpawners
-  //projectileSpawners.add(bow);
+  //player.display();
   
-  //stamina20 = new StaminaPickup(3*width/4, height/4, 10, 10, 20);
-  //pickups.add(stamina20);
-  
-  player.display();
-  
-  //ENEMY INITIALIZATION
   
   //Initiallize Chapter Information
   configureChapter(chapter1);
@@ -332,6 +331,9 @@ void keyReleased()
       temp = activeWeapon;
       activeWeapon = previousWeapon;
       previousWeapon = temp;
+      fistTop = playerTop;
+      playerTop = bowTop;
+      bowTop = fistTop;
     }
     if(key == 'h' || key == 'H')
       hitBoxMode = !hitBoxMode;

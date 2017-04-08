@@ -242,6 +242,13 @@ class Player extends Character
       xChange = change.x;
       yChange = change.y;
     }
+    
+    for(int i = 0; i < enemies.size(); i++)
+    {
+      change = collision(enemies.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, 0);
+      xChange = change.x;
+      yChange = change.y;
+    }
     change.z = 0;
     //Zone Transition Collision
     for(int i = 0; i < transitions.size(); i++)
@@ -345,9 +352,10 @@ class Player extends Character
     this.xPos = x;}
   void setY(float y){
     this.yPos = y;}
-    
   void setDir(float dir){
     this.direction = dir;}
   void setMDir(int dir){
     this.mDirection = dir;}
+  void setHealth(float health){
+    this.currentHealth = health;}
 }

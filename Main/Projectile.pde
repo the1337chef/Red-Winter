@@ -51,10 +51,15 @@ class Projectile
     this.hBox.setYPos(this.yPos);
     this.xPos = this.xPos + this.xVector*this.speed;
     this.yPos = this.yPos + this.yVector*this.speed;
+    ellipseMode(CENTER);
     noStroke();
     fill(100);
-    ellipseMode(CENTER);
-    ellipse(0,0, this.sizeW, this.sizeH);
+    if(this.type.equals("hostile_damage"))
+    {
+      fill(255,100,0);
+    }
+    
+    ellipse(0,-64, this.sizeW*scaler, this.sizeH*scaler);
     if(hitBoxMode)
       this.hBox.displayBox();
     popMatrix();
@@ -71,4 +76,8 @@ class Projectile
     return this.yVector;}
   Hitbox getHitbox(){
     return this.hBox;}
+  String getType(){
+    return this.type;}
+  float getDamage(){
+    return this.damage;}
 }

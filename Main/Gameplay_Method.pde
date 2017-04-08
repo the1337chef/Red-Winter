@@ -102,16 +102,31 @@ void gamePlay()
         //WALL COLLISION
         for(int j = 0; j < walls.size(); j++)
         {
-          change = collision(walls.get(j).getHitbox(), projectiles.get(i).getHitbox(), change.x, change.y, change.z, walls.get(j).getDirection());
-          if(change.z == 1)
+          if(removed == false)
           {
-            projectiles.remove(i);
-            removed = true;
-            break;
+            change = collision(walls.get(j).getHitbox(), projectiles.get(i).getHitbox(), change.x, change.y, change.z, walls.get(j).getDirection());
+            if(change.z == 1)
+            {
+              //projectiles.remove(i);
+              removed = true;
+            }
           }
         }
         
-        //Enemy Collision Check
+        //Enemy Shooting player Collision Check
+        if(projectiles.size() > 0)
+        {
+          if(projectiles.get(i).getType().equals("hostile_damage") && removed == false)
+          {
+            change = collision(player.getHitbox(),projectiles.get(i).getHitbox(), change.x, change.y, change.z, 0);
+            if(change.z == 1)
+            {
+              player.setHealth(player.getCurrentHealth() - projectiles.get(i).getDamage());
+              //projectiles.remove(i);
+              removed = true;
+            }
+          }
+        }
         
         //Out of bounds Check
         if(removed == false)
@@ -119,13 +134,16 @@ void gamePlay()
           if(projectiles.get(i).getXPos() < -50 || projectiles.get(i).getXPos() > 1170 ||
             projectiles.get(i).getYPos() < -50 || projectiles.get(i).getYPos() > 604)
             {
-              projectiles.remove(0);
+              //projectiles.remove(i);
               removed = true;
             }
         }
         
         if(removed)
+        {
+          projectiles.remove(i);
           i--;
+        }
         else
           projectiles.get(i).display();
       }
@@ -246,10 +264,7 @@ void gamePlay()
   }
   else if(dead == true)
   {
-    //stop music
-    //play death noise and animation
-    
-    //"Continue","Main menu","Exit game"
+    setup();
   }
   printSave(saveCompleted); //Prints if recently saved
 }

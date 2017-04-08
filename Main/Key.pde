@@ -33,6 +33,10 @@ class Key extends Pickup
       this.hBox.displayBox();
     popMatrix();
     popMatrix();
+    
+    //Hitbox placement
+    this.hBox.setXPos(this.xPos);
+    this.hBox.setYPos(this.yPos);
   }
   
   String getID(){

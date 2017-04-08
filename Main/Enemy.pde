@@ -50,7 +50,7 @@ class Enemy extends Character
     imageMode(CENTER);
     if(direction == 0) //RIGHT
     {
-      if(mDirection == 0)
+      if(mDirection == 0 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -66,7 +66,7 @@ class Enemy extends Character
     }
     else if(direction == 1) //UP
     {
-      if(mDirection == 1)
+      if(mDirection == 1 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -82,7 +82,7 @@ class Enemy extends Character
     }
     else if(direction == 2) //LEFT
     {
-      if(mDirection == 2)
+      if(mDirection == 2 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -98,7 +98,7 @@ class Enemy extends Character
     }
     else if(direction == 3) // DOWN
     {
-      if(mDirection == 3)
+      if(mDirection == 3 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -122,7 +122,7 @@ class Enemy extends Character
     imageMode(CENTER);
     if(direction == 0) //RIGHT
     {
-      if(mDirection == 0)
+      if(mDirection == 0 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -134,13 +134,19 @@ class Enemy extends Character
         image(russianTop.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else if(shooting)
-        image(russianTop.get(320, 0, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      {
+        pushMatrix();
+        translate(0, -48);
+        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos));
+        image(russianTop.get(320, 0, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+        popMatrix();
+      }
       else
         image(russianTop.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(direction == 1) //UP
     {
-      if(mDirection == 1)
+      if(mDirection == 1 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -152,13 +158,20 @@ class Enemy extends Character
         image(russianTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else if(shooting)
-        image(russianTop.get(320, 64, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      {
+        //image(russianTop.get(320, 64, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        pushMatrix();
+        translate(0, -48);
+        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI/2);
+        image(russianTop.get(320, 64, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+        popMatrix();
+      }
       else
         image(russianTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(direction == 2) //LEFT
     {
-      if(mDirection == 2)
+      if(mDirection == 2 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -170,13 +183,20 @@ class Enemy extends Character
         image(russianTop.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else if(shooting)
-        image(russianTop.get(320, 128, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      {
+        //image(russianTop.get(320, 128, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        pushMatrix();
+        translate(0, -48);
+        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI);
+        image(russianTop.get(320, 128, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+        popMatrix();
+      }
       else
         image(russianTop.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(direction == 3) // DOWN
     {
-      if(mDirection == 3)
+      if(mDirection == 3 && !shooting)
       {
         int temp = runTime;
         runTime = millis();
@@ -188,14 +208,21 @@ class Enemy extends Character
         image(russianTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else if(shooting)
-        image(russianTop.get(320, 192, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      {
+        //image(russianTop.get(320, 192, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        pushMatrix();
+        translate(0, -48);
+        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) - PI/2);
+        image(russianTop.get(320, 192, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+        popMatrix();
+      }
       else
         image(russianTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     if(hitBoxMode)
     {
-      this.hBox.displayBox();
       pushMatrix();
+      this.hBox.displayBox();
       fill(0,150);
       rotate(-PI/2*direction);
       arc(0,0,this.viewDist*scaler*2,this.viewDist*scaler*2,-PI/4,PI/4);
@@ -256,9 +283,36 @@ class Enemy extends Character
     }
     else
     {
-      direction = (direction+1)%4;
+      float distance = sqrt(pow(this.xPos-player.getXPos(),2)+pow(this.yPos-player.getYPos(),2));
+      float angle = acos(abs(this.xPos-player.getXPos())/distance);
+      
+      if(angle <= PI/4 && player.getXPos() >= this.xPos)
+      {
+        direction = 0;
+        mDirection = 0;
+        xChange = 1.5;
+      }
+      else if(angle >= PI/4 && player.getYPos() <= this.yPos)
+      {
+        direction = 1;
+        mDirection = 1;
+        yChange = -1.5;
+      }
+      else if(angle <= PI/4 && player.getXPos() <= this.xPos)
+      {
+        direction = 2;
+        mDirection = 2;
+        xChange = -1.5;
+      }
+      else if(angle >= PI/4 && player.getYPos() >= this.yPos)
+      {
+        direction = 3;
+        mDirection = 3;
+        yChange = 1.5;
+      }
     }
-    movement(xChange,yChange);
+    if(!shooting)
+      movement(xChange,yChange);
     visionCheck();
   }
   
@@ -274,6 +328,17 @@ class Enemy extends Character
       yChange = change.y;
     }
     
+    //Fellow enemy collision and correction
+    for(int i = 0; i < enemies.size(); i++)
+    {
+      if(enemies.get(i) != this)
+      {
+        change = collision(enemies.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, 0);
+        xChange = change.x;
+        yChange = change.y;
+      }
+    }
+    //Player collision
     change = collision(player.getHitbox(), this.hBox, change.x, change.y, change.z, 0);
     xChange = change.x;
     yChange = change.y;
@@ -283,68 +348,83 @@ class Enemy extends Character
       xChange = 0;
     if(this.yPos + yChange > 544 || this.yPos + yChange < 0)
       yChange = 0;
-    if(abs(xChange) + abs(yChange) >= 1.4*enemySpeed)
-    {
-      xChange = xChange * 0.7;
-      yChange = yChange * 0.7;
-    }
     this.xPos += xChange;
     this.yPos += yChange;
+    
+    //Hitbox placement
+    this.hBox.setXPos(this.xPos);
+    this.hBox.setYPos(this.yPos);
   }
 
   void visionCheck()
   {
     float distance = sqrt(pow(this.xPos-player.getXPos(),2)+pow(this.yPos-player.getYPos(),2));
     float angle = acos(abs(this.xPos-player.getXPos())/distance);
-    //QuadrantI
-    if(this.xPos <= player.getXPos() && this.yPos >= player.getYPos() && (direction == 0 || direction == 1))
+    if(alerted)
     {
-      if(distance <= this.viewDist && angle <= (PI/2*direction)+this.viewAngle/2 && angle >= (PI/2*direction)-this.viewAngle/2)
-      {
-        for(int i = 0; i < enemies.size(); i++)
-          enemies.get(i).setAlert(true);
-      }
-    }
-    //QuadrantII
-    else if(this.xPos > player.getXPos() && this.yPos >= player.getYPos() && (direction == 1 || direction == 2))
-    {
-      if(distance <= this.viewDist && angle <= (PI/2*(direction-1))+this.viewAngle/2 && angle >= (PI/2*(direction-1))-this.viewAngle/2)
-      {
-        for(int i = 0; i < enemies.size(); i++)
-          enemies.get(i).setAlert(true);
-      }
-    }
-    //QuadrantIII
-    else if(this.xPos > player.getXPos() && this.yPos < player.getYPos() && (direction == 2 || direction == 3))
-    {
-      if(distance <= this.viewDist && angle <= (PI/2*(direction-2))+viewAngle/2 && angle >= (PI/2*(direction-2))-this.viewAngle/2)
-      {
-        for(int i = 0; i < enemies.size(); i++)
-          enemies.get(i).setAlert(true);
-      }
-    }
-    //QuadrantIV
-    else if(this.xPos <= player.getXPos() && this.yPos >= player.getYPos() && (direction == 3 || direction == 0))
-    {
-      int temp;
-      if(direction == 3)
-        temp = 0;
+      if(distance <= this.viewDist*2)
+        attack();
       else
-        temp = 1;
-      if(distance <= this.viewDist && angle <= (PI/2*(temp))+viewAngle/2 && angle >= (PI/2*(temp))-this.viewAngle/2)
+        shooting = false;
+    }
+    else
+    {
+      if(this.direction == 0 && angle <= PI/4 && distance <= this.viewDist && player.getXPos() >= this.xPos)
       {
         for(int i = 0; i < enemies.size(); i++)
+        {
           enemies.get(i).setAlert(true);
+          enemies.get(i).setTimer(0);
+        }
+      }
+      else if(this.direction == 1 && angle >= PI/4 && distance <= this.viewDist && player.getYPos() <= this.yPos)
+      {
+        for(int i = 0; i < enemies.size(); i++)
+        {
+          enemies.get(i).setAlert(true);
+          enemies.get(i).setTimer(0);
+        }
+      }
+      else if(this.direction == 2 && angle <=PI/4 && distance <= this.viewDist && player.getXPos() <= this.xPos)
+      {
+        for(int i = 0; i < enemies.size(); i++)
+        {
+          enemies.get(i).setAlert(true);
+          enemies.get(i).setTimer(0);
+        }
+      }
+      else if(this.direction == 3 && angle >= PI/4 && distance <= this.viewDist && player.getYPos() >= this.yPos)
+      {
+        for(int i = 0; i < enemies.size(); i++)
+        {
+          enemies.get(i).setAlert(true);
+          enemies.get(i).setTimer(0);
+        }
       }
     }
   }
 
-  public void attackCheck(){
-    
+  void attack()
+  {
+    int temp = this.runTime;
+    this.runTime = millis();
+    this.runTimeTracker += this.runTime - temp;
+    if(this.runTimeTracker >= 300)
+    {
+      float angle = atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos);
+      projectiles.add(new Projectile(this.xPos + cos(angle)*bulletSpeed*1.5, this.yPos + sin(angle)*bulletSpeed*1.5, bulletDamage, bulletSpeed, 
+        cos(angle), sin(angle), bulletSize, bulletSize, "hostile_damage"));
+      this.runTimeTracker = 0;
+      this.shooting = true;
+    }
   }
   
   void setAlert(boolean status){
     this.alerted = status;}
+  void setTimer(int time){
+    this.runTimeTracker = time;}
+  Hitbox getHitbox(){
+    return this.hBox;}
   
   void print(){
     println("Enemy:");
