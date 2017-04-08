@@ -278,5 +278,6 @@ void gamePlay()
   {
     setup();
   }
+    checkDead(player);
   printSave(saveCompleted); //Prints if recently saved
 }
