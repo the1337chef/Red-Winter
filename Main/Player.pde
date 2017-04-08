@@ -80,10 +80,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        image(playerBottom.get(64*temp2,0,64,64), 2, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        image(playerBottom.get(0,0,64,64), 2, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 1) //UP
     {
@@ -112,10 +112,10 @@ class Player extends Character
           runTimeTracker = 0;
         int temp2 = (runTimeTracker / 100)+1;
         //println(temp2);
-        image(playerBottom.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        image(playerBottom.get(64*temp2,128,64,64), -4, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(playerBottom.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        image(playerBottom.get(0,128,64,64), -4, -32, peopleSize*scaler, peopleSize*scaler);
     }
     else if(mDirection == 3) // DOWN
     {
@@ -160,73 +160,163 @@ class Player extends Character
       translate(0, height/2);
     
     imageMode(CENTER);
-    if(mDirection == 0) //RIGHT
+    if(aiming && this.ammo > 0)
     {
-      if(mRight)
+      pushMatrix();
+      int tempX = 0;
+      //Right
+      if(this.direction >= -PI/4 && this.direction <= PI/4)
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 600)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(playerTop.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        translate(0, -40);
+        rotate(direction);
+        if(shooting)
+        {
+          tempX = 512;
+          int temp = timer;
+          timer = millis();
+          shootTimer += timer - temp;
+          if(shootTimer >= 1000)
+          {
+            shooting = false;
+            shootTimer = 0;
+          }
+        }
+        else
+          tempX = 448;
+        image(playerTop.get(tempX, 0, 64, 64), 1, -3, peopleSize*scaler, peopleSize*scaler);
       }
+      //Up
+      else if(this.direction > -3*PI/4 && this.direction < -PI/4)
+      {
+        translate(0, -38);
+        rotate(direction +PI/2);
+        if(shooting)
+        {
+          tempX = 512;
+          int temp = timer;
+          timer = millis();
+          shootTimer += timer - temp;
+          if(shootTimer >= 1000)
+          {
+            shooting = false;
+            shootTimer = 0;
+          }
+        }
+        else
+          tempX = 448;
+        image(playerTop.get(tempX, 64, 64, 64), 0, -10, peopleSize*scaler, peopleSize*scaler);
+      }
+      //Left
+      else if(this.direction >= 3*PI/4 || this.direction <= -3*PI/4)
+      {
+        translate(0, -40);
+        rotate(direction + PI);
+        if(shooting)
+        {
+          tempX = 512;
+          int temp = timer;
+          timer = millis();
+          shootTimer += timer - temp;
+          if(shootTimer >= 1000)
+          {
+            shooting = false;
+            shootTimer = 0;
+          }
+        }
+        else
+          tempX = 448;
+        image(playerTop.get(tempX, 128, 64, 64), 0, -3, peopleSize*scaler, peopleSize*scaler);
+      }
+      //Down
       else
-        image(playerTop.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      {
+        translate(0, -40);
+        rotate(direction - PI/2);
+        if(shooting)
+        {
+          tempX = 512;
+          int temp = timer;
+          timer = millis();
+          shootTimer += timer - temp;
+          if(shootTimer >= 1000)
+          {
+            shooting = false;
+            shootTimer = 0;
+          }
+        }
+        else
+          tempX = 448;
+        image(playerTop.get(tempX, 192, 64, 64), 0, 10, peopleSize*scaler, peopleSize*scaler);
+      }
+      popMatrix();
     }
-    else if(mDirection == 1) //UP
+    else
     {
-      if(mUp)
+      if(mDirection == 0) //RIGHT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 600)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(playerTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mRight)
+        {
+          int temp = runTime;
+          runTime = millis();
+          runTimeTracker += runTime - temp;
+          if(runTimeTracker >= 600)
+            runTimeTracker = 0;
+          int temp2 = (runTimeTracker / 100)+1;
+          //println(temp2);
+          image(playerTop.get(64*temp2,0,64,64), 2, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(playerTop.get(0,0,64,64), 2, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(playerTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(mDirection == 2) //LEFT
-    {
-      if(mLeft)
+      else if(mDirection == 1) //UP
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 600)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(playerTop.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mUp)
+        {
+          int temp = runTime;
+          runTime = millis();
+          runTimeTracker += runTime - temp;
+          if(runTimeTracker >= 600)
+            runTimeTracker = 0;
+          int temp2 = (runTimeTracker / 100)+1;
+          //println(temp2);
+          image(playerTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(playerTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(playerTop.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(mDirection == 3) // DOWN
-    {
-      if(mDown)
+      else if(mDirection == 2) //LEFT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 600)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(playerTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mLeft)
+        {
+          int temp = runTime;
+          runTime = millis();
+          runTimeTracker += runTime - temp;
+          if(runTimeTracker >= 600)
+            runTimeTracker = 0;
+          int temp2 = (runTimeTracker / 100)+1;
+          //println(temp2);
+          image(playerTop.get(64*temp2,128,64,64), -4, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(playerTop.get(0,128,64,64), -4, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(playerTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      else if(mDirection == 3) // DOWN
+      {
+        if(mDown)
+        {
+          int temp = runTime;
+          runTime = millis();
+          runTimeTracker += runTime - temp;
+          if(runTimeTracker >= 600)
+            runTimeTracker = 0;
+          int temp2 = (runTimeTracker / 100)+1;
+          //println(temp2);
+          image(playerTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(playerTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      }
     }
-    
-    if(aiming)
-      rotate(this.direction);
     popMatrix();
   }
   
@@ -358,4 +448,6 @@ class Player extends Character
     this.mDirection = dir;}
   void setHealth(float health){
     this.currentHealth = health;}
+  void setCurrentAmmo(int ammo){
+    this.ammo = ammo;}
 }

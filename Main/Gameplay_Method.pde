@@ -113,7 +113,7 @@ void gamePlay()
           }
         }
         
-        //Enemy Shooting player Collision Check
+        //Character collision
         if(projectiles.size() > 0)
         {
           if(projectiles.get(i).getType().equals("hostile_damage") && removed == false)
@@ -124,6 +124,18 @@ void gamePlay()
               player.setHealth(player.getCurrentHealth() - projectiles.get(i).getDamage());
               //projectiles.remove(i);
               removed = true;
+            }
+          }
+          else if(projectiles.get(i).getType().equals("friendly_damage") && removed == false)
+          {
+            for(int j = 0; j < enemies.size(); j++)
+            {
+              change = collision(enemies.get(j).getHitbox(), projectiles.get(i).getHitbox(), change.x, change.y, change.z, 0);
+              if(change.z == 1)
+              {
+                enemies.get(j).setCurrentHealth(enemies.get(j).getCurrentHealth() - projectiles.get(i).getDamage());
+                removed = true;
+              }
             }
           }
         }

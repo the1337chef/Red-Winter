@@ -26,6 +26,9 @@ int bulletDamage;
 float bulletSpeed;
 float bulletSize;
 boolean aiming;
+boolean shooting;
+int timer;
+int shootTimer;
 Player player;                 //The player character that the user directly controls
 HUD hud;                       //Class which retrieves information and displays it for the user
 boolean zoneTransition;        //Triggers the fade between zone transitions
@@ -87,8 +90,14 @@ PImage playerBottom;
 PImage playerTop;
 PImage fistTop;
 PImage bowTop;
+PImage arrow;
 PImage russianBottom;
 PImage russianTop;
+
+PImage hudHealth;
+PImage hudEnergy;
+PImage hudAmmo;
+PImage crosshairs;
 
 //Fonts
 PFont menuFont;
@@ -110,7 +119,6 @@ Button saveGame;
 //Weapons
 Weapon none;
 RangedWeapon bow;
-//MeleeWeapon knife;
 
 Weapon activeWeapon, previousWeapon, temp;
 
@@ -135,7 +143,7 @@ ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 
 //Enemies
-ArrayList<Enemy> enemies = new ArrayList<Enemy>();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 
 //Sounds
@@ -220,9 +228,14 @@ void setup()
   fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
   playerTop = fistTop;
+  arrow = loadImage("Sprites/arrow_projectile.png");
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
+  hudHealth = loadImage("Sprites/Heart.png");
+  hudEnergy = loadImage("Sprites/Energy.png");
+  hudAmmo = loadImage("Sprites/Arrow.png");
+  crosshairs = loadImage("Sprites/crosshairs.png");
   //Intro?
   
   //Menu
@@ -264,12 +277,15 @@ void setup()
   enemySpeed = 2.0;
   direction = 0;
   arrowDamage = 100;
-  arrowSpeed = 30.0;
+  arrowSpeed = 15.0;
   arrowSize = 5;
   bulletDamage = 20;
   bulletSpeed = 10.0;
   bulletSize = 4;
   aiming = false;
+  shooting = false;
+  timer = 0;
+  shootTimer = 0;
   
   //Heads up display
   hud = new HUD(saveHealth, saveStamina, saveTemp, saveAmmo);
@@ -277,9 +293,7 @@ void setup()
   bow = new RangedWeapon(arrowDamage, arrowSpeed, "friendly_damage", arrowSize, arrowSize);
   activeWeapon = none;
   previousWeapon = bow;
-  meleeOne = false;
-  meleeTwo = false;
-  hitBoxMode = true;
+  hitBoxMode = false;
   
   
   //Sounds
@@ -406,7 +420,7 @@ void mousePressed()
       gameState = 0;
       resetValues();
       //println("reset in continue game");
-      cursor(CROSS);
+      noCursor();
     }
 
     if(quitGame.getHighlight())
@@ -426,17 +440,19 @@ void mousePressed()
   {
     if(mouseButton == LEFT)
     {
-      if(activeWeapon instanceof RangedWeapon && aiming)
+      if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
       {
         float angle = mouseAngle();
         float xVector = cos(angle);
         float yVector = sin(angle);
         bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
+        shooting = true;
+        player.setCurrentAmmo(player.getCurrentAmmo() - 1);
       }
     }
     //MORE PAUSE;
     
-    if(activeWeapon instanceof RangedWeapon && mouseButton == RIGHT)
+    if(activeWeapon instanceof RangedWeapon && player.getCurrentAmmo() > 0 && mouseButton == RIGHT)
     {
        aiming = true;
     }

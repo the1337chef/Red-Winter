@@ -418,11 +418,14 @@ class Enemy extends Character
       this.shooting = true;
     }
   }
-  
+  void setCurrentHealth(float health){
+    this.currentHealth = health;}
   void setAlert(boolean status){
     this.alerted = status;}
   void setTimer(int time){
     this.runTimeTracker = time;}
+  float getCurrentHealth(){
+    return this.currentHealth;}
   Hitbox getHitbox(){
     return this.hBox;}
   

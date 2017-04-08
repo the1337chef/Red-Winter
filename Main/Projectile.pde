@@ -57,9 +57,16 @@ class Projectile
     if(this.type.equals("hostile_damage"))
     {
       fill(255,100,0);
+      ellipse(0,-64, this.sizeW*scaler, this.sizeH*scaler);
+    }
+    if(this.type.equals("friendly_damage"))
+    {
+      imageMode(CENTER);
+      translate(0, -60);
+      rotate(atan2(this.yVector,this.xVector));
+      image(arrow, 0, 0, arrow.width*scaler*.75, arrow.height*scaler*.75);
     }
     
-    ellipse(0,-64, this.sizeW*scaler, this.sizeH*scaler);
     if(hitBoxMode)
       this.hBox.displayBox();
     popMatrix();
