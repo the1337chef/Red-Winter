@@ -185,16 +185,7 @@ r=pi4
 //enemies
 #ofenemies=0
 //zone2
-#oftransitions=1
-//transition 1
-x=850
-y=157
-w=100
-h=50
-r=0
-nextzone=2
-nextPlayerX=63
-nextPlayerY=118
+#oftransitions=0
 //walls
 #ofwalls=0
 //pickups
