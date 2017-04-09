@@ -44,10 +44,6 @@ class Button
       {
         fill(206,151,59);
         this.highlight = true;
-        //if(btnClicked) {
-        //  fill(164,13,13);
-        //  stroke(206,151,59);
-        //}
       }
       else
       {
@@ -71,9 +67,6 @@ class Button
         (mouseY <= yPos+(bHeight/2)) && (mouseY >= yPos-(bHeight/2)))
       {
         fill(164,13,13);
-        //if(btnClicked) {
-        //  fill(206,151,59);
-        //}
       }
     else
       fill(206,151,59);

@@ -35,7 +35,13 @@ void gamePlay()
         mUp = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+          println(currentChapter);
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -43,7 +49,12 @@ void gamePlay()
         mDown = true;
         
         if(millis() - savedTime > 300){
-          step.play();
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -51,7 +62,12 @@ void gamePlay()
         mLeft = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -59,7 +75,12 @@ void gamePlay()
         mRight = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+         if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }

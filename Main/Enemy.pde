@@ -362,8 +362,9 @@ class Enemy extends Character
     float angle = acos(abs(this.xPos-player.getXPos())/distance);
     if(alerted)
     {
-      if(distance <= this.viewDist*2)
+      if(distance <= this.viewDist*2) {
         attack();
+      }
       else
         shooting = false;
     }
@@ -411,6 +412,7 @@ class Enemy extends Character
     this.runTimeTracker += this.runTime - temp;
     if(this.runTimeTracker >= 300)
     {
+      ak47.play();
       float angle = atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos);
       projectiles.add(new Projectile(this.xPos + cos(angle)*bulletSpeed*1.5, this.yPos + sin(angle)*bulletSpeed*1.5, bulletDamage, bulletSpeed, 
         cos(angle), sin(angle), bulletSize, bulletSize, "hostile_damage"));

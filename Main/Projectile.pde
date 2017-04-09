@@ -56,8 +56,12 @@ class Projectile
     fill(100);
     if(this.type.equals("hostile_damage"))
     {
-      fill(255,100,0);
-      ellipse(0,-64, this.sizeW*scaler, this.sizeH*scaler);
+      imageMode(CENTER);
+      rotate(atan2(this.yVector,this.xVector));
+      image(bullet, 0,-64, bullet.width*scaler*.5, bullet.height*scaler*.5); //idk how this works...  it is off tho!
+      
+      //fill(255,100,0);
+      //ellipse(0,-64, this.sizeW*scaler, this.sizeH*scaler);
     }
     if(this.type.equals("friendly_damage"))
     {

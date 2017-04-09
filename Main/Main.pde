@@ -92,6 +92,7 @@ PImage playerTop;
 PImage fistTop;
 PImage bowTop;
 PImage arrow;
+PImage bullet;
 PImage russianBottom;
 PImage russianTop;
 
@@ -151,11 +152,14 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 //Sounds
 SoundFile pickupSound;
+SoundFile ak47;
+SoundFile wounded;
 SoundFile buttonHover;
 SoundFile buttonClick;
-SoundFile step;
-SoundFile soundFile;
 boolean soundPlayed = false;
+SoundFile step;
+SoundFile floor_step;
+SoundFile soundFile;
 
 void setup()
 {
@@ -235,6 +239,7 @@ void setup()
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
   playerTop = fistTop;
   arrow = loadImage("Sprites/arrow_projectile.png");
+  bullet = loadImage("Sprites/bullet_projectile.png");
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
@@ -310,8 +315,12 @@ void setup()
   buttonClick.amp(.5);
   pickupSound = new SoundFile(this, "SFX/pickup.wav");
   pickupSound.amp(1.0);
+  ak47 = new SoundFile(this, "SFX/ak47.wav");
+  wounded = new SoundFile(this, "SFX/wounded.wav");
   step = new SoundFile(this, "SFX/one-snow-step.wav");
   step.amp(0.3);
+  floor_step = new SoundFile(this, "SFX/one-step-floor.wav");
+  floor_step.amp(0.4);
   
   //player.display();
   
