@@ -8,8 +8,8 @@ w=180
 h=50
 r=0
 nextzone=2
-nextPlayerX=165
-nextPlayerY=46
+nextPlayerX=278
+nextPlayerY=136
 //walls
 #ofwalls=9
 //wall1
@@ -79,8 +79,8 @@ w=200
 h=200
 r=0
 nextzone=3
-nextPlayerX=43
-nextPlayerY=250
+nextPlayerX=91
+nextPlayerY=262
 //transition2
 x=119
 y=63
@@ -265,7 +265,16 @@ r=0
 //enemies
 #ofenemies=0
 //zone3
-#oftransitions=0
+#oftransitions=1
+//transition 1
+x=40
+y=300
+w=50
+h=200
+r=0
+nextzone=2
+nextPlayerX=840
+nextPlayerY=320
 //walls
 #ofwalls=33
 //wall1

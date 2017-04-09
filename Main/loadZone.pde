@@ -17,7 +17,7 @@ void loadZone(){
     //println("currentChapter is " + currentChapter);
     nextZone = "1";
     //println("Next zone is 1 from loadzone->else if");
-    gameState = 0;
+    gameState = 1;
     nextZoneChanged = false;
     //println("nzf4");
     loadZone();

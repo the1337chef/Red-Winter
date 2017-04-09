@@ -1,7 +1,9 @@
-#ofcutscenes=0
+#ofcutscenes=2
 //cutscene 1
 nextZone=1
-#ofsubscenes=21
+nextPlayerX=355
+nextPlayerY=324
+#ofsubscenes=25
 	//layers
 1
 1
@@ -24,9 +26,16 @@ nextZone=1
 1
 1
 1
-	//sounds
 1
+1
+1
+1
+	//sounds
 0
+0
+0
+0
+1
 0
 0
 0
@@ -69,24 +78,18 @@ nextZone=1
 5000
 4000
 4000
+5000
+5000
+4000
+4000
 //cutscene2
 nextZone=-2
-#ofsubscenes=5
+nextPlayerX=133
+nextPlayerY=341
+#ofsubscenes=1
 //layers
-1
-1
-1
-1
 1
 //sounds
 0
-0
-0
-0
-0
 //durations
-4000
-4000
-4000
-4000
 4000

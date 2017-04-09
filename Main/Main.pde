@@ -1,4 +1,3 @@
-
 //RED WINTER MAIN
 //Main file/ class
 

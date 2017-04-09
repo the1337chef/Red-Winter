@@ -330,5 +330,6 @@ void gamePlay()
      
      }
   printSave(saveCompleted); //Prints if recently saved
+  //println("nextZone is " + nextZone);
 
 }

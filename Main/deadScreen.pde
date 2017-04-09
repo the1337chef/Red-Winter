@@ -24,7 +24,7 @@ void deadScreen(){
           transparency2 = 255;
           gameState = 2;
        }
-  }
+  
   
   
   

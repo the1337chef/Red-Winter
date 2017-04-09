@@ -71,16 +71,25 @@ r=0
 //enemies
 #ofenemies=0
 //zone2
-#oftransitions=1
-//transition 1
+#oftransitions=2
+//transition 1 Sewer pipe
 x=850
 y=157
 w=70
 h=50
 r=0
-nextzone=2
-nextPlayerX=63
-nextPlayerY=118
+nextzone=-1
+nextPlayerX=133
+nextPlayerY=341
+//transition 2
+x=63
+y=41
+w=40
+h=100
+r=0
+nextzone=1
+nextPlayerX=384
+nextPlayerY=226
 //walls
 #ofwalls=18
 //wall1
