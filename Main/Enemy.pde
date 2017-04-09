@@ -362,7 +362,7 @@ class Enemy extends Character
     float angle = acos(abs(this.xPos-player.getXPos())/distance);
     if(alerted)
     {
-      if(distance <= this.viewDist*2)
+      if(distance <= this.viewDist*1.5)
         attack();
       else
         shooting = false;
@@ -418,16 +418,22 @@ class Enemy extends Character
       this.shooting = true;
     }
   }
+  //SETTERS
   void setCurrentHealth(float health){
     this.currentHealth = health;}
   void setAlert(boolean status){
     this.alerted = status;}
   void setTimer(int time){
     this.runTimeTracker = time;}
+  void setShooting(boolean shoot){
+    this.shooting = shoot;}
+  //GETTERs
   float getCurrentHealth(){
     return this.currentHealth;}
   Hitbox getHitbox(){
     return this.hBox;}
+  boolean getAlert(){
+    return this.alerted;}
   
   void print(){
     println("Enemy:");

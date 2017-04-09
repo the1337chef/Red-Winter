@@ -5,6 +5,7 @@ void mainMenu()
   //Display background/ background animation
   background(200);
   //Display buttons
+  cursor(ARROW);
   newGame.display();
   continueGame.display();
   quitGame.display();

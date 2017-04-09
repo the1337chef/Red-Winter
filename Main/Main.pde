@@ -147,6 +147,8 @@ ArrayList<Hitbox> transitions = new ArrayList<Hitbox>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 
+
+
 //Sounds
 SoundFile pickupSound;
 SoundFile step;
@@ -166,65 +168,20 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
   cameraY = 0;
   
   //Save file reader and writer
-  saveReader = createReader("save.txt");
-
-  try
-  {
-    currentChapter = saveReader.readLine().substring(8);
-    currentZone = saveReader.readLine().substring(5);
-    nextPlayerX = Float.parseFloat(saveReader.readLine().substring(5));
-    nextPlayerY = Float.parseFloat(saveReader.readLine().substring(5));
-    nextZone = currentZone;
-    saveHealth = Float.parseFloat(saveReader.readLine().substring(7));
-    saveStamina = Float.parseFloat(saveReader.readLine().substring(8));
-    saveTemp = Float.parseFloat(saveReader.readLine().substring(5));
-    saveAmmo = Integer.parseInt(saveReader.readLine().substring(5));
-    last_cutscene = saveReader.readLine().substring(14);
-    dynamite = Integer.parseInt(saveReader.readLine().substring(9));
-    detonator = Integer.parseInt(saveReader.readLine().substring(10));
-    rope = Integer.parseInt(saveReader.readLine().substring(5));
-    collar = Integer.parseInt(saveReader.readLine().substring(7));
-    seal1 = Integer.parseInt(saveReader.readLine().substring(6));
-    seal2 = Integer.parseInt(saveReader.readLine().substring(6));
-    whale = Integer.parseInt(saveReader.readLine().substring(6));
-    sap = Integer.parseInt(saveReader.readLine().substring(4));
-  }
-  catch(IOException e)
-  {
-    currentChapter = "1";
-    currentZone = "null";
-    nextPlayerX = 0;
-    nextPlayerY = 0;
-    saveHealth = 0;
-    saveStamina = 0;
-    saveTemp = 0;
-    saveAmmo = 0;
-    last_cutscene = "0";
-    dynamite = 0;
-    detonator = 0;
-    rope = 0;
-    collar = 0;
-    seal1 = 0;
-    seal2 = 0;
-    whale = 0;
-    sap = 0;
-    e.printStackTrace();
-  }
-  
+  loadSave();
   
   //Fonts
   textAlign(CENTER);
   menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
   
   //Images
-  background = loadImage("ETC/major_cutscene_test_32_low_res.png");
   playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
   fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
@@ -256,11 +213,8 @@ void setup()
   //Options
   
   pause = false;
-  gameStart = true; //SWITCH TO FALSE WHEN MENU IS ADDED
   dead = false;
   deadTimer = 0;
-  
-  //Fades
  
   //Play sounds
   //Menu/ Game music
@@ -355,8 +309,10 @@ void keyReleased()
     if(key == 'h' || key == 'H')
       hitBoxMode = !hitBoxMode;
       
-    if(key == 't' || key == 'T')
-      zoneTransition = true;
+    if(key == 't' || key == 'T'){
+      println("getHealth =" + player.getCurrentHealth());
+      println("gameState is " + gameState);
+    }
       
     if(key == 'c' || key == 'C'){
       gameState = 1;
@@ -490,6 +446,7 @@ boolean checkDead(Character testChar)
   {
     dead = true;  
     enemies.clear(); 
+    println("dead = true in checkDead");
   }
 }
      return dead;
@@ -507,25 +464,7 @@ void draw()
   if(gameState == 0)
   {
      gamePlay(); 
-     if(dead == true)
-     {
-       float temptime = deadTimer;
-       deadTimer = millis();
-       timeDead += (deadTimer - temptime);  
-       speed = 0;
-       
-       if(timeDead >= 10000)
-       {         
-            //Switch to gameplay at appropriate zone
-            reload();
-            println(currentZone);
-            println(nextZone);
-            timeDead = 0;
-            deadTimer = 0;
-            gameState = 2;
-       }
-     
-     }
+
   
   }
   else if(gameState == 1){

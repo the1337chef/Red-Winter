@@ -127,7 +127,7 @@ void nextSubScene(){
 void cutSceneTransition(){
   pushMatrix();
   if(cutSceneTransitionPlayed == false){
-    if(transparency < 255){ //Fade to white
+      if(transparency < 255){ //Fade to white
           transparency += transparencyIncrement;
           rectMode(CORNER);
           fill(fillColor, fillColor, fillColor, transparency);

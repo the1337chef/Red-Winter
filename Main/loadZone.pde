@@ -36,7 +36,14 @@ void loadZone(){
     foreground = loadImage("Ch" + currentChapter + "/Zones/" + nextZone + "_Foreground.png");
     
     currentZone = nextZone;
-   
+    
+    //Player position
+    if( pause == false){
+      player.setX(nextPlayerX);
+      player.setY(nextPlayerY);
+      player.movement(0,0); //recalculate the camera position because of new player location
+      
+    }
     
     //Walls
     walls.clear();
@@ -71,18 +78,14 @@ void loadZone(){
     ArrayList <Enemy> thisEnemy = thisZone.getEnemies();
     for(int i = 0; i < thisEnemy.size(); i++){
       enemies.add(thisEnemy.get(i));
+      println("Enemy " + i + " alert is: " + thisEnemy.get(i).getAlert());
     }
     //chapterKeys = 0;
     //reqKeys = 1;
     
-        //Player position
-    if( pause == false){
-      player.setX(nextPlayerX);
-      player.setY(nextPlayerY);
-      player.movement(0,0); //recalculate the camera position because of new player location
-      
-    }
+
     pause = false;
+    zoneTransition = true;
 
   }
 
