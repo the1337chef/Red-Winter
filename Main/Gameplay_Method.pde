@@ -5,8 +5,9 @@ void gamePlay()
 {
  //MUSIC CONTROL
 
-  //INTRO?
-  
+  //INTRO
+  noCursor();
+
   //MENUS
   
   if(pause == false)
@@ -34,7 +35,13 @@ void gamePlay()
         mUp = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+          //println(currentChapter);
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -42,7 +49,12 @@ void gamePlay()
         mDown = true;
         
         if(millis() - savedTime > 300){
-          step.play();
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -50,7 +62,12 @@ void gamePlay()
         mLeft = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -58,7 +75,12 @@ void gamePlay()
         mRight = true;
 
         if(millis() - savedTime > 300){
-          step.play();
+          if (currentChapter.equals("2")) { 
+            floor_step.play();
+          }
+          else {
+            step.play();
+          }
           savedTime = millis();
         }
       }
@@ -226,7 +248,7 @@ void gamePlay()
                }
      }
      else if(transparency == 255){ //Fade from white to new zone
-         cutSceneHalfWay = true;
+        cutSceneHalfWay = true;
          //add switch statement of the variety of zones to transition to
         loadZone();       
         player.setX(nextPlayerX);
@@ -308,4 +330,5 @@ void gamePlay()
      
      }
   printSave(saveCompleted); //Prints if recently saved
+
 }

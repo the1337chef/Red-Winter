@@ -1,3 +1,4 @@
+
 //RED WINTER MAIN
 //Main file/ class
 
@@ -81,6 +82,7 @@ SoundFile theme;
 SoundFile siberia;
 
 //Images
+PImage menu_background;
 PImage background;
 PImage zoneGround;
 PImage foreground;
@@ -128,6 +130,7 @@ boolean mUp, mDown, mLeft, mRight;
 boolean meleeOne, meleeTwo;
 
 boolean hitBoxMode;
+//boolean btnClicked;
 
 //Walls
 //Changes from zone to zone
@@ -151,9 +154,14 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 //Sounds
 SoundFile pickupSound;
+SoundFile ak47;
+SoundFile wounded;
+SoundFile buttonHover;
+SoundFile buttonClick;
 SoundFile step;
 SoundFile soundFile;
 boolean soundPlayed = false;
+SoundFile floor_step;
 
 void setup()
 {
@@ -179,14 +187,15 @@ void setup()
   
   //Fonts
   textAlign(CENTER);
-  menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
-  
-  //Images
+  menuFont = createFont("Fonts/BraggadocioRegular.ttf", 32);
+
+  menu_background = loadImage("Menu/menu-temp.png");
   playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
   fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
   playerTop = fistTop;
   arrow = loadImage("Sprites/arrow_projectile.png");
+  bullet = loadImage("Sprites/bullet_projectile.png");
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
@@ -197,6 +206,7 @@ void setup()
   //Intro?
   
   //Menu
+  textFont(menuFont);
   newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
   if(currentZone.equals("null"))
     continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
@@ -252,10 +262,18 @@ void setup()
   
   
   //Sounds
+  buttonHover = new SoundFile(this, "SFX/btn_hover.wav");
+  buttonHover.amp(.2);
+  buttonClick = new SoundFile(this, "SFX/btn_click.wav");
+  buttonClick.amp(.5);
   pickupSound = new SoundFile(this, "SFX/pickup.wav");
   pickupSound.amp(1.0);
+  ak47 = new SoundFile(this, "SFX/ak47.wav");
+  wounded = new SoundFile(this, "SFX/wounded.wav");
   step = new SoundFile(this, "SFX/one-snow-step.wav");
   step.amp(0.3);
+  floor_step = new SoundFile(this, "SFX/one-step-floor.wav");
+  floor_step.amp(0.4);
   
   //player.display();
   
@@ -351,11 +369,23 @@ void keyReleased()
 
 //Mouse
 
+void mouseMoved() {
+  if (gameState == 2) {
+    if(newGame.getHighlight() || continueGame.getHighlight() || quitGame.getHighlight() || saveGame.getHighlight()) {
+      cursor(HAND);
+    }
+    else {
+      cursor(ARROW); 
+    }
+  }
+}
+
 void mousePressed()
 {
   //Menu buttons
   if(gameState == 2)
   {
+    buttonClick.play();
     //New game button
     if(newGame.getHighlight())
     {
@@ -383,6 +413,7 @@ void mousePressed()
     if(quitGame.getHighlight())
     {
       //Quit game
+      buttonClick.play();
       exit();
     }
     
@@ -446,7 +477,7 @@ boolean checkDead(Character testChar)
   {
     dead = true;  
     enemies.clear(); 
-    println("dead = true in checkDead");
+    
   }
 }
      return dead;

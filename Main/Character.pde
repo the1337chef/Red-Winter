@@ -52,6 +52,7 @@ class Character
   //Reduce Health
   void reduceHealth(int damage)
   {
+    wounded.play(); // doesn't work... :( why???
     this.currentHealth -= damage;
   }
   

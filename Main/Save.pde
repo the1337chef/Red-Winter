@@ -37,10 +37,15 @@ void printSave(boolean saved){
   
   
   if(saved == true){
-    //println("Printing Save!");
+    pushMatrix();
+    noStroke();
+    rectMode(CENTER);
     textSize(20);
-    //textAlign(CENTER,CENTER);
-    text("Saved Successfully", 6*width/7, height/5);
+    fill(0,80);
+    rect(width-115,0,350,100);
+    fill(255);
+    text("Saved Successfully", width-145, 25);
+    popMatrix();
   }
 }
 

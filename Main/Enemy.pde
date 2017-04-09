@@ -411,13 +411,14 @@ class Enemy extends Character
     this.runTimeTracker += this.runTime - temp;
     if(this.runTimeTracker >= 300)
     {
+      ak47.play();
       float angle = atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos);
-      projectiles.add(new Projectile(this.xPos + cos(angle)*bulletSpeed*1.5, this.yPos + sin(angle)*bulletSpeed*1.5, bulletDamage, bulletSpeed, 
-        cos(angle), sin(angle), bulletSize, bulletSize, "hostile_damage"));
+      projectiles.add(new Projectile(this.xPos + cos(angle)*bulletSpeed*1.5, this.yPos + sin(angle)*bulletSpeed*1.5, bulletDamage, bulletSpeed, cos(angle), sin(angle), bulletSize, bulletSize, "hostile_damage"));
       this.runTimeTracker = 0;
       this.shooting = true;
     }
   }
+
   //SETTERS
   void setCurrentHealth(float health){
     this.currentHealth = health;}
@@ -427,6 +428,7 @@ class Enemy extends Character
     this.runTimeTracker = time;}
   void setShooting(boolean shoot){
     this.shooting = shoot;}
+
   //GETTERs
   float getCurrentHealth(){
     return this.currentHealth;}
@@ -442,4 +444,5 @@ class Enemy extends Character
     println("width = " + this.sizeW);
     println("height = " + this.sizeH);
   }
+
 }
