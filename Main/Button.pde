@@ -9,6 +9,7 @@ class Button
   private String text;
   private boolean active;
   private boolean highlight;
+  private boolean soundPlayed;
   
   Button(float x, float y, float w, float h, String words, boolean a)
   {
@@ -19,26 +20,42 @@ class Button
     this.text = words;
     this.active = a;
     this.highlight = false;
+    this.soundPlayed = false;
   }
   
   //Display button
   void display()
   {
+    if (this.highlight) {
+      if (this.soundPlayed == false) {
+         buttonHover.play();
+         soundPlayed = true;
+      }
+    }
+    else {
+       soundPlayed = false; 
+    }
+    
     //Box
     if(this.active)
     {
       if( (mouseX <= xPos+(bWidth/2)) && (mouseX >= xPos-(bWidth/2)) &&
         (mouseY <= yPos+(bHeight/2)) && (mouseY >= yPos-(bHeight/2)))
       {
-        fill(255,0,0);
+        fill(206,151,59);
         this.highlight = true;
+        //if(btnClicked) {
+        //  fill(164,13,13);
+        //  stroke(206,151,59);
+        //}
       }
       else
       {
-        fill(255);
+        fill(164,13,13);
         this.highlight = false;
+        noStroke();
       }
-      stroke(0);
+
     }
     else
     {
@@ -50,13 +67,20 @@ class Button
     
     //Text
     if(this.active)
-      fill(0);
+      if( (mouseX <= xPos+(bWidth/2)) && (mouseX >= xPos-(bWidth/2)) &&
+        (mouseY <= yPos+(bHeight/2)) && (mouseY >= yPos-(bHeight/2)))
+      {
+        fill(164,13,13);
+        //if(btnClicked) {
+        //  fill(206,151,59);
+        //}
+      }
     else
-      fill(50);
-    rectMode(CENTER);
-    textSize(36);
-    textAlign(CENTER,CENTER);
-    text(text,this.xPos, this.yPos);
+      fill(206,151,59);
+      rectMode(CENTER);
+      textSize(36);
+      textAlign(CENTER,CENTER);
+      text(text,this.xPos, this.yPos);
   }
   
   //GETTERS

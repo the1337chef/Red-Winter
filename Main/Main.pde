@@ -81,6 +81,7 @@ SoundFile theme;
 SoundFile siberia;
 
 //Images
+PImage menu_background;
 PImage background;
 PImage zoneGround;
 PImage foreground;
@@ -128,6 +129,7 @@ boolean mUp, mDown, mLeft, mRight;
 boolean meleeOne, meleeTwo;
 
 boolean hitBoxMode;
+//boolean btnClicked;
 
 //Walls
 //Changes from zone to zone
@@ -149,6 +151,8 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 //Sounds
 SoundFile pickupSound;
+SoundFile buttonHover;
+SoundFile buttonClick;
 SoundFile step;
 SoundFile soundFile;
 boolean soundPlayed = false;
@@ -166,7 +170,7 @@ void setup()
   peopleSize = 48;
   
   //Game state
-  gameState = 0; //Start in Menu
+  gameState = 2; //Start in Menu
   
   //Initial camera position
   cameraX = 0;
@@ -221,9 +225,10 @@ void setup()
   
   //Fonts
   textAlign(CENTER);
-  menuFont = loadFont("Fonts/LucidaSans-TypewriterBold-24.vlw");
+  menuFont = createFont("Fonts/BraggadocioRegular.ttf", 32);
   
   //Images
+  menu_background = loadImage("Menu/menu-temp.png");
   background = loadImage("ETC/major_cutscene_test_32_low_res.png");
   playerBottom = loadImage("Sprites/Amaruq_Sprite_Sheet_Bottom.png");
   fistTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top.png");
@@ -240,18 +245,19 @@ void setup()
   //Intro?
   
   //Menu
-  newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
+  textFont(menuFont);
+  newGame = new Button(width/1.3, height/9, 300, 75, "NEW GAME", true);
   if(currentZone.equals("null"))
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+    continueGame = new Button(width/1.3, height/9 + 100, 300, 75, "CONTINUE", false);
   else{
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
+    continueGame = new Button(width/1.3, height/9 + 100, 300, 75, "CONTINUE", true);
     zoneTransition = true;
     //println("t3");
   }
   //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
   //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
-  quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
-  saveGame = new Button(width/2, height/2 + height/5, 200, 50, "SAVE", true);
+  saveGame = new Button(width/1.3, height/9 + 200, 300, 75, "SAVE", true);
+  quitGame = new Button(width/1.3, height/9 + 300, 300, 75, "QUIT", true);
   
   //Options
   
@@ -298,6 +304,10 @@ void setup()
   
   
   //Sounds
+  buttonHover = new SoundFile(this, "SFX/btn_hover.wav");
+  buttonHover.amp(.2);
+  buttonClick = new SoundFile(this, "SFX/btn_click.wav");
+  buttonClick.amp(.5);
   pickupSound = new SoundFile(this, "SFX/pickup.wav");
   pickupSound.amp(1.0);
   step = new SoundFile(this, "SFX/one-snow-step.wav");
@@ -395,11 +405,23 @@ void keyReleased()
 
 //Mouse
 
+void mouseMoved() {
+  if (gameState == 2) {
+    if(newGame.getHighlight() || continueGame.getHighlight() || quitGame.getHighlight() || saveGame.getHighlight()) {
+      cursor(HAND);
+    }
+    else {
+      cursor(ARROW); 
+    }
+  }
+}
+
 void mousePressed()
 {
   //Menu buttons
   if(gameState == 2)
   {
+    buttonClick.play();
     //New game button
     if(newGame.getHighlight())
     {
@@ -427,6 +449,7 @@ void mousePressed()
     if(quitGame.getHighlight())
     {
       //Quit game
+      buttonClick.play();
       exit();
     }
     
@@ -517,7 +540,7 @@ void draw()
        if(timeDead >= 10000)
        {         
             //Switch to gameplay at appropriate zone
-            reload();
+            //reload();
             println(currentZone);
             println(nextZone);
             timeDead = 0;

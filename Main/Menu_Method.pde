@@ -3,7 +3,9 @@
 void mainMenu()
 {
   //Display background/ background animation
-  background(200);
+  menu_background.resize(width,height);
+  image(menu_background, 0, 0);
+    
   //Display buttons
   newGame.display();
   continueGame.display();
