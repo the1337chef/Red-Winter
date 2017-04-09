@@ -498,25 +498,7 @@ void draw()
   if(gameState == 0)
   {
      gamePlay(); 
-     if(dead == true)
-     {
-       float temptime = deadTimer;
-       deadTimer = millis();
-       timeDead += (deadTimer - temptime);  
-       speed = 0;
-       
-       if(timeDead >= 10000)
-       {         
-            //Switch to gameplay at appropriate zone
-            reload();
-            println(currentZone);
-            println(nextZone);
-            timeDead = 0;
-            deadTimer = 0;
-            gameState = 2;
-       }
-     
-     }
+    
   
   }
   else if(gameState == 1){

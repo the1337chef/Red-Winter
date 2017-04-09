@@ -194,7 +194,7 @@ void gamePlay()
     if(cutSceneHalfWay && !zoneTransition){
       hud.display();
     }
-    deadCheck(player);
+    checkDead(player);
     
      if(zoneTransition == true){ //For zone transitions
 
