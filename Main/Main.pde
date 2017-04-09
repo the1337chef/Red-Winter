@@ -93,6 +93,7 @@ PImage playerTop;
 PImage fistTop;
 PImage bowTop;
 PImage arrow;
+PImage bullet;
 PImage russianBottom;
 PImage russianTop;
 
@@ -158,10 +159,10 @@ SoundFile ak47;
 SoundFile wounded;
 SoundFile buttonHover;
 SoundFile buttonClick;
-SoundFile step;
-SoundFile soundFile;
 boolean soundPlayed = false;
+SoundFile step;
 SoundFile floor_step;
+SoundFile soundFile;
 
 void setup()
 {
@@ -195,7 +196,7 @@ void setup()
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
   playerTop = fistTop;
   arrow = loadImage("Sprites/arrow_projectile.png");
-  bullet = loadImage("Sprites/bullet_projectile.png");
+  bullet = loadImage("Sprites/bullet_projectile2.png");
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
@@ -207,18 +208,18 @@ void setup()
   
   //Menu
   textFont(menuFont);
-  newGame = new Button(width/2, height/2, 200, 50, "NEW GAME", true);
+  newGame = new Button(width/1.3, height/9, 300, 75, "NEW GAME", true);
   if(currentZone.equals("null"))
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", false);
+    continueGame = new Button(width/1.3, height/9 + 100, 300, 75, "CONTINUE", false);
   else{
-    continueGame = new Button(width/2, height/2 - height/5, 200, 50, "CONTINUE", true);
+    continueGame = new Button(width/1.3, height/9 + 100, 300, 75, "CONTINUE", true);
     zoneTransition = true;
     //println("t3");
   }
   //menuBack = new Button(width/2, height/2 + height/5, 200, 50, "MAIN MENU", true);
   //pauseContinue = new Button(width/2, height/2, 200, 50, "RESUME", true);
-  quitGame = new Button(width/2, height/2 + 2*height/5, 200, 50, "QUIT", true);
-  saveGame = new Button(width/2, height/2 + height/5, 200, 50, "SAVE", true);
+  saveGame = new Button(width/1.3, height/9 + 200, 300, 75, "SAVE", true);
+  quitGame = new Button(width/1.3, height/9 + 300, 300, 75, "QUIT", true);
   
   //Options
   
