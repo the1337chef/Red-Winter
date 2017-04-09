@@ -108,6 +108,7 @@ boolean pause;
 boolean gameStart;
 boolean dead;
 float deadTimer;
+float timeDead;
 
 Button newGame;
 Button continueGame;
@@ -479,14 +480,19 @@ void zoneKeyAdd()
 }
 
 //DEAD CHECK
-void deadCheck(Character testChar)
+boolean checkDead(Character testChar)
 {
+  
   if(testChar.getCurrentHealth() <= 0)
   {
-    //Death sound
-    //Reset/ Load to checkpoint
-    dead = true;
+  
+  if(testChar instanceof  Player)
+  {
+    dead = true;  
+    enemies.clear(); 
   }
+}
+     return dead;
 }
 
 
@@ -498,8 +504,29 @@ void resetValues(){
 //DRAW FUNCTION
 void draw()
 {
-  if(gameState == 0){
-    gamePlay();
+  if(gameState == 0)
+  {
+     gamePlay(); 
+     if(dead == true)
+     {
+       float temptime = deadTimer;
+       deadTimer = millis();
+       timeDead += (deadTimer - temptime);  
+       speed = 0;
+       
+       if(timeDead >= 10000)
+       {         
+            //Switch to gameplay at appropriate zone
+            reload();
+            println(currentZone);
+            println(nextZone);
+            timeDead = 0;
+            deadTimer = 0;
+            gameState = 2;
+       }
+     
+     }
+  
   }
   else if(gameState == 1){
     //println("SubSceneIndex: " + subSceneIndex);
