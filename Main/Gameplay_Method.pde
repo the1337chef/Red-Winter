@@ -274,9 +274,6 @@ void gamePlay()
     }
     
   }
-  else if(dead == true)
-  {
-    setup();
-  }
+   checkDead(player);
   printSave(saveCompleted); //Prints if recently saved
 }
