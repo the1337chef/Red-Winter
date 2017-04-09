@@ -239,7 +239,7 @@ void setup()
   bowTop = loadImage("Sprites/Amaruq_Sprite_Sheet_Top_Bow.png");
   playerTop = fistTop;
   arrow = loadImage("Sprites/arrow_projectile.png");
-  bullet = loadImage("Sprites/bullet_projectile.png");
+  bullet = loadImage("Sprites/bullet_projectile2.png");
   russianBottom = loadImage("Sprites/Soldier_Sprite_Sheet_Bottom.png");
   russianTop = loadImage("Sprites/Soldier_Sprite_Sheet_Top.png");  
 
