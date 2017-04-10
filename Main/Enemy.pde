@@ -19,6 +19,7 @@ class Enemy extends Character
   private int runTimeTracker;
   private boolean shooting;
   private boolean alerted;
+  private boolean dead;
   private float patrolSize;
   
   Enemy(float x, float y, int d, float he, float w, float h, float a, float dist, float p)
@@ -41,6 +42,7 @@ class Enemy extends Character
     this.shooting = false;
     this.patrolSize = p;
     this.alerted = false;
+    this.dead = false;
   }
   
   void displayBottom()
@@ -48,69 +50,84 @@ class Enemy extends Character
     pushMatrix();
     translate((width*(this.xPos-cameraX)/512), height*(this.yPos-cameraY)/288);
     imageMode(CENTER);
-    if(direction == 0) //RIGHT
+    if(this.dead)
     {
-      if(mDirection == 0 && !shooting)
+      if(this.runTimeTracker < 500)
       {
         int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianBottom.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        this.runTime = millis();
+        this.runTimeTracker += this.runTime - temp;
+        image(russianBottom.get(384,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
       else
-        image(russianBottom.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        image(russianBottom.get(384,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
-    else if(direction == 1) //UP
+    else
     {
-      if(mDirection == 1 && !shooting)
+      if(direction == 0) //RIGHT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianBottom.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mDirection == 0 && !shooting)
+        {
+          int temp = runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianBottom.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(russianBottom.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(russianBottom.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(direction == 2) //LEFT
-    {
-      if(mDirection == 2 && !shooting)
+      else if(direction == 1) //UP
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianBottom.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mDirection == 1 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianBottom.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(russianBottom.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(russianBottom.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(direction == 3) // DOWN
-    {
-      if(mDirection == 3 && !shooting)
+      else if(direction == 2) //LEFT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianBottom.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mDirection == 2 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianBottom.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(russianBottom.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(russianBottom.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      else if(direction == 3) // DOWN
+      {
+        if(mDirection == 3 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianBottom.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else
+          image(russianBottom.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+      }
     }
     popMatrix();
   }
@@ -120,104 +137,117 @@ class Enemy extends Character
     pushMatrix();
     translate((width*(this.xPos-cameraX)/512), height*(this.yPos-cameraY)/288);
     imageMode(CENTER);
-    if(direction == 0) //RIGHT
+    if(this.dead)
     {
-      if(mDirection == 0 && !shooting)
+      if(this.runTimeTracker < 500)
       {
         int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianTop.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        this.runTime = millis();
+        this.runTimeTracker += this.runTime - temp;
+        image(russianTop.get(384,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else if(shooting)
-      {
-        pushMatrix();
-        translate(0, -48);
-        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos));
-        image(russianTop.get(320, 0, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
-        popMatrix();
-      }
-      else
-        image(russianTop.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
-    else if(direction == 1) //UP
+    else
     {
-      if(mDirection == 1 && !shooting)
+      if(direction == 0) //RIGHT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mDirection == 0 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianTop.get(64*temp2,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else if(shooting)
+        {
+          pushMatrix();
+          translate(0, -48);
+          rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos));
+          image(russianTop.get(320, 0, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+          popMatrix();
+        }
+        else
+          image(russianTop.get(0,0,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else if(shooting)
+      else if(direction == 1) //UP
       {
-        //image(russianTop.get(320, 64, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-        pushMatrix();
-        translate(0, -48);
-        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI/2);
-        image(russianTop.get(320, 64, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
-        popMatrix();
+        if(mDirection == 1 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianTop.get(64*temp2,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else if(shooting)
+        {
+          //image(russianTop.get(320, 64, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+          pushMatrix();
+          translate(0, -48);
+          rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI/2);
+          image(russianTop.get(320, 64, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+          popMatrix();
+        }
+        else
+          image(russianTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(russianTop.get(0,64,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(direction == 2) //LEFT
-    {
-      if(mDirection == 2 && !shooting)
+      else if(direction == 2) //LEFT
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianTop.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        if(mDirection == 2 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianTop.get(64*temp2,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else if(shooting)
+        {
+          //image(russianTop.get(320, 128, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+          pushMatrix();
+          translate(0, -48);
+          rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI);
+          image(russianTop.get(320, 128, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+          popMatrix();
+        }
+        else
+          image(russianTop.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else if(shooting)
+      else if(direction == 3) // DOWN
       {
-        //image(russianTop.get(320, 128, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-        pushMatrix();
-        translate(0, -48);
-        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) + PI);
-        image(russianTop.get(320, 128, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
-        popMatrix();
+        if(mDirection == 3 && !shooting)
+        {
+          int temp = this.runTime;
+          this.runTime = millis();
+          this.runTimeTracker += this.runTime - temp;
+          if(this.runTimeTracker >= 400)
+            this.runTimeTracker = 0;
+          int temp2 = (this.runTimeTracker / 100)+1;
+          //println(temp2);
+          image(russianTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+        }
+        else if(shooting)
+        {
+          //image(russianTop.get(320, 192, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
+          pushMatrix();
+          translate(0, -48);
+          rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) - PI/2);
+          image(russianTop.get(320, 192, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
+          popMatrix();
+        }
+        else
+          image(russianTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
       }
-      else
-        image(russianTop.get(0,128,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-    }
-    else if(direction == 3) // DOWN
-    {
-      if(mDirection == 3 && !shooting)
-      {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 400)
-          runTimeTracker = 0;
-        int temp2 = (runTimeTracker / 100)+1;
-        //println(temp2);
-        image(russianTop.get(64*temp2,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-      }
-      else if(shooting)
-      {
-        //image(russianTop.get(320, 192, 64, 64), 0, -32, peopleSize*scaler, peopleSize*scaler);
-        pushMatrix();
-        translate(0, -48);
-        rotate(atan2(player.getYPos() - this.yPos, player.getXPos() - this.xPos) - PI/2);
-        image(russianTop.get(320, 192, 64, 64), 0, 16, peopleSize*scaler, peopleSize*scaler);
-        popMatrix();
-      }
-      else
-        image(russianTop.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
     if(hitBoxMode)
     {
@@ -270,14 +300,14 @@ class Enemy extends Character
       //Stopping at square corner for 3 seconds
       else if(mDirection == -1)
       {
-        int temp = runTime;
-        runTime = millis();
-        runTimeTracker += runTime - temp;
-        if(runTimeTracker >= 3000)
+        int temp = this.runTime;
+        this.runTime = millis();
+        this.runTimeTracker += this.runTime - temp;
+        if(this.runTimeTracker >= 3000)
         {
           direction = (direction+1)%4;
           mDirection = direction;
-          runTimeTracker = 0;
+          this.runTimeTracker = 0;
         }
       }
     }
@@ -428,6 +458,8 @@ class Enemy extends Character
     this.runTimeTracker = time;}
   void setShooting(boolean shoot){
     this.shooting = shoot;}
+  void setDead(boolean dead){
+    this.dead = dead;}
 
   //GETTERs
   float getCurrentHealth(){
@@ -436,6 +468,8 @@ class Enemy extends Character
     return this.hBox;}
   boolean getAlert(){
     return this.alerted;}
+  boolean getDead(){
+    return this.dead;}
   
   void print(){
     println("Enemy:");

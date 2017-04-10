@@ -181,6 +181,7 @@ class Player extends Character
           {
             shooting = false;
             shootTimer = 0;
+            aiming = false;
           }
         }
         else
@@ -202,6 +203,7 @@ class Player extends Character
           {
             shooting = false;
             shootTimer = 0;
+            aiming = false;
           }
         }
         else
@@ -223,6 +225,7 @@ class Player extends Character
           {
             shooting = false;
             shootTimer = 0;
+            aiming = false;
           }
         }
         else
@@ -244,6 +247,7 @@ class Player extends Character
           {
             shooting = false;
             shootTimer = 0;
+            aiming = false;
           }
         }
         else
@@ -326,6 +330,11 @@ class Player extends Character
   void movement(float xChange, float yChange)
   {
     PVector change = new PVector(xChange,yChange,0);
+    if(exhausted)
+    {
+      xChange = 0.75*xChange;
+      yChange = 0.75*yChange;
+    }
     
     //Wall collision and correction
     for(int i = 0; i < walls.size(); i++)
@@ -337,9 +346,12 @@ class Player extends Character
     
     for(int i = 0; i < enemies.size(); i++)
     {
-      change = collision(enemies.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, 0);
-      xChange = change.x;
-      yChange = change.y;
+      if(enemies.get(i).getDead() == false)
+      {
+        change = collision(enemies.get(i).getHitbox(), this.hBox, change.x, change.y, change.z, 0);
+        xChange = change.x;
+        yChange = change.y;
+      }
     }
     change.z = 0;
     //Zone Transition Collision
@@ -451,7 +463,9 @@ class Player extends Character
   void setHealth(float health){
     this.currentHealth = health;}
   void setStamina(float stamina){
-    this.currentStamina = stamina;}
+    this.currentStamina = stamina;
+    if(this.currentStamina > this.maxStamina)
+      this.currentStamina = this.maxStamina;}
   void setCurrentAmmo(int ammo){
     this.ammo = ammo;}
 }

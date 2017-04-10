@@ -109,6 +109,7 @@ PFont menuFont;
 boolean pause;
 boolean gameStart;
 boolean dead;
+boolean exhausted;
 float deadTimer;
 float timeDead;
 
@@ -123,7 +124,7 @@ Button saveGame;
 Weapon none;
 RangedWeapon bow;
 
-Weapon activeWeapon, previousWeapon, temp;
+Weapon activeWeapon, previousWeapon, tempWeapon;
 
 //Player movement
 boolean mUp, mDown, mLeft, mRight;
@@ -316,9 +317,9 @@ void keyReleased()
     //Weapon switch
     if(key == 'f' || key == 'F')
     {
-      temp = activeWeapon;
+      tempWeapon = activeWeapon;
       activeWeapon = previousWeapon;
-      previousWeapon = temp;
+      previousWeapon = tempWeapon;
       fistTop = playerTop;
       playerTop = bowTop;
       bowTop = fistTop;
@@ -425,7 +426,6 @@ void mousePressed()
   //IN-GAME
   else if(gameState == 0)
   {
-  
     if(activeWeapon instanceof RangedWeapon && player.getCurrentAmmo() > 0 && mouseButton == LEFT)
     {
        aiming = true;
@@ -433,7 +433,7 @@ void mousePressed()
     //MORE PAUSE;
     if( mouseButton == RIGHT)
     {
-     aiming = false;
+      aiming = false;
     }
   }
   //CUTSCENE
@@ -448,7 +448,7 @@ void mouseReleased()
   {
     if(mouseButton == LEFT)
     {
-          if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
+      if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
       {
         float angle = mouseAngle();
         float xVector = cos(angle);
@@ -468,18 +468,17 @@ void zoneKeyAdd()
 //DEAD CHECK
 boolean checkDead(Character testChar)
 {
-  
+  boolean deadTest = false;
   if(testChar.getCurrentHealth() <= 0)
   {
-  
-  if(testChar instanceof  Player)
-  {
-    dead = true;  
-    enemies.clear(); 
-    
+    deadTest = true;
+    if(testChar instanceof  Player)
+    {
+      dead = true;  
+      enemies.clear();
+    }
   }
-}
-     return dead;
+  return deadTest;
 }
 
 

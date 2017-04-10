@@ -42,7 +42,7 @@ void gamePlay()
           else {
             step.play();
           }
-          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
+          //speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -56,7 +56,7 @@ void gamePlay()
           else {
             step.play();
           }
-          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
+          //speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -70,7 +70,7 @@ void gamePlay()
           else {
             step.play();
           }
-          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
+          //speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -84,50 +84,70 @@ void gamePlay()
           else {
             step.play();
           }
-          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
+          //speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
     }  
     if(mUp == true){
       player.movement(0, -1*speed);
-      if (player.getCurrentStamina() >= 15) {
-        player.setStamina(player.getCurrentStamina()-0.1);
+      if (player.getCurrentStamina() > 0 && !exhausted) {
+        player.setStamina(player.getCurrentStamina()-0.2);
       }
+      else if(player.getCurrentStamina() < player.getMaxStamina() &&  exhausted){
+        player.setStamina(player.getCurrentStamina()+1);}
       player.setMDir(1);}
+      
     if(mDown == true){
       player.movement(0, speed);
-      if (player.getCurrentStamina() >= 15) {
-        player.setStamina(player.getCurrentStamina()-0.1);
+      if (player.getCurrentStamina() > 0 && !exhausted) {
+        player.setStamina(player.getCurrentStamina()-0.2);
       }
+      else if(player.getCurrentStamina() < player.getMaxStamina() &&  exhausted){
+        player.setStamina(player.getCurrentStamina()+1);}
       player.setMDir(3);}
+      
     if(mLeft == true){
       player.movement(-1*speed, 0);
-      if (player.getCurrentStamina() >= 15) {
-        player.setStamina(player.getCurrentStamina()-0.1);
+      if (player.getCurrentStamina() > 0 && !exhausted) {
+        player.setStamina(player.getCurrentStamina()-0.2);
       }
+      else if(player.getCurrentStamina() < player.getMaxStamina() &&  exhausted){
+        player.setStamina(player.getCurrentStamina()+1);}
       player.setMDir(2);}
+      
     if(mRight == true){
       player.movement(speed, 0);
-      if (player.getCurrentStamina() >= 15) {
-        player.setStamina(player.getCurrentStamina()-0.1);
+      if (player.getCurrentStamina() > 0 && !exhausted) {
+        player.setStamina(player.getCurrentStamina()-0.2);
       }
+      else if(player.getCurrentStamina() < player.getMaxStamina() &&  exhausted){
+        player.setStamina(player.getCurrentStamina()+1);}
+        
       player.setMDir(0);}
+        
     if (mUp == false && mDown == false && mLeft == false && mRight == false) {
-      if (player.getCurrentStamina() <= player.getMaxStamina()) {
-         player.setStamina(player.getCurrentStamina()+0.2); 
+      if (player.getCurrentStamina() < player.getMaxStamina()) {
+         player.setStamina(player.getCurrentStamina()+2); 
       }
     }
+    if(player.getCurrentStamina() == 0)
+      exhausted = true;
+    if(player.getCurrentStamina() == player.getMaxStamina() && exhausted)
+      exhausted = false;
       
     player.setDir(mouseAngle());
     for(int i = 0; i < enemies.size(); i++)
-      enemies.get(i).behaviorCheck();
+    {
+      if(enemies.get(i).getDead() == false)
+        enemies.get(i).behaviorCheck();
+    }
     
     if(cutSceneHalfWay){
       //Player and Enemy display
-      player.displayBottom();
       for(int i = 0; i < enemies.size(); i++)
         enemies.get(i).displayBottom();
+      player.displayBottom();
     }
     
     //Pickup Display
@@ -174,10 +194,13 @@ void gamePlay()
             for(int j = 0; j < enemies.size(); j++)
             {
               change = collision(enemies.get(j).getHitbox(), projectiles.get(i).getHitbox(), change.x, change.y, change.z, 0);
-              if(change.z == 1)
+              if(change.z == 1 && enemies.get(j).getDead() == false)
               {
                 enemies.get(j).setCurrentHealth(enemies.get(j).getCurrentHealth() - projectiles.get(i).getDamage());
+                if(checkDead(enemies.get(j)))
+                  enemies.get(j).setDead(true);
                 removed = true;
+                change.z = 0;
               }
             }
           }
@@ -321,39 +344,45 @@ void gamePlay()
     }
     
   }
-   checkDead(player);
-     if(dead == true)
-     {
-       float temptime = deadTimer;
-       deadTimer = millis();
-       timeDead += (deadTimer - temptime);
-       //TODO:block player's input
+  if(checkDead(player))
+  {
+    float temptime = deadTimer;
+    deadTimer = millis();
+    timeDead += (deadTimer - temptime);
+    //TODO:block player's input
 
-       
-       if(timeDead >= 10000)
-       {         
-            //Switch to gameplay at appropriate zone
-            loadSave();
-            
-            timeDead = 0;
-            deadTimer = 0;
-            gameState = 2;
-            player.setHealth(100);
-            dead = false;
-            println("dead is false in timeDead");
-            projectiles.clear();
-            int cc = Integer.parseInt(currentChapter);
-            cc--;
-            int cz = Integer.parseInt(currentZone);
-            cz--;
-            for(int i = 0; i < chapters.get(cc).getZones().get(cz).getEnemies().size(); i++){
-              chapters.get(cc).getZones().get(cz).getEnemies().get(i).setAlert(false);
-              chapters.get(cc).getZones().get(cz).getEnemies().get(i).setShooting(false);
-            }
-            deadScreen();
-       }
-     
-     }
+   
+    if(timeDead >= 10000)
+    {         
+        //Switch to gameplay at appropriate zone
+        loadSave();
+        
+        timeDead = 0;
+        deadTimer = 0;
+        gameState = 2;
+        player.setHealth(100);
+        dead = false;
+        println("dead is false in timeDead");
+        projectiles.clear();
+        int cc = Integer.parseInt(currentChapter);
+        cc--;
+        int cz = Integer.parseInt(currentZone);
+        cz--;
+        for(int i = 0; i < chapters.get(cc).getZones().get(cz).getEnemies().size(); i++){
+          chapters.get(cc).getZones().get(cz).getEnemies().get(i).setAlert(false);
+          chapters.get(cc).getZones().get(cz).getEnemies().get(i).setShooting(false);
+        }
+        deadScreen();
+   }
+  }/*
+  for(int i = 0; i < enemies.size(); i++)
+  {
+    if(checkDead(enemies.get(i)))
+    {
+      enemies.get(i).setDead(true);
+      enemies.get(i).setTimer(0);
+    }
+  }*/
   printSave(saveCompleted); //Prints if recently saved
   //println("nextZone is " + nextZone);
 }

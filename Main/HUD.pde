@@ -46,7 +46,10 @@ class HUD
     image(hudEnergy, width/40-5, (height/20)-2+32);
     fill(100,100,100,100);
     rect(2*width/40-2, height/20 + -2 + 32, 5*width/20+4, 5*height/200+4);
-    fill(0,255,0,255);
+    if(exhausted)
+      fill(255,255,0,255);
+    else
+      fill(0,255,0,255);
     rect(2*width/40, height/20 + 32 , (stamina/100.0)*5*width/20, 5*height/200);
     
     

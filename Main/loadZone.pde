@@ -78,7 +78,7 @@ void loadZone(){
     ArrayList <Enemy> thisEnemy = thisZone.getEnemies();
     for(int i = 0; i < thisEnemy.size(); i++){
       enemies.add(thisEnemy.get(i));
-      println("Enemy " + i + " alert is: " + thisEnemy.get(i).getAlert());
+      //println("Enemy " + i + " alert is: " + thisEnemy.get(i).getAlert());
     }
     //chapterKeys = 0;
     //reqKeys = 1;
