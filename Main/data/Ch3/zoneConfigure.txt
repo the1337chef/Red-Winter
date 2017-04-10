@@ -181,9 +181,25 @@ w=120
 h=120
 r=pi4
 //pickups
-#ofpickups=0
+#ofpickups=2
+//pick1
+x=268
+y=224
+w=45
+h=45
+id = ammo
+//pick2
+x = 718
+y = 208
+w = 45
+h = 45
+id = health
 //enemies
-#ofenemies=0
+#ofenemies=1
+//enemy1
+x=772
+y=452
+p=180
 //zone2
 #oftransitions=0
 //walls
@@ -219,6 +235,22 @@ w=180
 h=180
 r=pi4
 //pickups
-#ofpickups=0
+#ofpickups=2
+//pick1
+x=868
+y=137
+w=45
+h=45
+id=ammo
+//pick2
+x=435
+y=116
+w=45
+h=45
+id=health
 //enemies
-#ofenemies=0
+#ofenemies=1
+//enemy1
+x=569
+y=180
+p=0
