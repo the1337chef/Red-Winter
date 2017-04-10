@@ -91,25 +91,25 @@ void gamePlay()
     }  
     if(mUp == true){
       player.movement(0, -1*speed);
-      if (player.getCurrentStamina() >= 0) {
+      if (player.getCurrentStamina() >= 15) {
         player.setStamina(player.getCurrentStamina()-0.1);
       }
       player.setMDir(1);}
     if(mDown == true){
       player.movement(0, speed);
-      if (player.getCurrentStamina() >= 0) {
+      if (player.getCurrentStamina() >= 15) {
         player.setStamina(player.getCurrentStamina()-0.1);
       }
       player.setMDir(3);}
     if(mLeft == true){
       player.movement(-1*speed, 0);
-      if (player.getCurrentStamina() >= 0) {
+      if (player.getCurrentStamina() >= 15) {
         player.setStamina(player.getCurrentStamina()-0.1);
       }
       player.setMDir(2);}
     if(mRight == true){
       player.movement(speed, 0);
-      if (player.getCurrentStamina() >= 0) {
+      if (player.getCurrentStamina() >= 15) {
         player.setStamina(player.getCurrentStamina()-0.1);
       }
       player.setMDir(0);}
