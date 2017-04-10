@@ -42,6 +42,7 @@ void gamePlay()
           else {
             step.play();
           }
+          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -55,6 +56,7 @@ void gamePlay()
           else {
             step.play();
           }
+          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -68,6 +70,7 @@ void gamePlay()
           else {
             step.play();
           }
+          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
@@ -81,22 +84,40 @@ void gamePlay()
           else {
             step.play();
           }
+          speed = 4.0 * (player.getCurrentStamina()/player.getMaxStamina());
           savedTime = millis();
         }
       }
     }  
     if(mUp == true){
       player.movement(0, -1*speed);
+      if (player.getCurrentStamina() >= 0) {
+        player.setStamina(player.getCurrentStamina()-0.1);
+      }
       player.setMDir(1);}
     if(mDown == true){
       player.movement(0, speed);
+      if (player.getCurrentStamina() >= 0) {
+        player.setStamina(player.getCurrentStamina()-0.1);
+      }
       player.setMDir(3);}
     if(mLeft == true){
       player.movement(-1*speed, 0);
+      if (player.getCurrentStamina() >= 0) {
+        player.setStamina(player.getCurrentStamina()-0.1);
+      }
       player.setMDir(2);}
     if(mRight == true){
       player.movement(speed, 0);
+      if (player.getCurrentStamina() >= 0) {
+        player.setStamina(player.getCurrentStamina()-0.1);
+      }
       player.setMDir(0);}
+    if (mUp == false && mDown == false && mLeft == false && mRight == false) {
+      if (player.getCurrentStamina() <= player.getMaxStamina()) {
+         player.setStamina(player.getCurrentStamina()+0.2); 
+      }
+    }
       
     player.setDir(mouseAngle());
     for(int i = 0; i < enemies.size(); i++)

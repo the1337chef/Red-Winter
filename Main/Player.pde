@@ -448,6 +448,8 @@ class Player extends Character
     this.mDirection = dir;}
   void setHealth(float health){
     this.currentHealth = health;}
+  void setStamina(float stamina){
+    this.currentStamina = stamina;}
   void setCurrentAmmo(int ammo){
     this.ammo = ammo;}
 }

@@ -56,6 +56,7 @@ currentZone = "1";
 nextPlayerX = 96;
 nextPlayerY = 480;
 saveHealth = 100;
+saveStamina = 100;
 saveTemp = 100;
 saveAmmo = 0;
 last_cutscene = "0";
