@@ -1,0 +1,44 @@
+#ofcutscenes=2
+//cutscene 1
+nextZone=1
+nextPlayerX=117
+nextPlayerY=298
+#ofsubscenes=3
+	//layers
+1
+1
+1
+	//sounds
+1
+0
+0
+	//durations in milliseconds
+2000
+9000
+7000
+//cutscene 2
+nextZone=-3
+nextPlayerX=0
+nextPlayerY=0
+#ofsubscenes=6
+	//layers
+1
+1
+1
+1
+1
+1
+	//sounds
+1
+0
+0
+0
+0
+0
+	//durations in milliseconds
+5000
+5000
+7000
+3000
+4000
+14000
