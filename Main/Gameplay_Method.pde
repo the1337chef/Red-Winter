@@ -1,5 +1,5 @@
 //Gameplay Method
-
+boolean deathPlayed = false;
 float savedTime = millis();
 void gamePlay()
 {
@@ -190,7 +190,13 @@ void gamePlay()
             if(change.z == 1)
             {
               player.setHealth(player.getCurrentHealth() - projectiles.get(i).getDamage());
-              wounded.play();
+              if (!dead) {
+              //  println("YOU DIED!");
+               //death.play(); 
+              //}
+              //else {
+                wounded.play();
+              }
               removed = true;
             }
           }
@@ -202,8 +208,10 @@ void gamePlay()
               if(change.z == 1 && enemies.get(j).getDead() == false)
               {
                 enemies.get(j).setCurrentHealth(enemies.get(j).getCurrentHealth() - projectiles.get(i).getDamage());
-                if(checkDead(enemies.get(j)))
+                if(checkDead(enemies.get(j))) {
                   enemies.get(j).setDead(true);
+                  death.play();  
+                }
                 removed = true;
                 change.z = 0;
               }
@@ -352,7 +360,11 @@ void gamePlay()
    checkDead(player);
      if(dead == true)
      {
-          
+       if (deathPlayed==false) {
+         death.play();
+         deathPlayed = true;
+       }
+  
        deadScreen();
      
      }

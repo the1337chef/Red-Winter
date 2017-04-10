@@ -45,7 +45,7 @@ void printSave(boolean saved){
     rect(width-115,0,350,100);
     fill(255);
     textAlign(CENTER,TOP);
-    text("Saved Successfully", width-145, 20);
+    text("Saved Successfully", width-145, 18);
     popMatrix();
   }
 }

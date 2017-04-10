@@ -158,6 +158,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 SoundFile pickupSound;
 SoundFile ak47;
 SoundFile wounded;
+SoundFile death;
 SoundFile buttonHover;
 SoundFile buttonClick;
 boolean soundPlayed = false;
@@ -272,6 +273,7 @@ void setup()
   pickupSound.amp(1.0);
   ak47 = new SoundFile(this, "SFX/ak47.wav");
   wounded = new SoundFile(this, "SFX/wounded.wav");
+  death = new SoundFile(this, "SFX/death.wav");
   step = new SoundFile(this, "SFX/one-snow-step.wav");
   step.amp(0.3);
   floor_step = new SoundFile(this, "SFX/one-step-floor.wav");
