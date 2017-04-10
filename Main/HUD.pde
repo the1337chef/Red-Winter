@@ -36,14 +36,14 @@ class HUD
     rectMode(CORNER);
     imageMode(CORNER);
     noStroke();
-    image(hudHealth, width/40-2, (height/20)-2);
+    image(hudHealth, width/40-5, (height/20)-5);
     fill(100,100,100,100);
     rect(2*width/40-2, height/20-2, 5*width/20+4, 5*height/200+4);
     fill(255,0,0,255);
     rect(2*width/40, height/20, (health/100.0)*5*width/20, 5*height/200);
     
     //Stamina bar
-    image(hudEnergy, width/40-2, (height/20)-2+32);
+    image(hudEnergy, width/40-5, (height/20)-2+32);
     fill(100,100,100,100);
     rect(2*width/40-2, height/20 + -2 + 32, 5*width/20+4, 5*height/200+4);
     fill(0,255,0,255);

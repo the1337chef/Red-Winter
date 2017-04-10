@@ -45,7 +45,7 @@ void printSave(boolean saved){
     rect(width-115,0,350,100);
     fill(255);
     textAlign(CENTER,TOP);
-    text("Saved Successfully", width-145, 25);
+    text("Saved Successfully", width-145, 20);
     popMatrix();
   }
 }
@@ -69,6 +69,8 @@ seal1 = 0;
 seal2 = 0;
 whale = 0;
 sap = 0;
+
+player.setStamina(saveStamina);
 
 nextZone = "1";
 println("nextZone is 1 form newsave");
