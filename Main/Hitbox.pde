@@ -38,7 +38,7 @@ class Hitbox
   {
     pushMatrix();
     if(!type.equals("player"))
-      translate((width*(this.xPos-cameraX)/512), height*(this.yPos-cameraY)/288);
+      //translate((width*(this.xPos-cameraX)/512), height*(this.yPos-cameraY)/288);
       
     //rotate(this.direction);
     rectMode(CENTER);
@@ -69,7 +69,6 @@ class Hitbox
     popMatrix();
     
     pushMatrix();
-    //translate(this.xPos, this.yPos);
     textAlign(LEFT,BOTTOM);
     text("( " + this.xPos + " , " + this.yPos + " ) ", 0, 0);
     popMatrix();
