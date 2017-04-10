@@ -425,23 +425,15 @@ void mousePressed()
   //IN-GAME
   else if(gameState == 0)
   {
-    if(mouseButton == LEFT)
-    {
-      if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
-      {
-        float angle = mouseAngle();
-        float xVector = cos(angle);
-        float yVector = sin(angle);
-        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
-        shooting = true;
-        player.setCurrentAmmo(player.getCurrentAmmo() - 1);
-      }
-    }
-    //MORE PAUSE;
-    
-    if(activeWeapon instanceof RangedWeapon && player.getCurrentAmmo() > 0 && mouseButton == RIGHT)
+  
+    if(activeWeapon instanceof RangedWeapon && player.getCurrentAmmo() > 0 && mouseButton == LEFT)
     {
        aiming = true;
+    }
+    //MORE PAUSE;
+    if( mouseButton == RIGHT)
+    {
+     aiming = false;
     }
   }
   //CUTSCENE
@@ -454,9 +446,17 @@ void mouseReleased()
 {
   if(gameState == 0 && activeWeapon instanceof RangedWeapon)
   {
-    if(mouseButton == RIGHT)
+    if(mouseButton == LEFT)
     {
-      aiming = false;
+          if(activeWeapon instanceof RangedWeapon && aiming && player.getCurrentAmmo() > 0 && !shooting)
+      {
+        float angle = mouseAngle();
+        float xVector = cos(angle);
+        float yVector = sin(angle);
+        bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
+        shooting = true;
+        player.setCurrentAmmo(player.getCurrentAmmo() - 1);
+      }
     }
   }
 }
