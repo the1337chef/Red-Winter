@@ -187,13 +187,13 @@ x=268
 y=224
 w=45
 h=45
-id = ammo
+id=ammo
 //pick2
-x = 718
-y = 208
-w = 45
-h = 45
-id = health
+x=718
+y=208
+w=45
+h=45
+id=health
 //enemies
 #ofenemies=1
 //enemy1
