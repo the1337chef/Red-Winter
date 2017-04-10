@@ -1,3 +1,5 @@
+boolean themePlayed = false;
+
 void mainMenu()
 {
   //Display background/ background animation
@@ -10,4 +12,10 @@ void mainMenu()
   quitGame.display();
   saveGame.display();
   printSave(saveCompleted); //Prints if recently saved
+  if(!themePlayed){
+    theme.amp(1.0);
+    theme.loop();
+    themePlayed = true;
+  }
+  
 }

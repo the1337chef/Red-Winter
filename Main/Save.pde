@@ -69,6 +69,7 @@ seal1 = 0;
 seal2 = 0;
 whale = 0;
 sap = 0;
+saveStamina = 100;
 
 player.setStamina(saveStamina);
 

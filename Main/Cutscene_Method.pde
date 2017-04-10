@@ -9,8 +9,10 @@ boolean layer3Exists = false;
 //Sound (Maybe put in seperate place)
 SoundFile soundFile1;
 SoundFile soundFile2;
+SoundFile soundFile3;
 boolean soundPlayed1 = false;
 boolean soundPlayed2 = false;
+boolean soundPlayed3 = false;
 
 float pastTime;
 boolean timeUpdated = false;
@@ -52,19 +54,26 @@ void playCutScene(int ch, CutScene cutscene){
         //println(source);
         
         if(soundPlayed1 == false){
-          println("subscene " + subSceneIndex);
-          println("Playing Sound1");
+          //println("subscene " + subSceneIndex);
+          //println("Playing Sound1");
           soundFile1 = new SoundFile(this, source);
           soundFile1.play();
           //println("Turning to true3");
           soundPlayed1 = true;
         }
         if(soundPlayed2 == false && i == 1){
-          println("subscene " + subSceneIndex);
-          println("Playing Sound2");
+          //println("subscene " + subSceneIndex);
+          //println("Playing Sound2");
           soundFile2 = new SoundFile(this, source);
           soundFile2.play();
           soundPlayed2 = true;
+        }
+        if(soundPlayed3 == false && i == 2){
+          //println("subscene " + subSceneIndex);
+          //println("Playing Sound3");
+          soundFile3 = new SoundFile(this, source);
+          soundFile3.play();
+          soundPlayed3 = true;
         }
       }
       //TODO: sound might not be able to be overwritten
@@ -91,6 +100,7 @@ void playCutScene(int ch, CutScene cutscene){
       //println("Turning to false4");
       soundPlayed = false;
       soundPlayed2 = false;
+      soundPlayed3 = false;
       cutSceneTransitionPlayed = false;
       save();
       loadZone();
@@ -118,6 +128,7 @@ void nextSubScene(){
       }
       soundPlayed1 = false;
       soundPlayed2 = false;
+      soundPlayed3 = false;
       
       //println("Next SubScene");
       

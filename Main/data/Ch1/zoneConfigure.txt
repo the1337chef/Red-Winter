@@ -3,13 +3,13 @@
 #oftransitions=1
 //transition 1
 x=1034
-y=534
-w=180
+y=554
+w=160
 h=50
 r=0
 nextzone=2
-nextPlayerX=278
-nextPlayerY=136
+nextPlayerX=192
+nextPlayerY=88
 //walls
 #ofwalls=9
 //wall1
@@ -83,12 +83,12 @@ nextPlayerX=91
 nextPlayerY=262
 //transition2
 x=119
-y=63
-w=200
-h=140
+y=30
+w=80
+h=40
 r=0
 nextzone=1
-nextPlayerX=909
+nextPlayerX=920
 nextPlayerY=522
 //walls
 #ofwalls=28
@@ -273,8 +273,8 @@ w=50
 h=200
 r=0
 nextzone=2
-nextPlayerX=840
-nextPlayerY=320
+nextPlayerX=920
+nextPlayerY=400
 //walls
 #ofwalls=33
 //wall1
