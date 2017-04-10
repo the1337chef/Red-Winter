@@ -144,7 +144,7 @@ void gamePlay()
             if(change.z == 1)
             {
               player.setHealth(player.getCurrentHealth() - projectiles.get(i).getDamage());
-              wounded.play();
+              //projectiles.remove(i);
               removed = true;
             }
           }
@@ -205,8 +205,11 @@ void gamePlay()
         walls.get(i).displayWall();
         
       //Transition Zone display
-      for(int i = 0; i < transitions.size(); i++)
+      for(int i = 0; i < transitions.size(); i++){
+        pushMatrix();
+        translate((transitions.get(i).getXPos()-cameraX)*scaler,(transitions.get(i).getYPos()-cameraY)*scaler);
         transitions.get(i).displayBox();
+        popMatrix();}
     }
     
     player.cameraMove();

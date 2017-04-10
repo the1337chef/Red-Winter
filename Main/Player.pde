@@ -133,8 +133,9 @@ class Player extends Character
       else
         image(playerBottom.get(0,192,64,64), 0, -32, peopleSize*scaler, peopleSize*scaler);
     }
-    if(hitBoxMode)
-      this.hBox.displayBox();
+    if(hitBoxMode){
+      rectMode(CENTER);
+      this.hBox.displayBox();}
     popMatrix();
   }
    //Player display top half

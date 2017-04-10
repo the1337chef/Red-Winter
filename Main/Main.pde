@@ -169,6 +169,7 @@ void setup()
   fullScreen();
   //backgroundImage
   frameRate(60);
+  cursor(ARROW);
   noSmooth();
   
   scaler = height / 288.0;
