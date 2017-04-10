@@ -144,7 +144,7 @@ void gamePlay()
             if(change.z == 1)
             {
               player.setHealth(player.getCurrentHealth() - projectiles.get(i).getDamage());
-              //projectiles.remove(i);
+              wounded.play();
               removed = true;
             }
           }
