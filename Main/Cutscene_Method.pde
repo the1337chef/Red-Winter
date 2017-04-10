@@ -105,7 +105,7 @@ void playCutScene(int ch, CutScene cutscene){
       //println("reset in playCutScene last else");
     }
     
-    cursor(CROSS);
+    noCursor();
   }
     cutSceneTransition();
 }
