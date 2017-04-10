@@ -203,10 +203,13 @@ void gamePlay()
       //Wall display
       for(int i = 0; i < walls.size(); i++)
         walls.get(i).displayWall();
-        
+
       //Transition Zone display
-      for(int i = 0; i < transitions.size(); i++)
+      for(int i = 0; i < transitions.size(); i++){
+        pushMatrix();
+        translate((transitions.get(i).getXPos()-cameraX)*scaler,(transitions.get(i).getYPos()-cameraY)*scaler);
         transitions.get(i).displayBox();
+        popMatrix();}
     }
     
     player.cameraMove();
