@@ -36,7 +36,7 @@ boolean saveCompleted = false; //Prompts the screen to say that the user has com
 int currentTime;               //Measures time for the "Save Completed" to go away after 5 seconds
 float nextPlayerX;             //Player's X position upon a transition to a different zone
 float nextPlayerY;             //Player's Y position upon a transition to a different zone
-
+String gameOverStatement = "Mission Failed";      //Text to be displayed at end of game
 
 
 /*
@@ -109,6 +109,7 @@ PFont menuFont;
 boolean pause;
 boolean gameStart;
 boolean dead;
+//float deadTimer;
 boolean exhausted;
 float deadTimer;
 float timeDead;
@@ -170,6 +171,7 @@ void setup()
   fullScreen();
   //backgroundImage
   frameRate(60);
+  cursor(ARROW);
   noSmooth();
   
   scaler = height / 288.0;
@@ -280,10 +282,12 @@ void setup()
   
   
   Chapter chapter3 = new Chapter("3");
+  Chapter chapter4 = new Chapter("4");
   //Initiallize Chapter Information
   configureChapter(chapter1);
   configureChapter(chapter2);
   configureChapter(chapter3);
+  configureChapter(chapter4);
 }
 
 //Keyboard
@@ -395,16 +399,19 @@ void mousePressed()
       //Play next cutscene
       //Play cut
       gameState = 1;
+      
       //println("reset in mousePRessed");
       resetValues();
     }
     if(continueGame.getHighlight())
     {
+      theme.stop();
       //Read save file
+      gameState = 0;
       loadZone();
       
       //Switch to gameplay at appropriate zone
-      gameState = 0;
+      
       resetValues();
       //println("reset in continue game");
       noCursor();
@@ -441,6 +448,7 @@ void mousePressed()
     nextSubScene();
   }
 }
+
 
 void mouseReleased()
 {
@@ -480,7 +488,6 @@ boolean checkDead(Character testChar)
   }
   return deadTest;
 }
-
 
 void resetValues(){
   cutSceneHalfWay = false;

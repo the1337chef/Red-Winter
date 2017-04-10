@@ -4,6 +4,11 @@ float savedTime = millis();
 void gamePlay()
 {
  //MUSIC CONTROL
+ if(themePlayed){
+   themePlayed = false;
+   theme.amp(0.4);
+   theme.stop();
+ }
 
   //INTRO
   noCursor();
@@ -344,45 +349,21 @@ void gamePlay()
     }
     
   }
+   checkDead(player);
+     if(dead == true)
+     {
+          
+       deadScreen();
+     
+     }
+
   if(checkDead(player))
   {
-    float temptime = deadTimer;
-    deadTimer = millis();
-    timeDead += (deadTimer - temptime);
-    //TODO:block player's input
+
 
    
-    if(timeDead >= 10000)
-    {         
-        //Switch to gameplay at appropriate zone
-        loadSave();
-        
-        timeDead = 0;
-        deadTimer = 0;
-        gameState = 2;
-        player.setHealth(100);
-        dead = false;
-        println("dead is false in timeDead");
-        projectiles.clear();
-        int cc = Integer.parseInt(currentChapter);
-        cc--;
-        int cz = Integer.parseInt(currentZone);
-        cz--;
-        for(int i = 0; i < chapters.get(cc).getZones().get(cz).getEnemies().size(); i++){
-          chapters.get(cc).getZones().get(cz).getEnemies().get(i).setAlert(false);
-          chapters.get(cc).getZones().get(cz).getEnemies().get(i).setShooting(false);
-        }
-        deadScreen();
-   }
-  }/*
-  for(int i = 0; i < enemies.size(); i++)
-  {
-    if(checkDead(enemies.get(i)))
-    {
-      enemies.get(i).setDead(true);
-      enemies.get(i).setTimer(0);
-    }
-  }*/
+
+  }
   printSave(saveCompleted); //Prints if recently saved
   //println("nextZone is " + nextZone);
 }
