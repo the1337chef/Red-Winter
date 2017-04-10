@@ -55,6 +55,12 @@ class Key extends Pickup
                        break;
       case "rope": dynamite = 1;
                        break;
+      case "ammo": player.setCurrentAmmo(player.getCurrentAmmo() + 5);
+                   if(player.getCurrentAmmo() > 30)
+                     player.setCurrentAmmo(30);
+      case "health": player.setHealth(player.getCurrentHealth() + 25);
+                     if(player.getCurrentHealth() > 100)
+                       player.setHealth(100);
       default: println("INVALID KEY TYPE, DUMMY");
                        break;
     }
