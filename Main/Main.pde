@@ -155,6 +155,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 //Sounds
 SoundFile pickupSound;
+SoundFile whoosh;
 SoundFile ak47;
 SoundFile wounded;
 SoundFile death;
@@ -270,6 +271,7 @@ void setup()
   buttonClick.amp(.5);
   pickupSound = new SoundFile(this, "SFX/pickup.wav");
   pickupSound.amp(1.0);
+  whoosh = new SoundFile(this, "SFX/arrow_whoosh.wav");
   ak47 = new SoundFile(this, "SFX/ak47.wav");
   wounded = new SoundFile(this, "SFX/wounded.wav");
   death = new SoundFile(this, "SFX/death.wav");
@@ -468,6 +470,7 @@ void mouseReleased()
         float yVector = sin(angle);
         bow.addProjectile(player.getXPos(), player.getYPos(), xVector, yVector);
         shooting = true;
+        whoosh.play();
         player.setCurrentAmmo(player.getCurrentAmmo() - 1);
       }
     }
