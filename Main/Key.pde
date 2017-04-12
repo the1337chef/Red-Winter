@@ -64,14 +64,14 @@ class Key extends Pickup
                        player.setHealth(100);
                      break;
       case "bow": activeWeapon = bow;
-                  player.setCurrentAmmo(10);
+                  player.setCurrentAmmo(5);
                   playerTop = bowTop;
                   previousWeapon = none;
                   break;
       case "kayak":
            Hitbox temp2 = new Hitbox(845,151,90,90,0,"zone_transition");
            temp2.setZone("-1");
-           temp2.setNextXPos(355);
+           temp2.setNextXPos(355); /// may this be the aurora music bug area??
            temp2.setNextYPos(324);
            transitions.add(temp2);
            break;

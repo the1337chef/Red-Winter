@@ -294,7 +294,7 @@ void gamePlay()
         rect(0, 0, width, height);
         popMatrix();
               if(soundPlayed == false){
-                 soundFile.play();
+                 transition.play();
                  
                  if(!nextZone.equals("-1")){
                    theme.loop();

@@ -165,7 +165,7 @@ SoundFile buttonClick;
 boolean soundPlayed = false;
 SoundFile step;
 SoundFile floor_step;
-SoundFile soundFile;
+SoundFile transition;
 
 void setup()
 {
@@ -231,8 +231,8 @@ void setup()
  
   //Play sounds
   //Menu/ Game music
-  soundFile = new SoundFile(this, "SFX/ZoneTransition2.wav");
-  soundFile.amp(0.6);
+  transition = new SoundFile(this, "SFX/ZoneTransition2.wav");
+  transition.amp(0.6);
   theme = new SoundFile(this, "SFX/Theme.wav");
   theme.amp(0.8);
   siberia = new SoundFile(this, "SFX/siberia-background.wav");
