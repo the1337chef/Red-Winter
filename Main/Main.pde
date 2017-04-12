@@ -368,7 +368,7 @@ void keyReleased()
       println("y = " + nextPlayerY);
     }
     
-    if(key == 's' || key == 'S') {
+    if(key == 'i' || key == 'I') {
       if(!superspeed) {
          superspeed = true;
       }
