@@ -392,10 +392,10 @@ void mousePressed()
   //Menu buttons
   if(gameState == 2)
   {
-    buttonClick.play();
     //New game button
     if(newGame.getHighlight())
     {
+      buttonClick.play();
       //Write/ rewrite save file
       newSave();
       //println("SubSceneIndex: " + subSceneIndex);
@@ -408,6 +408,7 @@ void mousePressed()
     }
     if(continueGame.getHighlight())
     {
+      buttonClick.play();
       theme.stop();
       //Read save file
       gameState = 0;
@@ -424,11 +425,13 @@ void mousePressed()
     {
       //Quit game
       buttonClick.play();
+      delay(500);
       exit();
     }
     
     if(saveGame.getHighlight())
     {
+      buttonClick.play();
       save();
     }
     
