@@ -18,6 +18,7 @@ import processing.sound.*;
 float scaler;                  //Used to scale the game up from 512x288 to the user's screen resolution
 float peopleSize;
 float speed;                   //Player speed
+boolean superspeed;            //Testing speed;
 float enemySpeed;              //Russian soldier speed
 float direction;               //Initial player direction
 int arrowDamage;                //User arrow damage
@@ -240,7 +241,7 @@ void setup()
   
   //Player values
   player = new Player(width/2, height/2, direction, saveHealth, saveStamina, saveTemp, saveAmmo, peopleSize/2, peopleSize/2, "player");
-  speed = 4.0;
+  speed = 3.5;
   enemySpeed = 2.0;
   direction = 0;
   arrowDamage = 100;
@@ -276,7 +277,7 @@ void setup()
   wounded = new SoundFile(this, "SFX/wounded.wav");
   death = new SoundFile(this, "SFX/death.wav");
   step = new SoundFile(this, "SFX/one-snow-step.wav");
-  step.amp(0.3);
+  step.amp(0.2);
   floor_step = new SoundFile(this, "SFX/one-step-floor.wav");
   floor_step.amp(0.4);
   
@@ -365,6 +366,15 @@ void keyReleased()
     if(key == 'q' || key == 'Q'){
       println("x = " + nextPlayerX);
       println("y = " + nextPlayerY);
+    }
+    
+    if(key == 's' || key == 'S') {
+      if(!superspeed) {
+         superspeed = true;
+      }
+      else {
+         superspeed = false;
+      }
     }
 
       
