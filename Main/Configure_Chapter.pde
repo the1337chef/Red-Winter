@@ -175,7 +175,7 @@ void configureChapter(Chapter chapter) {
         int y =  Integer.parseInt(reader.readLine().substring(2));
         int p =  Integer.parseInt(reader.readLine().substring(2));
         
-        Enemy newEnemy = new Enemy(x, y, 0, 100, peopleSize/2, peopleSize/2, PI/2, 100, p);
+        Enemy newEnemy = new Enemy(x, y, 0, 100, peopleSize/2, peopleSize/2, PI/2, 150, p);
         newZone.addEnemy(newEnemy);
       }
       chapter.addZone(newZone);
