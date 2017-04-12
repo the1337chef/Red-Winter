@@ -232,7 +232,7 @@ void setup()
   //Play sounds
   //Menu/ Game music
   transition = new SoundFile(this, "SFX/ZoneTransition2.wav");
-  transition.amp(0.6);
+  transition.amp(0.1);
   theme = new SoundFile(this, "SFX/Theme.wav");
   theme.amp(0.8);
   siberia = new SoundFile(this, "SFX/siberia-background.wav");
@@ -277,7 +277,7 @@ void setup()
   wounded = new SoundFile(this, "SFX/wounded.wav");
   death = new SoundFile(this, "SFX/death.wav");
   step = new SoundFile(this, "SFX/one-snow-step.wav");
-  step.amp(0.2);
+  step.amp(0.1);
   floor_step = new SoundFile(this, "SFX/one-step-floor.wav");
   floor_step.amp(0.4);
   
