@@ -410,6 +410,7 @@ class Player extends Character
         pickupSound.play();
         pickups.remove(i);
         i--;
+        change.z = 0;
       }
     }
     

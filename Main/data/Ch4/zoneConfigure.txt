@@ -317,7 +317,7 @@ nextzone=4
 nextPlayerX=109
 nextPlayerY=300
 //walls
-#ofwalls=28
+#ofwalls=30
 //wall1
 x=39
 y=238
@@ -486,6 +486,18 @@ y=411
 w=120
 h=120
 r=pi4
+//wall29
+x=83
+y=324
+w=135
+h=100
+r=0
+//wall30
+x=80
+y=244
+w=75
+h=75
+r=0
 //pickups
 #ofpickups=3
 //pickup1

@@ -53,11 +53,11 @@ class Key extends Pickup
                        transitions.add(temp);
                        
                        break;
-      case "rope": dynamite = 1;
-                       break;
+      //case "rope": dynamite = 1;
+      //                 break;
       case "ammo": player.setCurrentAmmo(player.getCurrentAmmo() + 5);
-                   if(player.getCurrentAmmo() > 30)
-                     player.setCurrentAmmo(30);
+                   if(player.getCurrentAmmo() > 15)
+                     player.setCurrentAmmo(15);
                    break;
       case "health": player.setHealth(player.getCurrentHealth() + 25);
                      if(player.getCurrentHealth() > 100)

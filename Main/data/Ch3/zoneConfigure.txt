@@ -11,7 +11,7 @@ nextzone=2
 nextPlayerX=556
 nextPlayerY=463
 //walls
-#ofwalls=28
+#ofwalls=29
 //wall1
 x=39
 y=238
@@ -180,6 +180,12 @@ y=411
 w=120
 h=120
 r=pi4
+//wall29
+x=980
+y=328
+w=150
+h=300
+r=0
 //pickups
 #ofpickups=3
 //pickup1
